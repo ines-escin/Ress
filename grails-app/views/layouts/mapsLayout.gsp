@@ -1,8 +1,8 @@
 <%--
   Created by IntelliJ IDEA.
-  User: danielmaida
-  Date: 08/10/15
-  Time: 12:33
+  User: Leonardo
+  Date: 15/10/2016
+  Time: 19:51
 --%>
 
 <%@ page contentType="text/html;charset=UTF-8" %>
@@ -17,7 +17,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>ResS - Dashboard</title>
+    <title>ResS - Mapas</title>
 
     <!-- Bootstrap Core CSS -->
     <link href="../css/generatorDashboard/bootstrap.min.css" rel="stylesheet">
@@ -41,25 +41,10 @@
     <div id="sidebar-wrapper">
         <ul class="sidebar-nav">
             <li class="sidebar-brand">
-                <g:link controller="collectorDashboard" action="index">Painel de controle</g:link>
-            </li>
-            <li>
-                <g:link controller="collectorDashboard" action="index">Coletas em aberto</g:link>
-            </li>
-            <li>
-                <g:link controller="collectorDashboard" action="collectionHistory">Histórico de coletas</g:link>
-            </li>
-            <li>
-                <g:link controller="collectorDashboard" action="generatorList">Geradores de resíduo</g:link>
-            </li>
-            <li>
-                <g:link controller="collectorDashboard" action="accountConfig">Configurações de conta</g:link>
-            </li>
-            <li>
                 <g:link controller="collectorDashboard" action="maps">Mapas</g:link>
             </li>
-            <li id= "logout">
-                <g:link controller="logout" action="index">Sair</g:link>
+            <li id="collectionPoints">
+                <g:link controller="collectorDashboard" action="collectionPoints">Pontos de Coleta</g:link>
             </li>
         </ul>
     </div>

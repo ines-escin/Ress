@@ -1,8 +1,10 @@
 package br.ufpe.cin.ines.ress.residuecollector
 
+import br.ufpe.cin.ines.ress.Address
 import br.ufpe.cin.ines.ress.PickupRequest
 import br.ufpe.cin.ines.ress.Role
 import br.ufpe.cin.ines.ress.User
+import grails.converters.JSON
 import grails.plugins.springsecurity.Secured
 import org.grails.plugins.csv.CSVWriter
 
@@ -27,6 +29,22 @@ class CollectorDashboardController {
         def closedPickups = PickupRequest.findAllByStatus(true).sort{it.generator.name}
 
         render (view:'collectionHistory', model:[closedPickups : closedPickups])
+    }
+
+
+    def maps()
+    {
+        render (view:'maps')
+    }
+
+
+    def collectionPoints(){
+
+        Address endereco = User.findByUsername('ru').address;
+
+        def aux = User.findAll();
+
+        render (view:'collectionPoints', model: [ende: aux] )
     }
 
     def downloadExcelHistory(){
