@@ -51,6 +51,7 @@
 			<input placeholder="password" type='password' class='text_' name='j_password' id='password'/>
 			<input type='submit' id="submit" value='Login'/>
 		</form>
+		<g:link controller="login" action="createUser">Cadastre-se</g:link>
 	</div>
 <script type='text/javascript'>
 	<!--
