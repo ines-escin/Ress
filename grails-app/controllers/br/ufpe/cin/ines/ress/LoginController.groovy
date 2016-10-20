@@ -53,7 +53,7 @@ class LoginController {
 		String view = 'auth'
 		String postUrl = "${request.contextPath}${config.apf.filterProcessesUrl}"
 		render view: view, model: [postUrl: postUrl,
-		                           rememberMeParameter: config.rememberMe.parameter]
+								   rememberMeParameter: config.rememberMe.parameter]
 	}
 
 	/**
@@ -133,5 +133,14 @@ class LoginController {
 	 */
 	def ajaxDenied = {
 		render([error: 'access denied'] as JSON)
+	}
+
+	def createUser() {
+		redirect(controller: "signUp", action: "index")
+	}
+
+	def signUpSuccessful(){
+		flash.message = "Cadastro realizado com sucesso!"
+		redirect action: 'auth'
 	}
 }
