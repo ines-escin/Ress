@@ -11,7 +11,9 @@ class BootStrap {
                 name: 'Prefeitura',
                 email: 'admin@gmail.com',
                 address: new Address(street: 'Rua um', cep: '52912-123', city: 'Recife', state: 'Pernambuco', streetNumber: '0', neighborhood: 'Cidade Universitária'),
-                enabled: true).save(failOnError: true)
+                enabled: true,
+                typeUser: "Empresa Coletora",
+                cnpj: "73.572.673/0001-90").save(failOnError: true)
         if(!collector.authorities.contains(collectorRole)){
             UserRole.create(collector, collectorRole, true)
         }
@@ -22,7 +24,9 @@ class BootStrap {
                 name: 'Restaurante Universitário',
                 email: 'ru@gmail.com',
                 address: new Address(street: 'Rua dois', cep: '52232-123', city: 'Recife', state: 'Pernambuco', streetNumber: '22', neighborhood: 'Cidade Universitária'),
-                enabled: true).save(failOnError: true)
+                enabled: true,
+                typeUser: "Empresa Coletora",
+                cnpj: "72.517.376/0001-89").save(failOnError: true)
         if(!generator.authorities.contains(generatorRole)){
             UserRole.create(generator, generatorRole, true)
         }
@@ -33,7 +37,9 @@ class BootStrap {
                 name: 'Cantina da área 2',
                 email: 'cantina@gmail.com',
                 address: new Address(street: 'Rua tres', cep: '52223-123', city: 'Recife', state: 'Pernambuco', streetNumber: '99', neighborhood: 'Cidade Universitária'),
-                enabled: true).save(failOnError: true)
+                enabled: true,
+                typeUser: "Gerador de Resíduo",
+                cnpj: "08.844.418/0001-97").save(failOnError: true)
         if(!generator2.authorities.contains(generatorRole2)){
             UserRole.create(generator2, generatorRole2, true)
         }
