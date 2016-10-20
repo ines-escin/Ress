@@ -27,7 +27,9 @@ class ResidueGeneratorTestAuxilar {
                                     state: "Arkansas",
                                     cep: '65520020'
                             ), name : "Freddy",
-                            email   : "freddy@gmail.com"
+                            email   : "freddy@gmail.com",
+                            cnpj: "24.831.494/0001-14",
+                            typeUser: "Empresa Coletora"
                     ],
                     [
                             username: "testdummy2",
@@ -40,7 +42,9 @@ class ResidueGeneratorTestAuxilar {
                                     state: "Arkansas",
                                     cep: '65520020'
                             ), name : "Vlad",
-                            email   : "vlad2@gmail.com"
+                            email   : "vlad2@gmail.com",
+                            cnpj: "28.488.426/0001-55",
+                            typeUser: "Empresa Coletora"
                     ],
 
                     [
@@ -54,7 +58,9 @@ class ResidueGeneratorTestAuxilar {
                                     state: "Arkansas",
                                     cep: '65520020'
                             ), name : "Freddy",
-                            email   : "freddy@gmail.com"
+                            email   : "freddy@gmail.com",
+                            cnpj: "02.814.403/0001-08",
+                            typeUser: "Gerador de Resíduo"
                     ]
 
             ]
