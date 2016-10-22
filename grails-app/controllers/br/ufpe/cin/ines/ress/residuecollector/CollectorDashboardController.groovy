@@ -40,11 +40,26 @@ class CollectorDashboardController {
 
     def collectionPoints(){
 
-        Address endereco = User.findByUsername('ru').address;
+        def coletas = PickupRequest.findAllByStatus(false);
+        def enderecos = coletas.collect {it -> it.generator.address}
 
-        def aux = User.findAll();
+        if(coletas.empty) {
+            flash.error = "Sem locais com coletas!"
+            redirect(action: "maps")
+        }else{
+            render (view:'collectionPoints', model: [enderecos: enderecos] )
+        }
 
-        render (view:'collectionPoints', model: [ende: aux] )
+
+    }
+
+
+    List<Address> collectionPointsAddress(){
+
+        def coletas = PickupRequest.findAllByStatus(false);
+        def enderecos = coletas.collect {it -> it.generator.address}
+
+        return enderecos
     }
 
     def downloadExcelHistory(){
