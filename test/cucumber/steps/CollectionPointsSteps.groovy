@@ -1,9 +1,12 @@
 package cucumber.steps
 
+import br.ufpe.cin.ines.ress.Address
 import br.ufpe.cin.ines.ress.PickupRequest
+import br.ufpe.cin.ines.ress.Role
 import br.ufpe.cin.ines.ress.User
+import br.ufpe.cin.ines.ress.UserRole
 import br.ufpe.cin.ines.ress.residuecollector.CollectorDashboardController
-import cucumber.api.PendingException
+import pages.CollectionPointsPage
 import pages.CollectorDashboardPage
 import pages.HomePage
 import pages.LoginAuthenticationPage
@@ -56,9 +59,19 @@ Then(~/^eu vejo uma mensagem sinalizando que não há restaurantes com coletas p
     assert page.hasNoCollectionPoints()
 }
 
-
-
 Given(~/^o local de login "([^"]*)" possui coletas pendentes$/) { String arg ->
+
+    def generatorRole = Role.findByAuthority('ROLE_GENERATOR') ?: new Role(authority: 'ROLE_GENERATOR').save(failOnError: true)
+    def generator = User.findByUsername(arg) ?: new User(username: arg,
+            password: 'pass',
+            name: 'Restaurante Universitário - RU',
+            email: arg+ '@gmail.com',
+            address: new Address(street: 'Av. Reitor Joaquim Amazonas', cep: '50740-540', city: 'Recife', state: 'Pernambuco', streetNumber: '22', neighborhood: 'Cidade Universitária'),
+            enabled: true).save(failOnError: true)
+    if(!generator.authorities.contains(generatorRole)){
+        UserRole.create(generator, generatorRole, true)
+    }
+
     def pickupRequest = new PickupRequest()
 
     pickupRequest.generator = User.findByUsername(arg)
@@ -68,15 +81,11 @@ Given(~/^o local de login "([^"]*)" possui coletas pendentes$/) { String arg ->
     pickupRequest.collector = User.findByUsername('admin')
     pickupRequest.save()
 
-
     def coletas = PickupRequest.findAllByStatus(false);
     def generators = coletas.collect {it -> it.generator.username}
     def nome = generators.findAll{it -> it == arg}
 
     assert !nome.isEmpty()
-
-
-
 }
 
 def address

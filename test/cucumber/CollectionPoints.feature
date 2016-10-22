@@ -21,9 +21,9 @@ Feature: Map Visualization
  #Controller
 
   Scenario: Buscar endereços de coleta pendentes
-    Given o local de login "ru" possui coletas pendentes
+    Given o local de login "ru1" possui coletas pendentes
     When eu solicito os enderecos dos locais com coletas pendentes
-    Then o sistema retorna os enderecos do locais de login "ru"
+    Then o sistema retorna os enderecos do locais de login "ru1"
 
 
   Scenario: busca de enderecos nao havendo coletas pendentes
