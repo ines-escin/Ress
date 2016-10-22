@@ -12,48 +12,54 @@
     <meta name="layout" content="mapsLayout">
     <title></title>
     <link rel="stylesheet" type="text/css" href="../css/table-data.css">
-
     <style>
-
-
-    #map_canvas {
-        width: 100%;
+    html, body {
+        height: 100%;
+        margin: 0;
+        padding: 0;
+    }
+    #map {
         height: 100%;
     }
     </style>
-    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBOVREbzXvmpDVjFX7w5GXciMCWuBbnueM&callback=initMap" type="text/javascript"
-            async defer></script>
-    <script type="text/javascript">
+    <script>
         var map;
+        var infowindow;
+        var bounds;
+
         function initMap() {
+            var pyrmont = {lat: -8.051442, lng: -34.950867};
 
-            var mapOptions = {
-                center: new google.maps.LatLng(-8.051442, -34.950867),
-                zoom: 16,
-                mapTypeId: google.maps.MapTypeId.ROADMAP
-            };
+            map = new google.maps.Map(document.getElementById('map'), {
+                center: pyrmont,
+                zoom: 15
+            });
 
-            map = new google.maps.Map(document.getElementById('map_canvas'), mapOptions);
+            infowindow = new google.maps.InfoWindow();
+            bounds = new google.maps.LatLngBounds();
 
-            var geocoder = new google.maps.Geocoder();
+            <g:each in="${enderecos}" status="i" var="endereco">
 
-            var i = 1;
+                alert("oi")
+                var address = '${endereco.street?.encodeAsJavaScript()} ${endereco.city?.encodeAsJavaScript()}     ${endereco.cep?.encodeAsJavaScript()}';
+                var nome  = '${endereco.user.name?.encodeAsJavaScript()}';
 
-           <g:each in="${ende}" status="i" var="aa">
-                var address = '${aa.address.street?.encodeAsJavaScript()} ${aa.address.city?.encodeAsJavaScript()} ${aa.address.neighborhood?.encodeAsJavaScript()}     ${aa.address.cep?.encodeAsJavaScript()}';
-                var nome  = '${aa.name?.encodeAsJavaScript()}';
-               // alert(address);
-                geocoder.geocode({'address': address  }, function (results, status) {
+                var service = new google.maps.places.PlacesService(map);
+                service.textSearch({
+                    location: pyrmont,
+                    radius: 1000,
+                    query:  nome + " " + address
+                }, function (results, status) {
+                    if (status === google.maps.places.PlacesServiceStatus.OK) {
+                        createMarker(results[0]);
+                    } else{
+                        geocoder.geocode({'address': address  }, function (results, status) {
+                            alert('${endereco.user.name?.encodeAsJavaScript()}')
+                            if (status == google.maps.GeocoderStatus.OK) {
+                                reateMarker(results[0]);
+                            }
 
-                    if (status == google.maps.GeocoderStatus.OK) {
-
-                        var marker = new google.maps.Marker({
-                            position: results[0].geometry.location,
-                            map: map
                         });
-                        attachSecretMessage( marker,i,'${aa.name?.encodeAsJavaScript()}');
-
-                        i = i+1;
 
                     }
                 });
@@ -62,27 +68,26 @@
 
         }
 
-        google.maps.event.addDomListener(window, 'load', initMap);
-
-        function attachSecretMessage(marker, number, texto) {
-            var infowindow = new google.maps.InfoWindow(
-                    { content: texto,
-                        zIndex: number
-                    });
-
-           google.maps.event.addListener(marker, 'click', function() {
-                infowindow.open(map,marker);
-
-
+        function createMarker(place) {
+            var placeLoc = place.geometry.location;
+            var marker = new google.maps.Marker({
+                map: map,
+                position: place.geometry.location
             });
 
+            google.maps.event.addListener(marker, 'click', function() {
+                infowindow.setContent(place.name);
+                infowindow.open(map, this);
+            });
 
+            bounds.extend(marker.getPosition());
+            map.fitBounds(bounds);
         }
+
     </script>
-
-
 </head>
 <body>
-<div id="map_canvas"></div>
+<div id="map"></div>
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBOVREbzXvmpDVjFX7w5GXciMCWuBbnueM&signed_in=true&libraries=places&callback=initMap" async defer></script>
 </body>
 </html>
