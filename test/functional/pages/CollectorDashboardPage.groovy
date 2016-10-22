@@ -16,4 +16,8 @@ class CollectorDashboardPage extends Page {
     def logOff(){
         $("li", id: "logout").click()
     }
+
+    def maps(){
+        $("li", id: "maps").click()
+    }
 }

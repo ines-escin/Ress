@@ -11,6 +11,9 @@ class CollectionPointsPage extends Page{
     static url = "ResS/collectorDashboard/collectionPoints"
 
 
+    def hasmap(){
+        $("div", class: "gmnoprint")
+    }
 
 
 }
