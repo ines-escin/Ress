@@ -28,7 +28,6 @@
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
-
     <![endif]-->
     <g:layoutHead/>
 </head>
@@ -54,6 +53,9 @@
             </li>
             <li>
                 <g:link controller="collectorDashboard" action="accountConfig">Configurações de conta</g:link>
+            </li>
+            <li>
+                <g:link controller="collectorDashboard" action="maps">Mapas</g:link>
             </li>
             <li id= "logout">
                 <g:link controller="logout" action="index">Sair</g:link>
