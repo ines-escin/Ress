@@ -23,28 +23,27 @@
         async defer></script>
     <script type="text/javascript">
         var map;
-        var directionsService = new google.maps.DirectionsService();
-        var directionsDisplay = new google.maps.DirectionsRenderer();
+        var directionsService;
+        var directionsDisplay;
         function initMap() {
+			 directionsService = new google.maps.DirectionsService;
+			directionsDisplay = new google.maps.DirectionsRenderer;
             var mapOptions = {
                 center: new google.maps.LatLng(-8.1062988, -34.88777852),
                 zoom: 8,
                 mapTypeId: google.maps.MapTypeId.ROADMAP
             };
-            map = new google.maps.Map(document.getElementById("map_canvas"), mapOptions);
-            directionsDisplay.setMap(map_canvas)
+            map = new google.maps.Map(document.getElementById('map_canvas'), mapOptions);
+            directionsDisplay.setMap(map)
             route();
             /*var onChangeHandler = function() {
                 route(directionsService, directionsDisplay);
             }*/
         }
-
         function route() {
-
-
             var request = {
-                origin: google.maps.LatLng(-8.1062988, -34.88777852),
-                destination: google.maps.LatLng(-9.66928347, -35.67879414),
+                origin: {lat: -8.1062988, lng:-34.88777852},
+                destination:    {lat: -9.66928347, lng:-35.67879414},
                 /*waypoints: [
                         {
                             location:'Maragogi, Alagoas, Brazil',
