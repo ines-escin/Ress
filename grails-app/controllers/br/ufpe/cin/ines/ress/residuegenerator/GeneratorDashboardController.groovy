@@ -38,6 +38,17 @@ class GeneratorDashboardController{
         redirect(action:'pickupRequest')
     }
 
+    def saveDefaultPickUp(String generator){
+        def pickupRequest = new PickupRequest()
+
+        pickupRequest.generator = User.findByUsername(generator)
+        pickupRequest.date = new Date()
+        pickupRequest.status = false
+        pickupRequest.residueAmount = 40
+        pickupRequest.collector = User.findByUsername('admin')
+        pickupRequest.save()
+    }
+
     def accountConfig(){
         User user = (User) springSecurityService.currentUser
         render(view: "accountConfig", model:[user:user])
