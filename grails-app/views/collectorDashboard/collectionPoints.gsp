@@ -40,7 +40,7 @@
 
             <g:each in="${enderecos}" status="i" var="endereco">
 
-                alert("oi")
+
                 var address = '${endereco.street?.encodeAsJavaScript()} ${endereco.city?.encodeAsJavaScript()}     ${endereco.cep?.encodeAsJavaScript()}';
                 var nome  = '${endereco.user.name?.encodeAsJavaScript()}';
 
