@@ -43,13 +43,13 @@
         function route() {
             var request = {
                 origin: {lat: -8.1062988, lng:-34.88777852},
-                destination:    {lat: -9.66928347, lng:-35.67879414},
-                /*waypoints: [
+                destination: {lat: -9.66928347, lng:-35.67879414},
+                waypoints: [
                         {
-                            location:'Maragogi, Alagoas, Brazil',
+                            location:{lat: -9.01071607, lng:-35.22045827},
                             stopover: false
                         }
-                ]*/
+                ],
                 travelMode: google.maps.DirectionsTravelMode.DRIVING
             };
             directionsService.route(request, function(result, status) {
