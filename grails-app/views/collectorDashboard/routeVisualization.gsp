@@ -25,6 +25,15 @@
         var map;
         var directionsService;
         var directionsDisplay;
+        var waypts = [];
+        waypts.push({
+                            location:{lat: -8.05060572, lng: -34.95280063},
+                            stopover: false
+        });
+        waypts.push( {
+                            location:{lat: -8.05638996, lng: -34.95334244},
+                            stopover: false
+        });
         function initMap() {
 			 directionsService = new google.maps.DirectionsService;
 			directionsDisplay = new google.maps.DirectionsRenderer;
@@ -36,20 +45,23 @@
             map = new google.maps.Map(document.getElementById('map_canvas'), mapOptions);
             directionsDisplay.setMap(map)
             route();
-            /*var onChangeHandler = function() {
-                route(directionsService, directionsDisplay);
-            }*/
         }
         function route() {
             var request = {
-                origin: {lat: -8.1062988, lng:-34.88777852},
-                destination: {lat: -9.66928347, lng:-35.67879414},
-                waypoints: [
+                origin: {lat: -8.04902288, lng:-34.94483447},
+                destination: {lat: -8.04902288, lng:-34.94483447},
+                waypoints: waypts
+                /*[
                         {
-                            location:{lat: -9.01071607, lng:-35.22045827},
+                            location:{lat: -8.05060572, lng: -34.95280063},
+                            stopover: false
+                        },
+
+                        {
+                            location:{lat: -8.05638996, lng: -34.95334244},
                             stopover: false
                         }
-                ],
+                ]*/,
                 travelMode: google.maps.DirectionsTravelMode.DRIVING
             };
             directionsService.route(request, function(result, status) {
