@@ -51,6 +51,14 @@ class CollectorDashboardController {
         render (view:'routeVisualization')
     }
 
+    List<Address> collectionPointsAddress(){
+
+        def coletas = PickupRequest.findAllByStatus(false);
+        def enderecos = coletas.collect {it -> it.generator.address}
+
+        return enderecos
+    }
+
     def downloadExcelHistory(){
         def data = buildReport()
         response.setHeader("Content-disposition", "attachment; filename=" +
