@@ -14,13 +14,12 @@ class MapsPage extends Page {
         title ==~ titulo
     }
 
-    def ClickCollectionPoints(){
-        $("li", id: "collectionPoints").click()
+    def ClickRouteVisualization(){
+        $("li", id: "routeVisualization").click()
     }
 
-
-
-
-
+    boolean hasNoCollectionPoints(){
+        $("div", class: "alert-error")
+    }
 
 }
