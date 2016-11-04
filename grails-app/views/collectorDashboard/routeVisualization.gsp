@@ -25,6 +25,7 @@
         var map;
         var directionsService;
         var directionsDisplay;
+        var service;
         var waypts = [];
         waypts.push({
                             location:{lat: -8.05060572, lng: -34.95280063},
@@ -35,15 +36,44 @@
                             stopover: false
         });
         function initMap() {
-			 directionsService = new google.maps.DirectionsService;
+            var ufpe = {lat: -8.051442, lng:-34.950867};
+    		directionsService = new google.maps.DirectionsService;
 			directionsDisplay = new google.maps.DirectionsRenderer;
             var mapOptions = {
-                center: new google.maps.LatLng(-8.051442, -34.950867),
+                center: ufpe,
                 zoom: 16,
                 mapTypeId: google.maps.MapTypeId.ROADMAP
             };
             map = new google.maps.Map(document.getElementById('map_canvas'), mapOptions);
             directionsDisplay.setMap(map)
+            <g:each in="${enderecos}" status="i" var="endereco">
+                var address = '${endereco.street?.encodeAsJavaScript()} ${endereco.city?.encodeAsJavaScript()} ${endereco.cep?.encodeAsJavaScript()}';
+                    var nome  = '${endereco.user.name?.encodeAsJavaScript()}';
+                    service = new google.maps.places.PlacesService(map);
+                    service.textSearch({
+                    location: ufpe,
+                    radius: 1000,
+                    query:  nome + " " + address
+                    }, function (results, status) {
+                        if (status === google.maps.places.PlacesServiceStatus.OK) {
+                            waypts.push( {
+                                location: {lat: results[0].latitude, lng: results[0].longitude},
+                                stopover: false
+                            });
+
+                        }else {
+                            geocoder.geocode({'address': address  }, function (results, status) {
+                                alert('${endereco.user.name?.encodeAsJavaScript()}')
+                                if (status == google.maps.GeocoderStatus.OK) {
+                                    waypts.push( {
+                                        location: {lat: results[0].latitude, lng: results[0].longitude},
+                                        stopover: false
+                                    });
+                                }
+                            });
+                        }
+                    });
+            </g:each>
             route();
         }
         function route() {
