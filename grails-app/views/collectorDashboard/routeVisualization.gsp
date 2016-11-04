@@ -38,8 +38,8 @@
 			 directionsService = new google.maps.DirectionsService;
 			directionsDisplay = new google.maps.DirectionsRenderer;
             var mapOptions = {
-                center: new google.maps.LatLng(-8.1062988, -34.88777852),
-                zoom: 8,
+                center: new google.maps.LatLng(-8.051442, -34.950867),
+                zoom: 16,
                 mapTypeId: google.maps.MapTypeId.ROADMAP
             };
             map = new google.maps.Map(document.getElementById('map_canvas'), mapOptions);
