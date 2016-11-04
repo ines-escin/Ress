@@ -1,6 +1,6 @@
 package cucumber.steps
 
-import pages.ListCollectorPage
+import pages.ListUsersPage
 import pages.LoginAuthenticationPage
 import pages.SignUpPage
 
@@ -20,8 +20,8 @@ Given(~/^Estou na pagina de cadastro do ResS$/) { ->
 }
 
 And(~/^o usuário com o cnpj "([^"]*)" ou com o usuário "([^"]*)" não estão cadastrados$/) { String cnpj, String username ->
-    to ListCollectorPage
-    at ListCollectorPage
+    to ListUsersPage
+    at ListUsersPage
 
     assert page.hasCnpjOrUsername(cnpj, username) == false
 }
@@ -48,8 +48,8 @@ Then(~/^eu posso ver a tela de login$/) { ->
 
 //Scenario: Cadastro de mesmo cnpj para diferentes tipos de usuário
 Given(~'^o sistema tem armazenado um usuário do tipo "([^"]*)" com o cnpj "([^"]*)"$') { String tipoUsuario, String cnpj ->
-    to ListCollectorPage
-    at ListCollectorPage
+    to ListUsersPage
+    at ListUsersPage
 
     assert page.hasCnpjAndTypeUser(cnpj, tipoUsuario)
 }

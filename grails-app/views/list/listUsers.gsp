@@ -9,7 +9,7 @@
 <html>
 <head>
     <meta name='layout' content='main'/>
-    <title>ResS - Coletores</title>
+    <title>ResS - Usuários</title>
     <link rel="stylesheet" type="text/css" href="../css/signup.css"/>
     <link rel="stylesheet" type="text/css" href="../css/table-data.css">
 
@@ -38,7 +38,7 @@
                     <g:link controller="home" action="login">Login</g:link>
                 </li>
                 <li id="lista">
-                    <g:link controller="home" action="list">Empresas Coletoras</g:link>
+                    <g:link controller="home" action="list">Usuários Cadastrados</g:link>
                 </li>
                 <li>
                     <a href="#services">Sobre</a>

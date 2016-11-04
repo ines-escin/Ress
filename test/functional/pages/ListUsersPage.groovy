@@ -5,8 +5,8 @@ import geb.Page
 /**
  * Created by Marcos on 31/10/2016.
  */
-class ListCollectorPage extends Page {
-    def titulo = "ResS - Coletores"
+class ListUsersPage extends Page {
+    def titulo = "ResS - Usuários"
     static url = "/ResS/list/index"
     static at = {
         title ==~ titulo

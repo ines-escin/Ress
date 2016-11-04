@@ -50,7 +50,7 @@
                     <g:link controller="home" action="login">Login</g:link>
                 </li>
                 <li id="lista">
-                    <g:link controller="home" action="list">Empresas Coletoras</g:link>
+                    <g:link controller="home" action="list">Usuários Cadastrados</g:link>
                 </li>
                 <li>
                     <a href="#services">Sobre</a>
