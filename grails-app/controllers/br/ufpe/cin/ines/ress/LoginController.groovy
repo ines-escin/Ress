@@ -138,9 +138,4 @@ class LoginController {
 	def createUser() {
 		redirect(controller: "signUp", action: "index")
 	}
-
-	def signUpSuccessful(){
-		flash.message = "Cadastro realizado com sucesso!"
-		redirect action: 'auth'
-	}
 }

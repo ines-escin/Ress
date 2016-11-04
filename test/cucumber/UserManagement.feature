@@ -11,12 +11,12 @@ Feature: Gerenciar usuários
     And tento cadastrar esse usuário
     Then eu posso ver a tela de login
 
-#  Scenario: Cadastro de mesmo cnpj para diferentes tipos de usuário
-#    Given o sistema tem armazenado uma empresa coletora com o cnpj "12.587.230/0001-88".
-#    And estou na página de cadastro do ResS
-#    When eu tento cadastrar um gerador de resíduo com o cnpj "12.587.230/0001-88".
-#    Then eu vejo a mesma página de cadastro do ResS
-#    And eu posso ver uma mensagem avisando que existe uma empresa coletora com o cnpj "12.587.230/0001-88".
+  Scenario: Cadastro de mesmo cnpj para diferentes tipos de usuário
+    Given o sistema tem armazenado um usuário do tipo "Empresa Coletora" com o cnpj "73.572.673/0001-90"
+    And estou na página de cadastro do ResS
+    When eu tento cadastrar um usuário do tipo "Gerador de Resíduo" com o cnpj "73.572.673/0001-90" e login "teste"
+    Then eu vejo a mesma página de cadastro do ResS
+    And eu posso ver uma mensagem avisando que existe uma empresa coletora com o cnpj "73.572.673/0001-90"
 
 #  Scenario: Alterar informações de usuário e informar um cnpj já cadastrado
 #    Given estou logado no sistema como o usuário de tipo "Empresa Coletora" com cnpj "22.732.062/0001-20"

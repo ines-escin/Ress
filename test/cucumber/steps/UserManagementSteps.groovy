@@ -44,3 +44,35 @@ And(~/^tento cadastrar esse usuário$/) { ->
 Then(~/^eu posso ver a tela de login$/) { ->
     at LoginAuthenticationPage
 }
+
+
+//Scenario: Cadastro de mesmo cnpj para diferentes tipos de usuário
+Given(~'^o sistema tem armazenado um usuário do tipo "([^"]*)" com o cnpj "([^"]*)"$') { String tipoUsuario, String cnpj ->
+    to ListCollectorPage
+    at ListCollectorPage
+
+    assert page.hasCnpjAndTypeUser(cnpj, tipoUsuario)
+}
+
+And(~'^estou na página de cadastro do ResS$') { ->
+    to SignUpPage
+    at SignUpPage
+}
+
+When(~'^eu tento cadastrar um usuário do tipo "([^"]*)" com o cnpj "([^"]*)" e login "([^"]*)"$') {
+    String tipoUsuario, String cnpj, String login ->
+
+        at SignUpPage
+
+        page.createDefaultUser(cnpj, tipoUsuario, login)
+        page.createUser()
+}
+
+Then(~'^eu vejo a mesma página de cadastro do ResS$') { ->
+    at SignUpPage
+}
+And(~'^eu posso ver uma mensagem avisando que existe uma empresa coletora com o cnpj "([^"]*)"$') { String cnpj ->
+    at SignUpPage
+
+    assert page.messageError(cnpj)
+}

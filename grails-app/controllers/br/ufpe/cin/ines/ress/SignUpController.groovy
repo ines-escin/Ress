@@ -1,9 +1,5 @@
 package br.ufpe.cin.ines.ress
 
-import org.codehaus.groovy.grails.plugins.springsecurity.SpringSecurityUtils
-
-import javax.xml.bind.ValidationException
-
 class SignUpController {
 
 	/**
@@ -55,7 +51,7 @@ class SignUpController {
 				redirect(controller: "login", action: "index")
 			} catch (ValidationException) {
 				def msg = message(code: 'default.empty.fields.message')
-				redirect(action: "index", model: [message: msg])
+				render(view: "createUser", model: [message: msg])
 			}
 		}
     }

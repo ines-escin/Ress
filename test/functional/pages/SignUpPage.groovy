@@ -64,7 +64,7 @@ class SignUpPage extends Page{
         $("input", id: "password").value("")
     }
 
-    String messageError(){
-        $("div.login_message").text()
+    String messageError(cnpj){
+        $("div.login_message").text().contains(cnpj)
     }
 }
