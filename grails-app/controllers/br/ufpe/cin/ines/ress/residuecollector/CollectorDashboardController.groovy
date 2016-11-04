@@ -3,12 +3,8 @@ package br.ufpe.cin.ines.ress.residuecollector
 import br.ufpe.cin.ines.ress.PickupRequest
 import br.ufpe.cin.ines.ress.Role
 import br.ufpe.cin.ines.ress.User
+import br.ufpe.cin.ines.ress.UserRole
 import grails.plugins.springsecurity.Secured
-import org.grails.plugins.csv.CSVWriter
-
-//import pl.touk.excel.export.WebXlsxExporter
-
-import static br.ufpe.cin.ines.ress.User.*
 
 @Secured(['ROLE_COLLECTOR'])
 class CollectorDashboardController {
@@ -97,4 +93,14 @@ class CollectorDashboardController {
         redirect (action: 'accountConfig')
     }
 
+    def deleteCollectorAndPickups(User collector){
+        def lista = PickupRequest.findAllByCollectorAndStatus(collector, true)
+
+        lista.each {it -> it.delete(flush: true)}
+
+        UserRole role = UserRole.findByUser(collector)
+
+        role.delete(flush: true)
+        collector.delete(flush: true)
+    }
 }

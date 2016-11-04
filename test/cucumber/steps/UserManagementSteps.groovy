@@ -1,5 +1,13 @@
 package cucumber.steps
 
+import br.ufpe.cin.ines.ress.PickupRequest
+import br.ufpe.cin.ines.ress.User
+import br.ufpe.cin.ines.ress.residuecollector.CollectorDashboardController
+import br.ufpe.cin.ines.ress.residuegenerator.GeneratorDashboardController
+import pages.CollectorAccountConfigPage
+import pages.CollectorDashboardPage
+import pages.EditCollectorPage
+import pages.HomePage
 import pages.ListUsersPage
 import pages.LoginAuthenticationPage
 import pages.SignUpPage
@@ -75,4 +83,89 @@ And(~'^eu posso ver uma mensagem avisando que existe uma empresa coletora com o 
     at SignUpPage
 
     assert page.messageError(cnpj)
+}
+
+
+//Scenario: Alterar informações de usuário e informar um cnpj já cadastrado
+Given(~'^estou logado no sistema como o usuário de tipo "([^"]*)" com cnpj "([^"]*)"$') { String tipoUsuario, String cnpj ->
+    to HomePage
+    at HomePage
+
+//    page.clickLogIn()
+//
+//    at LoginAuthenticationPage
+//
+//    assert User.findByUsername("admin")
+//    assert Role.findByAuthority("ROLE_COLLECTOR")
+//
+//    String admin = 'admin'
+//    String pass = 'pass'
+//
+//    page.fillUsername(admin)
+//    page.fillPassword(pass)
+//
+//    page.logInButtonClick()
+}
+And(~'^estou na tela de alterar informações$') { ->
+    to CollectorDashboardPage
+    at CollectorDashboardPage
+    page.configAccount()
+
+    at EditCollectorPage
+    page.editUser()
+}
+And(~'^o usuário com cnpj "([^"]*)" já está cadastrado$') { String cnpj ->
+    User user = User.findByCnpj(cnpj)
+    assert user != null
+}
+When(~'^eu altero o cnpj "([^"]*)" para "([^"]*)"$') { String cnpj1, String cnpj2 ->
+    at CollectorAccountConfigPage
+
+    page.fillCollectorCnpj(cnpj2)
+    page.fillCollectorPassword("teste")
+    page.editUser()
+}
+Then(~'^eu posso ver os mesmos dados que eu via antes da alteração do usuário com cnpj "([^"]*)"$') { String cnpj ->
+    at CollectorAccountConfigPage
+
+    User user = User.findByCnpj(cnpj)
+
+    assert user != null
+    assert page.dataVerify(user)
+}
+
+
+
+////CONTROLADOR
+def createPickupRequest(collector, generator) {
+    GeneratorDashboardController control = new GeneratorDashboardController()
+
+    control.createPickupRequestConfirmedKl(collector, generator)
+
+    PickupRequest test = PickupRequest.findByCollector(collector)
+    assert test != null
+    assert test.status
+}
+
+//Scenario: Remover um usuário empresa coletora com solicitações de coleta confirmadas
+Given(~/^a empresa coletora cadastrada com o cnpj "([^"]*)" tem uma única solicitação de coleta do gerador de resíduo de cnpj "([^"]*)" confirmada\.$/) { String cnpj1, String cnpj2 ->
+    User collector = User.findByCnpj(cnpj1)
+    User generator = User.findByCnpj(cnpj2)
+
+    createPickupRequest(collector, generator)
+}
+When(~/^o cadastro da empresa coletora com o cnpj "([^"]*)" é deletado do sistema$/) { String cnpj ->
+    CollectorDashboardController control = new CollectorDashboardController()
+
+    User collector = User.findByCnpj(cnpj)
+    assert collector != null
+
+    control.deleteCollectorAndPickups(collector)
+}
+Then(~/^a solicitação de coleta do gerador de resíduo de cnpj "([^"]*)" que fora confirmada também é deletada do sistema\.$/) { String cnpj ->
+    User generator = User.findByCnpj(cnpj)
+    assert generator != null
+
+    def test = PickupRequest.findAllByGeneratorAndStatus(generator, true)
+    assert test.size() == 0
 }

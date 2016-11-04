@@ -1,6 +1,5 @@
 package br.ufpe.cin.ines.ress.residuegenerator
 
-import br.ufpe.cin.ines.ress.DashboardController
 import br.ufpe.cin.ines.ress.PickupRequest
 import br.ufpe.cin.ines.ress.User
 import grails.plugins.springsecurity.Secured
@@ -36,6 +35,16 @@ class GeneratorDashboardController{
         pickupRequest.save()
         MailService.sendEmail("dfm2@cin.ufpe.br", pickupRequest.generator.name, pickupRequest.date, pickupRequest.residueAmount)
         redirect(action:'pickupRequest')
+    }
+
+    def createPickupRequestConfirmedKl(User collector, User generator){
+        def pickupRequest = new PickupRequest()
+        pickupRequest.generator = generator
+        pickupRequest.date = new Date()
+        pickupRequest.status = true
+        pickupRequest.collector = collector
+        pickupRequest.residueAmount = 1000
+        pickupRequest.save()
     }
 
     def accountConfig(){
