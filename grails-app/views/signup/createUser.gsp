@@ -27,6 +27,9 @@
                 <li>
                     <g:link controller="home" action="login">Login</g:link>
                 </li>
+                <li id="lista">
+                    <g:link controller="home" action="list">Empresas Coletoras</g:link>
+                </li>
                 <li>
                     <a href="#services">Sobre</a>
                 </li>
@@ -43,8 +46,8 @@
 </div>
 <br>
 <div class='login'>
-    <g:if test='${flash.message}'>
-        <div class='login_message'>${flash.message}</div>
+    <g:if test='${message}'>
+        <div class='login_message'>${message}</div>
     </g:if>
 
     <g:form controller="signUp" action="saveUser" method="POST">

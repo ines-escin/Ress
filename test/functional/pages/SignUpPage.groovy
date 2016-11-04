@@ -63,4 +63,8 @@ class SignUpPage extends Page{
         $("input", id: "username").value("")
         $("input", id: "password").value("")
     }
+
+    String messageError(){
+        $("div.login_message").text()
+    }
 }

@@ -25,7 +25,7 @@ class BootStrap {
                 email: 'ru@gmail.com',
                 address: new Address(street: 'Rua dois', cep: '52232-123', city: 'Recife', state: 'Pernambuco', streetNumber: '22', neighborhood: 'Cidade Universitária'),
                 enabled: true,
-                typeUser: "Empresa Coletora",
+                typeUser: "Gerador de Resíduo",
                 cnpj: "72.517.376/0001-89").save(failOnError: true)
         if(!generator.authorities.contains(generatorRole)){
             UserRole.create(generator, generatorRole, true)

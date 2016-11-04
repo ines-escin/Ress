@@ -6,10 +6,10 @@ Feature: Gerenciar usuários
 #GUI
   Scenario: Realizar cadastro no sistema.
     Given Estou na pagina de cadastro do ResS
-    And o usuário com o cnpj "50.292.626/0001-97" e com o usuário "ruteste" não estão cadastrados
-    When eu informo o nome "Restaurante Universitário" com o seu cnpj "50.292.626/0001-97", o seu endereço "Rua dois" "22" "Dentro do campus" "Cidade Universitária" "Recife" "Pernambuco" "52232-123", o tipo de usuário como "Gerador de Resíduo", e-mail "ruteste@gmail.com", usuário "ruteste" e senha "pass"
+    And o usuário com o cnpj "36.682.672/0001-71" ou com o usuário "ruteste" não estão cadastrados
+    When eu informo o nome "Restaurante Universitário" com o seu cnpj "36.682.672/0001-71", o seu endereço "Rua dois" "22" "Dentro do campus" "Cidade Universitária" "Recife" "Pernambuco" "52232-123", o tipo de usuário como "Gerador de Resíduo", e-mail "ruteste@gmail.com", usuário "ruteste" e senha "pass"
     And tento cadastrar esse usuário
-    Then eu posso ver uma mensagem de confirmação de cadastro e a tela de login
+    Then eu posso ver a tela de login
 
 #  Scenario: Cadastro de mesmo cnpj para diferentes tipos de usuário
 #    Given o sistema tem armazenado uma empresa coletora com o cnpj "12.587.230/0001-88".

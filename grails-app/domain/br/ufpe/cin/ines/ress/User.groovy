@@ -28,6 +28,7 @@ class User {
 		//USER MANAGEMENT
 		cnpj blank: false, unique: true, nullable: false
 		typeUser blank: false, nullable: false
+		typeUser(inList: ["Empresa Coletora", "Gerador de Resíduo"])
 	}
 
 	static mapping = {
