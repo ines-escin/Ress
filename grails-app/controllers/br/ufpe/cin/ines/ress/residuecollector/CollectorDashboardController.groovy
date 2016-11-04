@@ -37,18 +37,17 @@ class CollectorDashboardController {
         render (view:'maps')
     }
 
-
-    def collectionPoints(){
-
-        Address endereco = User.findByUsername('ru').address;
-
-        def aux = User.findAll();
-
-        render (view:'collectionPoints', model: [ende: aux] )
-    }
-
     def routeVisualization() {
-        render (view:'routeVisualization')
+        def coletas = PickupRequest.findAllByStatus(false);
+        def enderecos = coletas.collect {it -> it.generator.address}
+
+        if(coletas.empty) {
+            flash.error = "Sem locais com coletas!"
+            redirect(action: "maps")
+        }else{
+            render (view:'routeVisualization', model: [enderecos: enderecos] )
+        }
+
     }
 
     List<Address> collectionPointsAddress(){
