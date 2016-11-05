@@ -40,10 +40,10 @@ class CollectorDashboardController {
 
     def collectionPoints(){
 
-        def coletas = PickupRequest.findAllByStatus(false);
-        def enderecos = coletas.collect {it -> it.generator.address}
 
-        if(coletas.empty) {
+        def enderecos = collectionPointsAddress()
+
+        if(enderecos.empty) {
             flash.error = message(code:'default.pickup.requests.not.found.message')
             redirect(action: "maps")
         }else{
