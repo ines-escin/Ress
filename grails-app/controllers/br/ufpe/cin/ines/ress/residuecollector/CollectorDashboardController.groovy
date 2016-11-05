@@ -43,7 +43,7 @@ class CollectorDashboardController {
         def enderecos = coletas.collect {it -> it.generator.address}
 
         if(coletas.empty) {
-            flash.error = "Sem locais com coletas!"
+            flash.error = message(code: 'default.pickup.requests.not.found.message')
             redirect(action: "maps")
         }else{
             render (view:'routeVisualization', model: [enderecos: enderecos, enderecoColetor: enderecoColetor])
