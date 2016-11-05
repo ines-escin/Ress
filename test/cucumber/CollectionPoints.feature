@@ -4,18 +4,18 @@ Feature: Map Visualization
   So that eu posso saber onde ficam os pontos de coleta
 
   #GUI
-
-#  Scenario: Visualizar locais
-#    Given Estou na página de visualização de mapa do ResS
-#    And os restaurantes de login "r1" e "r2" possuem coletas pendentes
-#    When eu solicito a visualização das coletas
-#    Then eu vejo a localização dos restaurantes de login "r1" e "r2" no mapa da UFPE
 #
-#  Scenario: Sem coletas pendentes
-#    Given Estou na página de visualização de mapa do ResS
-#    And não existem locais com coletas pendentes
+#  Scenario: Visualizar locais
+#    Given o restaurante de login "r1" possui uma coleta pendente
+#    And Estou na página de visualização de mapa do ResS
 #    When eu solicito a visualização das coletas
-#    Then eu vejo uma mensagem sinalizando que não há restaurantes com coletas pendentes
+#    Then eu vejo a localização do restaurante de login "r1" em um mapa
+
+  Scenario: Sem coletas pendentes
+    Given Estou na página de visualização de mapas do ResS
+    And não existem locais com coletas pendentes
+    When eu solicito a visualização das coletas
+    Then eu vejo uma mensagem sinalizando que não há restaurantes com coletas pendentes
 
 
  #Controller

@@ -19,7 +19,15 @@ class MapsPage extends Page {
     }
 
     boolean hasNoCollectionPoints(){
-        $("div", class: "alert-error")
+        def msg = $(".alert-error")
+        if(msg != null)
+        {
+            return true
+        }
+        else
+        {
+            return false
+        }
     }
 
 

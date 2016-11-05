@@ -16,4 +16,8 @@ class GeneratorDashboardPage extends Page {
     def logOff(){
         $("li", id: "logout").click()
     }
+
+    def pickupRequest(){
+        $("li", id: "pickupRequest").click()
+    }
 }

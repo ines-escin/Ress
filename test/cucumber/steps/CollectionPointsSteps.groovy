@@ -8,9 +8,11 @@ import br.ufpe.cin.ines.ress.residuecollector.CollectorDashboardController
 import br.ufpe.cin.ines.ress.residuegenerator.GeneratorDashboardController
 import pages.CollectionPointsPage
 import pages.CollectorDashboardPage
+import pages.GeneratorDashboardPage
 import pages.HomePage
 import pages.LoginAuthenticationPage
 import pages.MapsPage
+import pages.PickupRequestPage
 
 import static cucumber.api.groovy.EN.*;
 
@@ -19,26 +21,30 @@ import static cucumber.api.groovy.EN.*;
  * Created by Leonardo on 20/10/2016.
  */
 
-Given(~/^Estou na página de visualização de mapa do ResS$/) { ->
-    to HomePage
-    at HomePage
-    page.clickLogIn()
-    at LoginAuthenticationPage
-    page.fillUsername("admin")
-    page.fillPassword("pass")
-    page.logInButtonClick()
-    at CollectorDashboardPage
-    page.maps()
+
+Given(~/^o restaurante de login "([^"]*)" possui uma coleta pendente$/) { String login ->
+
+    at SignUpPage
+
+    page.createDefaultUser("cnpj", "Gerador de Resíduo", login)
+
+    to GeneratorDashboardPage
+    at GeneratorDashboardPage
+    page.pickupRequest()
+
+    at PickupRequestPage
+    page.fillResidueAmountDef()
+    page.submitButtonClick()
+}
+
+And(~/^Estou na página de visualização de mapa do ResS$/) { ->
+    to MapsPage
     at MapsPage
 }
-And(~/^os restaurantes de login "([^"]*)" e "([^"]*)" possuem coletas pendentes$/) { String arg1, String arg2 ->
-    User user = User.findByUsername(arg1)
-    assert user != null
-    assert PickupRequest.findByGenerator(user)
 
-    user = User.findByUsername(arg2)
-    assert user != null
-    assert PickupRequest.findByGenerator(user)
+Given(~/^Estou na página de visualização de mapas do ResS$/) { ->
+    to MapsPage
+    at MapsPage
 }
 
 When(~/^eu solicito a visualização das coletas$/) { ->
@@ -46,7 +52,7 @@ When(~/^eu solicito a visualização das coletas$/) { ->
     page.clickCollectionPoints()
 }
 
-Then(~/^eu vejo a localização dos restaurantes de login "([^"]*)" e "([^"]*)" no mapa da UFPE$/) { String arg1, String arg2 ->
+Then(~/^eu vejo a localização do restaurante de login "r1" em um mapa$/) { String arg1 ->
     at CollectionPointsPage
     page.hasmap()
 }

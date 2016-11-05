@@ -45,7 +45,7 @@
             <li>
                 <g:link controller="generatorDashboard" action="index">Histórico de coletas</g:link>
             </li>
-            <li>
+            <li id="pickupRequest">
                 <g:link controller="generatorDashboard" action="pickupRequest">Solicitar coleta</g:link>
             </li>
             <li>
