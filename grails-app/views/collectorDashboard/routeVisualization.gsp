@@ -25,7 +25,6 @@
         var map;
         var directionsService;
         var directionsDisplay;
-        var service;
         var waypts = [];
         /*waypts.push({
                             location:{lat: -8.05060572, lng: -34.95280063},
@@ -45,7 +44,7 @@
                 mapTypeId: google.maps.MapTypeId.ROADMAP
             };
             map = new google.maps.Map(document.getElementById('map_canvas'), mapOptions);
-            directionsDisplay.setMap(map)
+            directionsDisplay.setMap(map);
             <g:each in="${enderecos}" status="i" var="endereco">
                 var address = '${endereco.street?.encodeAsJavaScript()} ${endereco.city?.encodeAsJavaScript()} ${endereco.cep?.encodeAsJavaScript()}';
                 var nome  = '${endereco.user.name?.encodeAsJavaScript()}';
@@ -54,12 +53,12 @@
                     radius: 1000,
                     query:  nome + " " + address
                 };
-                service = new google.maps.places.PlacesService(map);
+                var service = new google.maps.places.PlacesService(map);
                 service.textSearch(req, callback);
                 function callback(results, status) {
                         if (status === google.maps.places.PlacesServiceStatus.OK) {
                             waypts.push( {
-                                location: {lat: results[0].latitude, lng: results[0].longitude},
+                                location: results[0].location,
                                 stopover: false
                             });
 
@@ -69,12 +68,12 @@
             route();
         }
         function route() {
-            var collectorAddress = '${enderecoColetor.street?.encodeAsJavaScript()} ${enderecoColetor.city?.encodeAsJavaScript()} ${enderecoColetor.cep?.encodeAsJavaScript()}';
+            //var collectorAddress = '${enderecoColetor.street?.encodeAsJavaScript()} ${enderecoColetor.city?.encodeAsJavaScript()} ${enderecoColetor.cep?.encodeAsJavaScript()}';
             var request = {
                 /*origin: {lat: -8.05249467, lng: -34.94510651},
                 destination: {lat: -8.05249467, lng: -34.94510651},*/
-                origin: collectorAddress,
-                destination: collectorAddress,
+                /**/origin: collectorAddress,
+                destination: collectorAddress,/**/
                 waypoints: waypts,
                 /*[
                         {
