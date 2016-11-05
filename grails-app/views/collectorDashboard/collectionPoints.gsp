@@ -56,7 +56,7 @@
                         geocoder.geocode({'address': address  }, function (results, status) {
                             alert('${endereco.user.name?.encodeAsJavaScript()}')
                             if (status == google.maps.GeocoderStatus.OK) {
-                                reateMarker(results[0]);
+                                createMarker(results[0]);
                             }
 
                         });
