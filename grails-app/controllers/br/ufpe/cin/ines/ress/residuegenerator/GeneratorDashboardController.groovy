@@ -34,7 +34,7 @@ class GeneratorDashboardController{
         pickupRequest.status = false
         pickupRequest.collector = User.findByUsername('admin')
         pickupRequest.save()
-        MailService.sendEmail("dfm2@cin.ufpe.br", pickupRequest.generator.name, pickupRequest.date, pickupRequest.residueAmount)
+        MailService.sendEmail("plal@cin.ufpe.br", pickupRequest.generator.name, pickupRequest.date, pickupRequest.residueAmount)
         redirect(action:'pickupRequest')
     }
 
