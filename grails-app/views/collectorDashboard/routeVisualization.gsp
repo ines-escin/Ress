@@ -49,30 +49,22 @@
             <g:each in="${enderecos}" status="i" var="endereco">
                 var address = '${endereco.street?.encodeAsJavaScript()} ${endereco.city?.encodeAsJavaScript()} ${endereco.cep?.encodeAsJavaScript()}';
                 var nome  = '${endereco.user.name?.encodeAsJavaScript()}';
+                var req = {
+                    location: ufpe,
+                    radius: 1000,
+                    query:  nome + " " + address
+                };
                 service = new google.maps.places.PlacesService(map);
-                service.textSearch({
-                location: ufpe,
-                radius: 1000,
-                query:  nome + " " + address
-                }, function (results, status) {
+                service.textSearch(req, callback);
+                function callback(results, status) {
                         if (status === google.maps.places.PlacesServiceStatus.OK) {
                             waypts.push( {
                                 location: {lat: results[0].latitude, lng: results[0].longitude},
                                 stopover: false
                             });
 
-                        }else {
-                            geocoder.geocode({'address': address  }, function (results, status) {
-                                alert('${endereco.user.name?.encodeAsJavaScript()}')
-                                if (status == google.maps.GeocoderStatus.OK) {
-                                    waypts.push( {
-                                        location: {lat: results[0].latitude, lng: results[0].longitude},
-                                        stopover: false
-                                });
-                            }
-                        });
-                    }
-                });
+                        }
+                };
             </g:each>
             route();
         }
@@ -83,7 +75,7 @@
                 destination: {lat: -8.05249467, lng: -34.94510651},*/
                 origin: collectorAddress,
                 destination: collectorAddress,
-                waypoints: waypts
+                waypoints: waypts,
                 /*[
                         {
                             location:{lat: -8.05060572, lng: -34.95280063},
@@ -94,7 +86,7 @@
                             location:{lat: -8.05638996, lng: -34.95334244},
                             stopover: false
                         }
-                ]*/,
+                ]*/
                 travelMode: google.maps.DirectionsTravelMode.DRIVING
             };
             directionsService.route(request, function(result, status) {
