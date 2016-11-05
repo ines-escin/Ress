@@ -12,7 +12,7 @@ import org.grails.plugins.csv.CSVWriter
 
 import static br.ufpe.cin.ines.ress.User.*
 
-@Secured(['ROLE_COLLECTOR'])
+//@Secured(['ROLE_COLLECTOR'])
 class CollectorDashboardController {
 
     def springSecurityService
@@ -44,7 +44,7 @@ class CollectorDashboardController {
         def enderecos = coletas.collect {it -> it.generator.address}
 
         if(coletas.empty) {
-            flash.error = "Sem locais com coletas!"
+            flash.error = message(code:'default.pickup.requests.not.found.message')
             redirect(action: "maps")
         }else{
             render (view:'collectionPoints', model: [enderecos: enderecos] )
