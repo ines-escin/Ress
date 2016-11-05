@@ -38,6 +38,7 @@ class CollectorDashboardController {
     }
 
     def routeVisualization() {
+        def enderecoColetor = User.findByUsername("admin").address;
         def coletas = PickupRequest.findAllByStatus(false);
         def enderecos = coletas.collect {it -> it.generator.address}
 
@@ -45,7 +46,7 @@ class CollectorDashboardController {
             flash.error = "Sem locais com coletas!"
             redirect(action: "maps")
         }else{
-            render (view:'routeVisualization', model: [enderecos: enderecos] )
+            render (view:'routeVisualization', model: [enderecos: enderecos, enderecoColetor: enderecoColetor])
         }
 
     }
