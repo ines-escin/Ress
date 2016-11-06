@@ -42,9 +42,6 @@
             <li class="sidebar-brand">
                 <g:link controller="collectorDashboard" action="maps">Mapas</g:link>
             </li>
-            <li id="collectionPoints">
-                <g:link controller="collectorDashboard" action="collectionPoints">Pontos de Coleta</g:link>
-            </li>
             <li id="routeVisualization">
                 <g:link controller="collectorDashboard" action="routeVisualization">Rotas</g:link>
             </li>
