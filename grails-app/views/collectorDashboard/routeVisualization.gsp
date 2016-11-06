@@ -35,7 +35,7 @@
                             stopover: false
         });*/
         function initMap() {
-            var ufpe = {lat: -8.051442, lng:-34.950867};
+            var ufpe = {lat: -8.05233197, lng: -34.94509196};
     		directionsService = new google.maps.DirectionsService;
 			directionsDisplay = new google.maps.DirectionsRenderer;
             var mapOptions = {
@@ -49,7 +49,6 @@
                 var address = '${endereco.street?.encodeAsJavaScript()} ${endereco.city?.encodeAsJavaScript()} ${endereco.cep?.encodeAsJavaScript()}';
                 var nome  = '${endereco.user.name?.encodeAsJavaScript()}';
                 var service = new google.maps.places.PlacesService(map);
-                alert("po");
                 service.textSearch({
                     location: ufpe,
                     radius: 5000,
@@ -57,34 +56,21 @@
                 }, function (results, status) {
                     if (status == google.maps.places.PlacesServiceStatus.OK) {
                         waypts.push( {
-                            location: {lat: results[i].latitude, lng: results[i].longitude},
+                            location: {lat: results[0].latitude, lng: results[0].longitude},
                             stopover: false
                         });
-
                     }
                 });
             </g:each>
             route();
         }
+
         function route() {
             var collectorAddress = '${enderecoColetor.street?.encodeAsJavaScript()} ${enderecoColetor.city?.encodeAsJavaScript()} ${enderecoColetor.cep?.encodeAsJavaScript()}';
             var request = {
-                /*origin: {lat: -8.05249467, lng: -34.94510651},
-                destination: {lat: -8.05249467, lng: -34.94510651},*/
-                /**/origin: collectorAddress,
-                destination: collectorAddress,/**/
+                origin: collectorAddress,
+                destination: collectorAddress,
                 waypoints: waypts,
-                /*[
-                        {
-                            location:{lat: -8.05060572, lng: -34.95280063},
-                            stopover: false
-                        },
-
-                        {
-                            location:{lat: -8.05638996, lng: -34.95334244},
-                            stopover: false
-                        }
-                ]*/
                 travelMode: google.maps.DirectionsTravelMode.DRIVING
             };
             directionsService.route(request, function(result, status) {
