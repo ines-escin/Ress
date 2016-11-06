@@ -19,7 +19,7 @@
         height: 100%;
     }
     </style>
-    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBOVREbzXvmpDVjFX7w5GXciMCWuBbnueM&callback=initMap"
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBOVREbzXvmpDVjFX7w5GXciMCWuBbnueM&libraries=places&callback=initMap"
         async defer></script>
     <script type="text/javascript">
         var map;
@@ -48,27 +48,26 @@
             <g:each in="${enderecos}" status="i" var="endereco">
                 var address = '${endereco.street?.encodeAsJavaScript()} ${endereco.city?.encodeAsJavaScript()} ${endereco.cep?.encodeAsJavaScript()}';
                 var nome  = '${endereco.user.name?.encodeAsJavaScript()}';
-                var req = {
-                    location: ufpe,
-                    radius: 1000,
-                    query:  nome + " " + address
-                };
                 var service = new google.maps.places.PlacesService(map);
-                service.textSearch(req, callback);
-                function callback(results, status) {
-                        if (status === google.maps.places.PlacesServiceStatus.OK) {
-                            waypts.push( {
-                                location: results[0].location,
-                                stopover: false
-                            });
+                alert("po");
+                service.textSearch({
+                    location: ufpe,
+                    radius: 5000,
+                    query:  nome + " " + address
+                }, function (results, status) {
+                    if (status == google.maps.places.PlacesServiceStatus.OK) {
+                        waypts.push( {
+                            location: {lat: results[i].latitude, lng: results[i].longitude},
+                            stopover: false
+                        });
 
-                        }
-                };
+                    }
+                });
             </g:each>
             route();
         }
         function route() {
-            //var collectorAddress = '${enderecoColetor.street?.encodeAsJavaScript()} ${enderecoColetor.city?.encodeAsJavaScript()} ${enderecoColetor.cep?.encodeAsJavaScript()}';
+            var collectorAddress = '${enderecoColetor.street?.encodeAsJavaScript()} ${enderecoColetor.city?.encodeAsJavaScript()} ${enderecoColetor.cep?.encodeAsJavaScript()}';
             var request = {
                 /*origin: {lat: -8.05249467, lng: -34.94510651},
                 destination: {lat: -8.05249467, lng: -34.94510651},*/
@@ -101,7 +100,5 @@
 </head>
 <body>
 <div id="map_canvas"></div>
-<div id="panel"></div>
-</body>
 </body>
 </html>
