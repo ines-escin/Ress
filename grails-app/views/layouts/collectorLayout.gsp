@@ -54,7 +54,7 @@
             <li>
                 <g:link controller="collectorDashboard" action="accountConfig">Configurações de conta</g:link>
             </li>
-            <li>
+            <li id="maps">
                 <g:link controller="collectorDashboard" action="maps">Mapas</g:link>
             </li>
             <li id= "logout">
