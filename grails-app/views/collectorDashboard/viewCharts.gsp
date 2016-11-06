@@ -30,16 +30,15 @@
             data.addColumn('number', 'Coletas');
             <g:each in="${datas}" status="i" var="dat">
                 var da = '${dat?.encodeAsJavaScript()}'
-            data.addRows([
-                    [da, 1]
-            ]);
+                data.addRows([
+                        [da, 1]
+                ]);
             </g:each>
-            // Set chart options
+
             var options = {'title':'Coletas',
                 'width':700,
                 'height':600};
 
-            // Instantiate and draw our chart, passing in some options.
             var chart = new google.visualization.ColumnChart(document.getElementById('chart_div'));
             chart.draw(data, options);
         }
