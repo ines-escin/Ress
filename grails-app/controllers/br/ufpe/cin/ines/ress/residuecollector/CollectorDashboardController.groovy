@@ -99,26 +99,26 @@ class CollectorDashboardController {
         redirect (action: 'accountConfig')
     }
 
-    List<String> stringPickUps(int i){
+    List<String> stringPickUps(String tempo){
         SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
         def coletas = PickupRequest.findAllByStatus(true).sort{it.date}
         def datas = coletas.collect{it -> it.date}
-        if(i == 1){
+        if(tempo == 'week'){
             for(int j = 0; j<datas.size(); j++){
-                if(datas[i].before(new Date(new Date().getTime() - 7*24*60*60*1000))){
-                    datas.remove(datas[i])
+                if(datas[j].before(new Date(new Date().getTime() - 7*24*60*60*1000))){
+                    datas.remove(datas[j])
                 }
             }
-        } else if(i == 2){
+        } else if(tempo == 'month'){
             for(int j = 0; j<datas.size(); j++){
-                if(datas[i].before(new Date(new Date().getTime() - 30*24*60*60*1000))){
-                    datas.remove(datas[i])
+                if(datas[j].before(new Date(new Date().getTime() - 31*24*60*60*1000))){
+                    datas.remove(datas[j])
                 }
             }
-        } else if(i == 3){
+        } else if(tempo == 'year'){
             for(int j = 0; j<datas.size(); j++){
-                if(datas[i].before(new Date(new Date().getTime() - 365*24*60*60*1000))){
-                    datas.remove(datas[i])
+                if(datas[j].before(new Date(new Date().getTime() - 365*24*60*60*1000))){
+                    datas.remove(datas[j])
                 }
             }
         }
@@ -126,15 +126,15 @@ class CollectorDashboardController {
         return strings
     }
 
-    List<String> uniqueStringPickUps(int i){
-        def strings = stringPickUps(i)
+    List<String> uniqueStringPickUps(String tempo){
+        def strings = stringPickUps(tempo)
         def ustrings = strings.unique()
         return ustrings
     }
 
-    List<Number> freqPickUps(int i){
-        def strings = stringPickUps(i)
-        def ustrings = uniqueStringPickUps(i)
+    List<Number> freqPickUps(String tempo){
+        def strings = stringPickUps(tempo)
+        def ustrings = uniqueStringPickUps(tempo)
         def frequencies = ustrings.collect{it -> strings.count(it)}
         return frequencies
     }
@@ -144,17 +144,20 @@ class CollectorDashboardController {
     }
 
     def viewLastWeek(){
-        def datas = uniqueStringPickUps(1);
-        render(view:'viewCharts', model: [datas: datas])
+        def datas = uniqueStringPickUps('week')
+        def freq = freqPickUps('week')
+        render(view:'viewCharts', model: [datas: datas, freq: freq])
     }
 
     def viewLastMonth(){
-        def datas = uniqueStringPickUps(2);
-        render(view:'viewCharts', model: [datas: datas])
+        def datas = uniqueStringPickUps('month');
+        def freq = freqPickUps('month')
+        render(view:'viewCharts', model: [datas: datas, freq: freq])
     }
 
     def viewLastYear(){
-        def datas = uniqueStringPickUps(3);
-        render(view:'viewCharts', model: [datas: datas])
+        def datas = uniqueStringPickUps('year');
+        def freq = freqPickUps('year')
+        render(view:'viewCharts', model: [datas: datas, freq: freq])
     }
 }
