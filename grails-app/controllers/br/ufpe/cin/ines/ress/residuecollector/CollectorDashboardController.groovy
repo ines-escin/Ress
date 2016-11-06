@@ -99,23 +99,42 @@ class CollectorDashboardController {
         redirect (action: 'accountConfig')
     }
 
-    List<String> stringPickUps(){
+    List<String> stringPickUps(int i){
         SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
         def coletas = PickupRequest.findAllByStatus(true).sort{it.date}
         def datas = coletas.collect{it -> it.date}
+        if(i == 1){
+            for(int j = 0; j<datas.size(); j++){
+                if(datas[i].before(new Date(new Date().getTime() - 7*24*60*60*1000))){
+                    datas.remove(datas[i])
+                }
+            }
+        } else if(i == 2){
+            for(int j = 0; j<datas.size(); j++){
+                if(datas[i].before(new Date(new Date().getTime() - 30*24*60*60*1000))){
+                    datas.remove(datas[i])
+                }
+            }
+        } else if(i == 3){
+            for(int j = 0; j<datas.size(); j++){
+                if(datas[i].before(new Date(new Date().getTime() - 365*24*60*60*1000))){
+                    datas.remove(datas[i])
+                }
+            }
+        }
         def strings = datas.collect{it -> formatter.format(it)}
         return strings
     }
 
-    List<String> uniqueStringPickUps(){
-        def strings = stringPickUps()
+    List<String> uniqueStringPickUps(int i){
+        def strings = stringPickUps(i)
         def ustrings = strings.unique()
         return ustrings
     }
 
-    List<Number> freqPickUps(){
-        def strings = stringPickUps()
-        def ustrings = uniqueStringPickUps()
+    List<Number> freqPickUps(int i){
+        def strings = stringPickUps(i)
+        def ustrings = uniqueStringPickUps(i)
         def frequencies = ustrings.collect{it -> strings.count(it)}
         return frequencies
     }
@@ -124,9 +143,18 @@ class CollectorDashboardController {
         render(view:'viewGraphics')
     }
 
-    def viewCharts(){
-        def datas = stringPickUps();
+    def viewLastWeek(){
+        def datas = uniqueStringPickUps(1);
         render(view:'viewCharts', model: [datas: datas])
     }
 
+    def viewLastMonth(){
+        def datas = uniqueStringPickUps(2);
+        render(view:'viewCharts', model: [datas: datas])
+    }
+
+    def viewLastYear(){
+        def datas = uniqueStringPickUps(3);
+        render(view:'viewCharts', model: [datas: datas])
+    }
 }
