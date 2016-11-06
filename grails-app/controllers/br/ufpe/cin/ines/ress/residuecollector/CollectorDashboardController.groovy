@@ -6,6 +6,8 @@ import br.ufpe.cin.ines.ress.User
 import grails.plugins.springsecurity.Secured
 import org.grails.plugins.csv.CSVWriter
 
+import java.text.SimpleDateFormat
+
 //import pl.touk.excel.export.WebXlsxExporter
 
 import static br.ufpe.cin.ines.ress.User.*
@@ -95,6 +97,36 @@ class CollectorDashboardController {
         userToChange.password = newUserInfo.password
         userToChange.save()
         redirect (action: 'accountConfig')
+    }
+
+    List<String> stringPickUps(){
+        SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
+        def coletas = PickupRequest.findAllByStatus(true).sort{it.date}
+        def datas = coletas.collect{it -> it.date}
+        def strings = datas.collect{it -> formatter.format(it)}
+        return strings
+    }
+
+    List<String> uniqueStringPickUps(){
+        def strings = stringPickUps()
+        def ustrings = strings.unique()
+        return ustrings
+    }
+
+    List<Number> freqPickUps(){
+        def strings = stringPickUps()
+        def ustrings = uniqueStringPickUps()
+        def frequencies = ustrings.collect{it -> strings.count(it)}
+        return frequencies
+    }
+
+    def viewGraphics(){
+        render(view:'viewGraphics')
+    }
+
+    def viewCharts(){
+        def datas = stringPickUps();
+        render(view:'viewCharts', model: [datas: datas])
     }
 
 }
