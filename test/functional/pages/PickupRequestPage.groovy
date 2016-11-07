@@ -1,9 +1,12 @@
 package pages
 
+import geb.Page
+import gherkin.lexer.Pa
+
 /**
  * Created by Pedro on 05/11/2016.
  */
-class PickupRequestPage {
+class PickupRequestPage extends Page{
     def titulo = "ResS - Dashboard"
     static url = "ResS/generatorDashboard/pickupRequest"
 

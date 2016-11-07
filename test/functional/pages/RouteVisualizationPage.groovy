@@ -2,12 +2,12 @@ package pages
 
 import geb.Page
 
-class RouteVisualizationPage {
+class RouteVisualizationPage extends Page{
 
     def titulo = "ResS - Mapas"
     static url = "ResS/collectorDashboard/maps/route"
 
-    def at = {
+    static at = {
         title ==~ titulo
     }
 

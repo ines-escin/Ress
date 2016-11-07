@@ -3,21 +3,19 @@ package cucumber.steps
 
 import br.ufpe.cin.ines.ress.PickupRequest
 import br.ufpe.cin.ines.ress.SignUpController
-import br.ufpe.cin.ines.ress.User
 import br.ufpe.cin.ines.ress.residuecollector.CollectorDashboardController
 import br.ufpe.cin.ines.ress.residuegenerator.GeneratorDashboardController
 import pages.CollectorDashboardPage
 import pages.GeneratorDashboardPage
-import pages.HomePage
-import pages.LoginAuthenticationPage
 import pages.MapsPage
 import pages.PickupRequestPage
 import pages.RouteVisualizationPage
+import pages.SignUpPage
 
 import static cucumber.api.groovy.EN.*;
 
-Given(~/^existem coletas pendentes para o local "([^"]*)"$/) { String login ->
-
+Given(~/^existem coletas pendentes no local "([^"]*)"$/) { String login ->
+    to SignUpPage
     at SignUpPage
 
     page.createDefaultUser("cnpj", "Gerador de Resíduo", login)
@@ -31,7 +29,7 @@ Given(~/^existem coletas pendentes para o local "([^"]*)"$/) { String login ->
     page.submitButtonClick()
 }
 
-And(~/^eu estou na página de visualização de mapa do ResS$/) { ->
+And(~/^eu estou na pagina de visualização de mapas do ResS$/) { ->
     to MapsPage
     at MapsPage
 }
@@ -66,7 +64,6 @@ Then(~/^o sistema exibe uma mensagem de erro$/) { ->
 }
 
 Given(~/^o local "([^"]*)" possui coletas pendentes$/) { String arg ->
-
     def signUpController = new SignUpController()
     signUpController.createDefaultGeneratorUser(arg)
 
@@ -80,14 +77,14 @@ Given(~/^o local "([^"]*)" possui coletas pendentes$/) { String arg ->
 }
 
 
-def address
 Given(~/^não ha coletas pendentes$/) { ->
     def collectorController = new CollectorDashboardController()
-    address = collectorController.pickUpsAddress()
+    def end = collectorController.pickUpsAddress()
     collectorController.response.reset()
-    assert address.empty;
+    assert end.empty;
 }
 
+def address
 When(~/^eu solicito a rota entre os locais com coletas pendentes$/) { ->
     def controlador = new CollectorDashboardController()
     controlador.routeVisualization()
@@ -96,14 +93,10 @@ When(~/^eu solicito a rota entre os locais com coletas pendentes$/) { ->
 }
 
 Then(~/^o sistema retorna a rota que passa por "([^"]*)"$/) { String arg ->
-    def controlador = new CollectorDashboardController()
-    controlador.routeVisualization()
-    controlador.response.reset()
-    assert controlador.routeFound()
+    assert address.collect{at -> at.user.username}.contains(arg)
+    PickupRequest.executeUpdate('delete from PickupRequest')
 }
 
-
-Then(~/^o sistema retorna um codigo de erro$/) { ->
+Then(~/^o sistema não retorna a rota$/) { ->
     assert address.empty
 }
-
