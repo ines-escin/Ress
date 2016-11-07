@@ -90,12 +90,14 @@ Given(~/^não ha coletas pendentes$/) { ->
 
 When(~/^eu solicito a rota entre os locais com coletas pendentes$/) { ->
     def controlador = new CollectorDashboardController()
+    controlador.routeVisualization()
     controlador.response.reset()
     address = controlador.pickUpsAddress()
 }
 
 Then(~/^o sistema retorna a rota que passa por "([^"]*)"$/) { String arg ->
     def controlador = new CollectorDashboardController()
+    controlador.routeVisualization()
     controlador.response.reset()
     assert controlador.routeFound()
 }
