@@ -19,7 +19,6 @@
 </head>
 </html>
 <body>
-<g:link controller="collectorDashboard" action="viewLastWeek"> <button class="btn btn-first"> Última semana </button> </g:link>
 <g:link controller="collectorDashboard" action="viewLastMonth"> <button class="btn btn-first"> Último mês </button> </g:link>
 <g:link controller="collectorDashboard" action="viewLastYear"> <button class="btn btn-first"> Último ano </button> </g:link>
 </body>

@@ -31,7 +31,7 @@
             <g:each in ="${datas}" status = "i" var = "dat">
                 var da = '${dat.encodeAsJavaScript()}';
                 data.addRows([
-                    [da, ${freq[i-1]}]
+                    [da, ${freq[i]}]
                 ]);
             </g:each>
 
