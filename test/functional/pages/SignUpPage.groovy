@@ -32,7 +32,7 @@ class SignUpPage extends Page{
         $("input", name: "ok").click()
     }
 
-    def createDefaultUser(cnpj, tipoUsuario, usuario){
+    def createDefaultUserCnpjTypeUserUsername(cnpj, tipoUsuario, usuario, email){
         $("input", id: "name").value("Teste")
         $("input", id: "cnpj").value(cnpj)
         $("input", id: "street").value("Teste")
@@ -43,28 +43,20 @@ class SignUpPage extends Page{
         $("input", id: "state").value("Teste")
         $("input", id: "cep").value("Teste")
         $("input", id: "typeUser").value(tipoUsuario)
-        $("input", id: "email").value("teste@gmail.com")
+        $("input", id: "email").value(email)
         $("input", id: "username").value(usuario)
         $("input", id: "password").value("teste123")
     }
 
-    def resetFields(){
-        $("input", id: "name").value("")
-        $("input", id: "cnpj").value("")
-        $("input", id: "street").value("")
-        $("input", id: "streetNumber").value("")
-        $("input", id: "additionalInfo").value("")
-        $("input", id: "neighborhood").value("")
-        $("input", id: "city").value("")
-        $("input", id: "state").value("")
-        $("input", id: "cep").value("")
-        $("input", id: "typeUser").value("")
-        $("input", id: "email").value("")
-        $("input", id: "username").value("")
-        $("input", id: "password").value("")
-    }
-
-    String messageError(cnpj){
-        $("div.login_message").text().contains(cnpj)
+    boolean messageError(){
+        def msg = $(".login_message")
+        if(msg != null)
+        {
+            return true
+        }
+        else
+        {
+            return false
+        }
     }
 }

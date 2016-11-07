@@ -16,4 +16,8 @@ class CollectorDashboardPage extends Page {
     def logOff(){
         $("li", id: "logout").click()
     }
+
+    def configAccount(){
+        $("li", id: "configConta").has("a").click()
+    }
 }

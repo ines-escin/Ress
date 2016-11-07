@@ -24,4 +24,8 @@ class EditCollectorPage extends Page {
     def confirmCollectorEdition(){
         $("input", value: "Confirmar").click()
     }
+
+    def editUser(){
+        $("button", id: "edit").click()
+    }
 }

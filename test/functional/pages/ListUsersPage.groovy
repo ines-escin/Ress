@@ -13,11 +13,14 @@ class ListUsersPage extends Page {
     }
 
     def hasCnpjAndTypeUser(String cnpj, String typeUser){
-//        $("td", text: cnpj)
         $("td", text: cnpj) && $("td", text: typeUser)
     }
 
     def hasCnpjOrUsername(String cnpj, String username){
         $("td", text: cnpj) || $("td", text: username)
+    }
+
+    def hasCnpj(String cnpj){
+        $("td", text: cnpj)
     }
 }

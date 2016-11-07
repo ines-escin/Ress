@@ -1,5 +1,6 @@
 package pages
 
+import br.ufpe.cin.ines.ress.User
 import geb.Page
 
 /**
@@ -11,5 +12,29 @@ class CollectorAccountConfigPage extends Page {
 
     static at = {
         title ==~ titulo
+    }
+
+    def fillCollectorEmail(String email){
+        $("input", id: "email").value(email)
+    }
+
+    def fillCollectorCnpj(String cnpj){
+        $("input", id: "cnpj").value(cnpj)
+    }
+
+    def fillCollectorPassword(String password){
+        $("input", id: "password").value(password)
+    }
+
+    def fillCollectorUsername(String username){
+        $("input", id: "username").value(username)
+    }
+
+    def editUser(){
+        $("input", id: "btnConfirm").click()
+    }
+
+    def cnpjVerify(String cnpj){
+        $("input", id: "cnpj").value() == cnpj
     }
 }
