@@ -27,7 +27,7 @@
 <body>
 <div id="page-content-wrapper">
     <g:if test = "${flash.error}">
-        <div class="alert-error" style="display: block"{flash.error}</div>
+        <div class="alert-error" style="display: block">${flash.error}</div>
     </g:if>
 
 </div>
