@@ -28,10 +28,10 @@
             var data = new google.visualization.DataTable();
             data.addColumn('string', 'Datas');
             data.addColumn('number', 'Coletas');
-            <g:each in="${datas}" status="i" var="dat">
-                var da = '${dat?.encodeAsJavaScript()}'
+            <g:each in ="${datas}" status = "i" var = "dat">
+                var da = '${dat.encodeAsJavaScript()}';
                 data.addRows([
-                        [da, 1]
+                    [da, ${freq[i-1]}]
                 ]);
             </g:each>
 
