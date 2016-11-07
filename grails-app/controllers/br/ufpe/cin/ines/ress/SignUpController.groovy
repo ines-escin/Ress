@@ -18,10 +18,10 @@ class SignUpController {
 
 		if (userCnpj) {
 			def msg = message(code: 'default.cnpj.existing.message', args: [userCnpj.cnpj])
-			render(view: "createUser", model: [message: msg]);
+			render(view: "createUser", model: [message: msg])
 		} else if (userUsername) {
 			def msg = message(code: 'default.username.existing.message', args: [userUsername.username])
-			render(view: "createUser", model: [message: msg]);
+			render(view: "createUser", model: [message: msg])
 		} else {
 			try {
 				User user = new User()
@@ -44,15 +44,20 @@ class SignUpController {
 
 				user.address = e
 
-				Role role = params.j_typeUser == "Empresa Coletora" ? (Role.findByAuthority('ROLE_COLLECTOR') ?: new Role(authority: 'ROLE_COLLECTOR').save(failOnError: true)) : (Role.findByAuthority('ROLE_GENERATOR') ?: new Role(authority: 'ROLE_GENERATOR').save(failOnError: true))
-				user.save(failOnError: true)
-				UserRole.create(user, role, true)
+				save(user)
 
 				redirect(controller: "login", action: "index")
 			} catch (ValidationException) {
 				def msg = message(code: 'default.empty.fields.message')
-				render(view: "createUser", model: [message: msg])
+                flash.message = msg
+                redirect(action: "index")
 			}
 		}
     }
+
+	def save(User user){
+		Role role = user.typeUser == "Empresa Coletora" ? (Role.findByAuthority('ROLE_COLLECTOR') ?: new Role(authority: 'ROLE_COLLECTOR').save(failOnError: true)) : (Role.findByAuthority('ROLE_GENERATOR') ?: new Role(authority: 'ROLE_GENERATOR').save(failOnError: true))
+		user.save(failOnError: true)
+		UserRole.create(user, role, true)
+	}
 }
