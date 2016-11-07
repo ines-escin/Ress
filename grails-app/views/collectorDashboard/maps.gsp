@@ -1,16 +1,10 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: Leonardo
-  Date: 15/10/2016
-  Time: 21:44
---%>
 
 
 <%@ page contentType="text/html;charset=UTF-8" %>
 <html>
 <head>
     <meta name="layout" content="mapsLayout">
-    <title></title>
+    <title>ResS - Mapas</title>
     <link rel="stylesheet" type="text/css" href="../css/table-data.css">
     <style type="text/css">
     th

@@ -2,9 +2,6 @@ package pages
 
 import geb.Page
 
-/**
- * Created by Leonardo on 15/10/2016.
- */
 class MapsPage extends Page {
 
     def titulo = "ResS - Mapas"
@@ -14,12 +11,17 @@ class MapsPage extends Page {
         title ==~ titulo
     }
 
-    def ClickRouteVisualization(){
+    def clickRouteVisualization(){
         $("li", id: "routeVisualization").click()
     }
 
     boolean hasNoCollectionPoints(){
-        $("div", class: "alert-error")
+        def msg = $(".alert-error")
+        if(msg != null) {
+            return true
+        } else {
+            return false
+        }
     }
 
 }

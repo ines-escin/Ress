@@ -12,7 +12,7 @@ import org.grails.plugins.csv.CSVWriter
 
 import static br.ufpe.cin.ines.ress.User.*
 
-@Secured(['ROLE_COLLECTOR'])
+//@Secured(['ROLE_COLLECTOR'])
 class CollectorDashboardController {
 
     def springSecurityService
@@ -37,6 +37,7 @@ class CollectorDashboardController {
         render (view:'maps')
     }
 
+    boolean route;
     def routeVisualization() {
         def enderecoColetor = User.findByUsername("admin").address;
         def coletas = PickupRequest.findAllByStatus(false);
@@ -46,12 +47,17 @@ class CollectorDashboardController {
             flash.error = message(code: 'default.pickup.requests.not.found.message')
             redirect(action: "maps")
         }else{
+            route = true;
             render (view:'routeVisualization', model: [enderecos: enderecos, enderecoColetor: enderecoColetor])
         }
 
     }
 
-    List<Address> collectionPointsAddress(){
+    boolean routeFound() {
+        return route
+    }
+
+    List<Address> pickUpsAddress(){
 
         def coletas = PickupRequest.findAllByStatus(false);
         def enderecos = coletas.collect {it -> it.generator.address}
