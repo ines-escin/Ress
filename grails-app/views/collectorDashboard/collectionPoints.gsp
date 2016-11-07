@@ -28,10 +28,10 @@
         var bounds;
 
         function initMap() {
-            var pyrmont = {lat: -8.051442, lng: -34.950867};
+            var recife = {lat: -8.051442, lng: -34.950867};
 
             map = new google.maps.Map(document.getElementById('map'), {
-                center: pyrmont,
+                center: recife,
                 zoom: 15
             });
 
@@ -46,7 +46,7 @@
 
                 var service = new google.maps.places.PlacesService(map);
                 service.textSearch({
-                    location: pyrmont,
+                    location: recife,
                     radius: 1000,
                     query:  nome + " " + address
                 }, function (results, status) {
