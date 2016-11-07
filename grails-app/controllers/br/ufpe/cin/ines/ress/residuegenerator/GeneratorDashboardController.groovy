@@ -6,7 +6,7 @@ import br.ufpe.cin.ines.ress.User
 import grails.plugins.springsecurity.Secured
 import mail.MailService
 
-@Secured(['ROLE_GENERATOR'])
+//@Secured(['ROLE_GENERATOR'])
 class GeneratorDashboardController{
 
     def springSecurityService

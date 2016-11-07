@@ -3,6 +3,7 @@ package cucumber.steps
 
 import br.ufpe.cin.ines.ress.PickupRequest
 import br.ufpe.cin.ines.ress.SignUpController
+import br.ufpe.cin.ines.ress.User
 import br.ufpe.cin.ines.ress.residuecollector.CollectorDashboardController
 import br.ufpe.cin.ines.ress.residuegenerator.GeneratorDashboardController
 import pages.CollectionPointsPage
@@ -55,6 +56,9 @@ When(~/^eu solicito a visualização das coletas$/) { ->
 Then(~/^eu vejo a localização do restaurante de login "([^"]*)" em um mapa$/) { String arg1 ->
     at CollectionPointsPage
     page.hasmap()
+
+    PickupRequest.executeUpdate('delete from PickupRequest')
+
 }
 
 And(~/^não existem locais com coletas pendentes$/) { ->
@@ -79,18 +83,25 @@ Given(~/^o local de login "([^"]*)" possui coletas pendentes$/) { String arg ->
     def pickups = PickupRequest.findAllByStatus(false).findAll {it -> it.generator.username == arg}
 
     assert !pickups.isEmpty()
+
+    signUpController.response.reset()
+    generatorController.response.reset()
 }
 
 def address
 When(~/^eu solicito os enderecos dos locais com coletas pendentes$/) { ->
     def controlador = new CollectorDashboardController()
     address = controlador.collectionPointsAddress()
+
+    controlador.response.reset()
+
 }
 
 Then(~/^o sistema retorna os enderecos do locais de login "([^"]*)"$/) { String arg ->
 
     assert address.collect{at -> at.user.username}.contains(arg)
     PickupRequest.executeUpdate('delete from PickupRequest')
+
 }
 
 Given(~/^não existem coletas pendentes$/) { ->
