@@ -5,6 +5,7 @@ import br.ufpe.cin.ines.ress.Role
 import br.ufpe.cin.ines.ress.User
 import grails.plugins.springsecurity.Secured
 import org.grails.plugins.csv.CSVWriter
+import sun.util.resources.CalendarData_ar
 
 import java.text.SimpleDateFormat
 
@@ -103,25 +104,29 @@ class CollectorDashboardController {
         SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
         def coletas = PickupRequest.findAllByStatus(true).sort{it.date}
         def datas = coletas.collect{it -> it.date}
-        if(tempo == 'week'){
+        if(tempo == 'month'){
+            println tempo
+            Calendar c = Calendar.getInstance()
+            Calendar current = Calendar.getInstance()
             for(int j = 0; j<datas.size(); j++){
-                if(datas[j].before(new Date(new Date().getTime() - 7*24*60*60*1000))){
+                c.setTime(datas[j])
+                if((c.get(c.MONTH) < current.get(current.MONTH)) ||
+                        ((c.get(c.MONTH) == current.get(current.MONTH)) && (c.get(c.YEAR) < current.get(current.YEAR)))) {
                     datas.remove(datas[j])
+                    println "eita"
                 }
             }
-        } else if(tempo == 'month'){
+        } else if(tempo == 'year') {
+            Calendar c = Calendar.getInstance()
+            Calendar current = Calendar.getInstance()
             for(int j = 0; j<datas.size(); j++){
-                if(datas[j].before(new Date(new Date().getTime() - 31*24*60*60*1000))){
-                    datas.remove(datas[j])
-                }
-            }
-        } else if(tempo == 'year'){
-            for(int j = 0; j<datas.size(); j++){
-                if(datas[j].before(new Date(new Date().getTime() - 365*24*60*60*1000))){
+                c.setTime(datas[j])
+                if((c.get(c.YEAR) < current.get(current.YEAR))){
                     datas.remove(datas[j])
                 }
             }
         }
+
         def strings = datas.collect{it -> formatter.format(it)}
         return strings
     }
@@ -141,12 +146,6 @@ class CollectorDashboardController {
 
     def viewGraphics(){
         render(view:'viewGraphics')
-    }
-
-    def viewLastWeek(){
-        def datas = uniqueStringPickUps('week')
-        def freq = freqPickUps('week')
-        render(view:'viewCharts', model: [datas: datas, freq: freq])
     }
 
     def viewLastMonth(){
