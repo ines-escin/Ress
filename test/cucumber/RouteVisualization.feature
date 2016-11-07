@@ -19,7 +19,7 @@ Feature: Route visualization
   #controle
     Scenario: solicitação de rotas
         Given o local "ru" possui coletas pendentes
-        When eu solicito a rota entre os locais com coletas pendentes
+        When eu solicito a rota passando pelos locais com coletas pendentes
         Then o sistema retorna a rota que passa por "ru"
 
     Scenario: solicitação de rotas sem coletas
