@@ -12,7 +12,8 @@ class RouteVisualizationPage extends Page{
     }
 
     def hasRoute(){
-        $("div", class: "map_canvas")
+        def div = $("div", class: "map_canvas")
+        return div!=null
     }
 
 }

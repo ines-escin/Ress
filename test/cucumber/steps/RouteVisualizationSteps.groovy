@@ -54,7 +54,7 @@ When(~/^eu seleciono a opção de visualização de rotas$/) { ->
 Then(~/^eu vejo a rota passando por "([^"]*)" no mapa$/) { String arg1 ->
     to RouteVisualizationPage
     at RouteVisualizationPage
-    page.hasRoute()
+    assert page.hasRoute()
 }
 
 Then(~/^o sistema exibe uma mensagem de erro$/) { ->
