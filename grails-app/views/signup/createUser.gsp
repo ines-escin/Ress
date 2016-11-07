@@ -46,6 +46,10 @@
 </div>
 <br>
 <div class='login'>
+    <g:if test='${flash.message}'>
+        <div class='login_message'>${flash.message}</div>
+    </g:if>
+
     <g:if test='${message}'>
         <div class='login_message'>${message}</div>
     </g:if>
