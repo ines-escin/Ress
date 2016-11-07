@@ -17,7 +17,20 @@ class CollectorDashboardPage extends Page {
         $("li", id: "logout").click()
     }
 
-    def maps() {
+
+    def pickupRequest() {
+        $("li", id: "pickupRequest").click()
+    }
+
+    def clickMaps() {
         $("li", id: "maps").click()
+    }
+
+    def hasNoPickUp() {
+        if ($("td", text: "Nenhum pedido de coleta está aberto no momento")) {
+            return true;
+        } else {
+            return false;
+        }
     }
 }
