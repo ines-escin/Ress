@@ -3,13 +3,13 @@ Feature: Map Visualization
   I want to visualizar os restaurantes com coletas pendentes
   So that eu posso saber onde ficam os pontos de coleta
 
-  #GUI
-#
-#  Scenario: Visualizar locais
-#    Given o restaurante de login "r1" possui uma coleta pendente
-#    And Estou na página de visualização de mapa do ResS
-#    When eu solicito a visualização das coletas
-#    Then eu vejo a localização do restaurante de login "r1" em um mapa
+  GUI
+
+  Scenario: Visualizar locais
+    Given o restaurante de login "r1" possui uma coleta pendente
+    And Estou na página de visualização de mapa do ResS
+    When eu solicito a visualização das coletas
+    Then eu vejo a localização do restaurante de login "r1" em um mapa
 
   Scenario: Sem coletas pendentes
     Given Estou na página de visualização de mapas do ResS

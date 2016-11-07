@@ -10,6 +10,7 @@ import pages.CollectorDashboardPage
 import pages.GeneratorDashboardPage
 import pages.MapsPage
 import pages.PickupRequestPage
+import pages.SignUpPage
 
 import static cucumber.api.groovy.EN.*;
 
@@ -21,6 +22,7 @@ import static cucumber.api.groovy.EN.*;
 
 Given(~/^o restaurante de login "([^"]*)" possui uma coleta pendente$/) { String login ->
 
+    to SignUpPage
     at SignUpPage
 
     page.createDefaultUser("cnpj", "Gerador de Resíduo", login)
@@ -50,7 +52,7 @@ When(~/^eu solicito a visualização das coletas$/) { ->
     page.clickCollectionPoints()
 }
 
-Then(~/^eu vejo a localização do restaurante de login "r1" em um mapa$/) { String arg1 ->
+Then(~/^eu vejo a localização do restaurante de login "([^"]*)" em um mapa$/) { String arg1 ->
     at CollectionPointsPage
     page.hasmap()
 }
