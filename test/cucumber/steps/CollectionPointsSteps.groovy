@@ -55,7 +55,7 @@ When(~/^eu solicito a visualização das coletas$/) { ->
 
 Then(~/^eu vejo a localização do restaurante de login "([^"]*)" em um mapa$/) { String arg1 ->
     at CollectionPointsPage
-    page.hasmap()
+    assert page.hasmap()
 
     PickupRequest.executeUpdate('delete from PickupRequest')
 
@@ -64,7 +64,7 @@ Then(~/^eu vejo a localização do restaurante de login "([^"]*)" em um mapa$/) 
 And(~/^não existem locais com coletas pendentes$/) { ->
     to CollectorDashboardPage
     at CollectorDashboardPage
-    page.hasNoPickUp()
+    assert page.hasNoPickUp()
 }
 
 Then(~/^eu vejo uma mensagem sinalizando que não há restaurantes com coletas pendentes$/) { ->

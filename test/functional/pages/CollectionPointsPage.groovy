@@ -17,8 +17,9 @@ class CollectionPointsPage extends Page{
 
 
     def hasmap(){
-        $("div", class: "gmnoprint")
+       def div =  $("div", class: "gmnoprint")
 
+        return div!=null
     }
 
 
