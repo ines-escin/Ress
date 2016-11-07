@@ -9,7 +9,6 @@ import br.ufpe.cin.ines.ress.LoginController
 import br.ufpe.cin.ines.ress.PickupRequest
 import br.ufpe.cin.ines.ress.User
 import br.ufpe.cin.ines.ress.Address
-import br.ufpe.cin.ines.ress.residuegenerator.GeneratorDashboardController
 import mail.MailService
 
 class ResidueGeneratorTestAuxilar {
@@ -26,10 +25,10 @@ class ResidueGeneratorTestAuxilar {
                                     city: "Charming",
                                     state: "Arkansas",
                                     cep: '65520020'
-                            ), name : "Freddy",
-                            email   : "freddy@gmail.com",
-                            cnpj: "24.831.494/0001-14",
-                            typeUser: "Empresa Coletora"
+                            ), name : "Olaf",
+                            email   : "olaf@gmail.com",
+                            cnpj: "63.581.978/0001-04",
+                            typeUser: "Gerador de Resíduo"
                     ],
                     [
                             username: "testdummy2",
@@ -44,7 +43,7 @@ class ResidueGeneratorTestAuxilar {
                             ), name : "Vlad",
                             email   : "vlad2@gmail.com",
                             cnpj: "28.488.426/0001-55",
-                            typeUser: "Empresa Coletora"
+                            typeUser: "Gerador de Resíduo"
                     ],
 
                     [
@@ -61,9 +60,59 @@ class ResidueGeneratorTestAuxilar {
                             email   : "freddy@gmail.com",
                             cnpj: "02.814.403/0001-08",
                             typeUser: "Gerador de Resíduo"
+                    ],
+
+                    [
+                            username: "ruteste",
+                            password: "123",
+                            address : new Address(
+                                    street: "Elm street",
+                                    streetNumber: "13",
+                                    neighborhood: "Devil's pit",
+                                    city: "Charming",
+                                    state: "Arkansas",
+                                    cep: '65520020'
+                            ), name : "Roger",
+                            email   : "roger@gmail.com",
+                            cnpj: "56.896.678/0001-59",
+                            typeUser: "Gerador de Resíduo"
                     ]
 
             ]
+
+    static User collector = new User
+            (
+                    username: "testcoldummy",
+                    password: "testcolpass",
+                    address: new Address(
+                            street: "Elm street",
+                            streetNumber: "13",
+                            neighborhood: "Devil's pit",
+                            city: "Charming",
+                            state: "Arkansas",
+                            cep: '65520020'
+                    ), name: "Dimmy",
+                    email: "dimmy@gmail.com",
+                    cnpj: "24.831.494/0001-14",
+                    typeUser: "Empresa Coletora"
+            );
+
+    static User collector2 = new User
+            (
+                    username: "username",
+                    password: "testcolpass",
+                    address: new Address(
+                            street: "Elm street",
+                            streetNumber: "13",
+                            neighborhood: "Devil's pit",
+                            city: "Charming",
+                            state: "Arkansas",
+                            cep: '65520020'
+                    ), name: "Dimmy",
+                    email: "dimmy2@gmail.com",
+                    cnpj: "24.831.494/0001-14",
+                    typeUser: "Empresa Coletora"
+            );
 
     public static def injectGenerator(String username) {
         User generator = findGenerator(username);
@@ -71,25 +120,26 @@ class ResidueGeneratorTestAuxilar {
     }
 
     public static def injectCollector() {
-        User collector = new User
-                (
-                        username: "testcoldummy",
-                        password: "testcolpass",
-                        address: new Address(
-                                street: "Elm street",
-                                streetNumber: "13",
-                                neighborhood: "Devil's pit",
-                                city: "Charming",
-                                state: "Arkansas",
-                                cep: '65520020'
-                        ), name: "Dimmy",
-                        email: "dimmy@gmail.com"
-                );
+//        User collector = new User
+//                (
+//                        username: "testcoldummy",
+//                        password: "testcolpass",
+//                        address: new Address(
+//                                street: "Elm street",
+//                                streetNumber: "13",
+//                                neighborhood: "Devil's pit",
+//                                city: "Charming",
+//                                state: "Arkansas",
+//                                cep: '65520020'
+//                        ), name: "Dimmy",
+//                        email: "dimmy@gmail.com",
+//                        cnpj: "24.831.494/0001-14",
+//                        typeUser: "Empresa Coletora"
+//                );
 
         collector.save(flush:true);
 
     }
-
 
     public static def findGenerator(String username) {
         User generator = generators.find
@@ -97,6 +147,10 @@ class ResidueGeneratorTestAuxilar {
                     generator -> generator.username == username
                 }
         return generator;
+    }
+
+    public static  def findCollector2(){
+        return collector2
     }
 
     public static def findPickupByUsername(String username)
@@ -164,5 +218,4 @@ class ResidueGeneratorTestAuxilar {
     public static def sendEmail(String name, double residueAmount) {
         return MailService.sendEmail("dfm2@cin.ufpe.br", name, new Date(), residueAmount)
     }
-
 }
