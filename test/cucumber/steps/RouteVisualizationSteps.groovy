@@ -51,7 +51,7 @@ When(~/^eu seleciono a opção de visualização de rotas$/) { ->
     page.clickRouteVisualization()
 }
 
-Then(~/^eu vejo a rota passando por "([^"]*)" no mapa$/) { String arg1 ->
+Then(~/^eu vejo a rota passando por "([^"]*)" no mapa$/) { String loc ->
     to RouteVisualizationPage
     at RouteVisualizationPage
     assert page.hasRoute()
