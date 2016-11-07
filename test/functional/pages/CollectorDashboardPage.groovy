@@ -20,4 +20,12 @@ class CollectorDashboardPage extends Page {
     def maps(){
         $("li", id: "maps").click()
     }
+
+    def hasNoPickUp() {
+        if ($("td", text: "Nenhum pedido de coleta está aberto no momento")) {
+            return true;
+        } else {
+            return false;
+        }
+    }
 }

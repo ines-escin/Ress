@@ -3,14 +3,11 @@ package cucumber.steps
 
 import br.ufpe.cin.ines.ress.PickupRequest
 import br.ufpe.cin.ines.ress.SignUpController
-import br.ufpe.cin.ines.ress.User
 import br.ufpe.cin.ines.ress.residuecollector.CollectorDashboardController
 import br.ufpe.cin.ines.ress.residuegenerator.GeneratorDashboardController
 import pages.CollectionPointsPage
 import pages.CollectorDashboardPage
 import pages.GeneratorDashboardPage
-import pages.HomePage
-import pages.LoginAuthenticationPage
 import pages.MapsPage
 import pages.PickupRequestPage
 
@@ -48,6 +45,7 @@ Given(~/^Estou na página de visualização de mapas do ResS$/) { ->
 }
 
 When(~/^eu solicito a visualização das coletas$/) { ->
+    to MapsPage
     at MapsPage
     page.clickCollectionPoints()
 }
@@ -58,9 +56,10 @@ Then(~/^eu vejo a localização do restaurante de login "r1" em um mapa$/) { Str
 }
 
 And(~/^não existem locais com coletas pendentes$/) { ->
-    assert PickupRequest.findAllByStatus(false).empty
+    to CollectorDashboardPage
+    at CollectorDashboardPage
+    page.hasNoPickUp()
 }
-
 
 Then(~/^eu vejo uma mensagem sinalizando que não há restaurantes com coletas pendentes$/) { ->
     at MapsPage
