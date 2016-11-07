@@ -28,14 +28,15 @@
         var waypts = [];
         /*waypts.push({
                             location:{lat: -8.05060572, lng: -34.95280063},
-                            stopover: false
+                            stopover: true
         });
         waypts.push( {
                             location:{lat: -8.05638996, lng: -34.95334244},
-                            stopover: false
+                            stopover: true
         });*/
         function initMap() {
-            var ufpe = {lat: -8.05233197, lng: -34.94509196};
+            var ufpe = new google.maps.LatLng(-8.05233197, -34.94509196);
+            //{lat: -8.05233197, lng: -34.94509196};
     		directionsService = new google.maps.DirectionsService;
 			directionsDisplay = new google.maps.DirectionsRenderer;
             var mapOptions = {
@@ -47,23 +48,44 @@
             directionsDisplay.setMap(map);
             <g:each in="${enderecos}" status="i" var="endereco">
                 var address = '${endereco.street?.encodeAsJavaScript()} ${endereco.city?.encodeAsJavaScript()} ${endereco.cep?.encodeAsJavaScript()}';
+                //alert(address);
                 var nome  = '${endereco.user.name?.encodeAsJavaScript()}';
+                //alert(nome);
                 var service = new google.maps.places.PlacesService(map);
-                service.textSearch({
+                //alert("depois do service");
+                var request = {
                     location: ufpe,
                     radius: 5000,
                     query:  nome + " " + address
-                }, function (results, status) {
-                    if (status == google.maps.places.PlacesServiceStatus.OK) {
-                        waypts.push( {
-                            location: {lat: results[0].latitude, lng: results[0].longitude},
-                            stopover: false
+                };
+
+                        waypts.push({
+                            location: nome + " " + address,
+                            stopover: true
                         });
-                    }
-                });
+
             </g:each>
+            //alert("saiud o each");
             route();
         }
+
+        function callback(results, status) {
+
+            if (status == google.maps.places.PlacesServiceStatus.OK) {
+                //alert("oi do if");
+                //createMarker(results[0]);
+                //var lugar = new google.maps.LatLng(results[0].latitude, results[0].longitude);
+                waypts.push({
+                    location: {lat: results[0].geometry.location.lat(), lng: results[0].geometry.location.lng()},
+
+                    stopover: true
+                });
+
+                //alert("oi do for");
+                //alert("depois do push");
+            }
+        }
+
 
         function route() {
             var collectorAddress = '${enderecoColetor.street?.encodeAsJavaScript()} ${enderecoColetor.city?.encodeAsJavaScript()} ${enderecoColetor.cep?.encodeAsJavaScript()}';
@@ -79,10 +101,23 @@
                 }
             });
         }
+
+        function createMarker(place) {
+            var placeLoc = place.geometry.location;
+            var marker = new google.maps.Marker({
+                map: map,
+                position: place.geometry.location
+            });
+            google.maps.event.addListener(marker, 'click', function() {
+                infowindow.setContent(place.name);
+                infowindow.open(map, this);
+            });
+            bounds.extend(marker.getPosition());
+            map.fitBounds(bounds);
+        }
+
         google.maps.event.addDomListener(window, 'load', initMap());
     </script>
-
-
 </head>
 <body>
 <div id="map_canvas"></div>
