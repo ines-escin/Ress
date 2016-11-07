@@ -150,13 +150,13 @@ class CollectorDashboardController {
     }
 
     def viewLastMonth(){
-        def datas = uniqueStringPickUps('month');
+        def datas = uniqueStringPickUps('month')
         def freq = freqPickUps('month')
         render(view:'viewCharts', model: [datas: datas, freq: freq])
     }
 
     def viewLastYear(){
-        def datas = uniqueStringPickUps('year');
+        def datas = uniqueStringPickUps('year')
         def freq = freqPickUps('year')
         render(view:'viewCharts', model: [datas: datas, freq: freq])
     }
