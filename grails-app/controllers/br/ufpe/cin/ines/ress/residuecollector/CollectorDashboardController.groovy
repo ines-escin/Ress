@@ -13,7 +13,7 @@ import java.text.SimpleDateFormat
 
 import static br.ufpe.cin.ines.ress.User.*
 
-@Secured(['ROLE_COLLECTOR'])
+
 class CollectorDashboardController {
 
     def springSecurityService
