@@ -156,7 +156,7 @@ class ResidueGeneratorTestAuxilar {
     }
 
     public static def sendEmail(String name, double residueAmount) {
-        return MailService.sendEmail("dfm2@cin.ufpe.br", name, new Date(), residueAmount)
+        return MailService.sendEmail("plal@cin.ufpe.br", name, new Date(), residueAmount)
     }
 
 }
