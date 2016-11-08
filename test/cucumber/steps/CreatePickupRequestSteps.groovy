@@ -7,7 +7,7 @@ Given(~'^there is no open pickup request for the residue generator with the user
     ResidueGeneratorTestAuxilar.injectGenerator(username)
     generatorUsername = username
     ResidueGeneratorTestAuxilar.injectCollector();
-    assert ResidueGeneratorTestAuxilar.findPickupByUsername(username) == false
+    assert !ResidueGeneratorTestAuxilar.findPickupByUsername(username)
 }
 
 When(~'^I make a pickup request for my "([^"]*)" liters residue container$'){ String amountString ->
@@ -30,5 +30,5 @@ When(~'I try to make a pickup request with the residue amount equals to "([^"]*)
 
 Then(~'^the system should not store the pickup request$'){ ->
     def teste = generatorUsername
-    assert ResidueGeneratorTestAuxilar.findPickupByUsername(teste) == false
+    assert !ResidueGeneratorTestAuxilar.findPickupByUsername(teste)
 }
