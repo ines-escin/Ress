@@ -29,3 +29,4 @@ Feature: Visualização de gráficos de coletas
     Given Existe uma lista de coletas realizadas
     When Eu seleciono a opção “Último mês”
     Then A lista de coletas realizadas não muda
+

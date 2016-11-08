@@ -99,7 +99,7 @@ class CollectorDashboardController {
         userToChange.save()
         redirect (action: 'accountConfig')
     }
-
+    
     List<String> stringPickUps(String tempo){
         SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
         def coletas = PickupRequest.findAllByStatus(true).sort{it.date}
