@@ -16,4 +16,8 @@ class CollectorDashboardPage extends Page {
     def logOff(){
         $("li", id: "logout").click()
     }
+
+    def hasNoPickUp() {
+        return $("td", text: "Nenhum pedido de coleta está aberto no momento")
+    }
 }
