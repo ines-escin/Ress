@@ -1,25 +1,30 @@
 package pages
 
 import geb.Page
+import steps.InternationalizationHelper
 
 /**
  * Created by Leonardo on 15/10/2016.
  */
 class CollectionPointsPage extends Page{
 
-    def titulo = "ResS - Mapas"
+
     static url = "ResS/collectorDashboard/collectionPoints"
 
     static at = {
-        title ==~ titulo
+
+        InternationalizationHelper helper = InternationalizationHelper.instance
+        String Maps = "Maps"
+        String MapsTitle = helper.getMessage("default.page.title.map", Maps)
+        title ==~ MapsTitle
+
+
     }
-
-
 
     def hasmap(){
        def div =  $("div", class: "gmnoprint")
 
-        return div!=null
+       return div!=null
     }
 
 

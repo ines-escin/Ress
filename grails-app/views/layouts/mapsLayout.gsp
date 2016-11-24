@@ -17,7 +17,10 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>ResS - Mapas</title>
+
+
+    <g:set var="entityName" value="${message(code: 'maps.label', default: 'Maps')}"/>
+    <title><g:message code="default.page.title.map" args="[entityName]"/></title>
 
     <!-- Bootstrap Core CSS -->
     <link href="../css/generatorDashboard/bootstrap.min.css" rel="stylesheet">

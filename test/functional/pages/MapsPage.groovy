@@ -1,17 +1,21 @@
 package pages
 
 import geb.Page
+import steps.InternationalizationHelper
 
 /**
  * Created by Leonardo on 15/10/2016.
  */
 class MapsPage extends Page {
 
-    def titulo = "ResS - Mapas"
+
     static url = "ResS/collectorDashboard/maps"
 
     static at = {
-        title ==~ titulo
+
+        InternationalizationHelper helper = InternationalizationHelper.instance
+        String MapsTitle = helper.getMessage("default.page.title.map", "Maps")
+        title ==~ MapsTitle
     }
 
     def clickCollectionPoints(){
@@ -20,19 +24,7 @@ class MapsPage extends Page {
 
     boolean hasNoCollectionPoints(){
         def msg = $(".alert-error")
-        if(msg != null)
-        {
-            return true
-        }
-        else
-        {
-            return false
-        }
+        msg != null
     }
-
-
-
-
-
 
 }
