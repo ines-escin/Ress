@@ -53,6 +53,9 @@
                 <g:link controller="collectorDashboard" action="generatorList">Geradores de resíduo</g:link>
             </li>
             <li>
+                <g:link controller="collectorDashboard" action="viewGraphics">Gráficos de coletas</g:link>
+            </li>
+            <li>
                 <g:link controller="collectorDashboard" action="accountConfig">Configurações de conta</g:link>
             </li>
             <li id= "logout">
