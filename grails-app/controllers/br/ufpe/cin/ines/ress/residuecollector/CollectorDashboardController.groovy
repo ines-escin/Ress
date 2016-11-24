@@ -105,7 +105,6 @@ class CollectorDashboardController {
         def coletas = PickupRequest.findAllByStatus(true).sort{it.date}
         def datas = coletas.collect{it -> it.date}
         if(tempo == 'month'){
-            println tempo
             Calendar c = Calendar.getInstance()
             Calendar current = Calendar.getInstance()
             for(int j = 0; j<datas.size(); j++){
