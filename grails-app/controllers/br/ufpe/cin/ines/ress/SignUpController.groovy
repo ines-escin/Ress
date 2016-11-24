@@ -4,6 +4,9 @@ import org.codehaus.groovy.grails.plugins.springsecurity.SpringSecurityUtils
 
 import javax.xml.bind.ValidationException
 
+
+
+
 class SignUpController {
 
     /**
@@ -16,7 +19,7 @@ class SignUpController {
 
         render(view: "createUser");
     }
-
+    //STUB
     def saveUser() {
         try {
             User user = new User()
@@ -51,14 +54,14 @@ class SignUpController {
         }
     }
 
-
-    def createDefaultGeneratorUser(String arg){
+    //STUB
+    def createDefaultGeneratorUser(login,rua, numero, infoAdicional, bairro, cidade, estado, cep) {
         def generatorRole = Role.findByAuthority('ROLE_GENERATOR') ?: new Role(authority: 'ROLE_GENERATOR').save(failOnError: true)
-        def generator = User.findByUsername(arg) ?: new User(username: arg,
-                password: 'pass',
-                name: 'Restaurante Universitário - RU',
-                email: arg+'@gmail.com',
-                address: new Address(street: 'Av. Reitor Joaquim Amazonas', cep: '50740-540', city: 'Recife', state: 'Pernambuco', streetNumber: '22', neighborhood: 'Cidade Universitária'),
+        def generator =  new User(username: login,
+                password: "pass",
+                name: login,
+                email: login+'@gmail.com',
+                address: new Address(street :rua, cep: cep, city: cidade, state: estado, streetNumber: numero, neighborhood: bairro, additionalInfo: infoAdicional),
                 enabled: true).save(failOnError: true)
         if(!generator.authorities.contains(generatorRole)){
             UserRole.create(generator, generatorRole, true)
