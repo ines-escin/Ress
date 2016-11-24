@@ -19,11 +19,11 @@ import static cucumber.api.groovy.EN.*;
  */
 
 //Por causa do Spring Security, não consegui realizar meus testes de GUI, porém, implementei todos.
-Given(~/^Nenhuma coleta foi realizada no último mês$/) { ->
+Given(~/^Nenhuma coleta foi realizada no último mes$/) { ->
     to CollectorDashboardPage
     at CollectorDashboardPage
 
-    assert page.hasNoCollectionPoints()
+    assert page.hasNoPickUp()
 }
 
 And(~/^Eu estou na tela de opções de gráficos$/) { ->
@@ -39,18 +39,18 @@ When(~/^Eu seleciono a opção “Último mês”$/) { ->
     page.ClickLastMonth()
 }
 
-Then(~/^Eu posso ver uma tela com um gráfico vazio$/){
+Then(~/^Eu posso ver uma tela com um gráfico vazio$/){->
     to MonthPage
     at MonthPage
 
     assert page.HasChartMonth()
 }
 
-And(~/^Foram realizadas apenas 2 coletas no dia “07\/11\/2016”$/){
+And(~/^Foram realizadas apenas 2 coletas no dia “07\/11\/2016”$/){ ->
     to SignUpPage
     at SignUpPage
 
-    page.createDefaultUser("cnpj", "Gerador de Resíduo", 'login')
+    page.createDefaultUser("cnpj", "Gerador de Resíduo", "login")
 
     to GeneratorDashboardPage
     at GeneratorDashboardPage
@@ -67,7 +67,7 @@ And(~/^Foram realizadas apenas 2 coletas no dia “07\/11\/2016”$/){
     to SignUpPage
     at SignUpPage
 
-    page.createDefaultUser("cnpj", "Coletor de Resíduo", 'caio')
+    page.createDefaultUser("cnpj", "Coletor de Resíduo", "caio")
 
     to GeneratorDashboardPage
     at GeneratorDashboardPage
@@ -75,8 +75,8 @@ And(~/^Foram realizadas apenas 2 coletas no dia “07\/11\/2016”$/){
 
     to LoginAuthenticationPage
     at LoginAuthenticationPage
-    page.fillUserName('login')
-    page.fillPassword('pass')
+    page.fillUserName("login")
+    page.fillPassword("pass")
 
     to GeneratorDashboardPage
     at GeneratorDashboardPage
@@ -92,8 +92,8 @@ And(~/^Foram realizadas apenas 2 coletas no dia “07\/11\/2016”$/){
 
     to LoginAuthenticationPage
     at LoginAuthenticationPage
-    page.fillUserName('caio')
-    page.fillPassword('pass')
+    page.fillUserName("caio")
+    page.fillPassword("pass")
 
     to GeneratorDashboardPage
     at GeneratorDashboardPage
@@ -108,7 +108,7 @@ When(~/^Eu seleciono a opção “Último ano”$/) { ->
 }
 
 
-Then(~/^Eu posso ver um gráfico Coletas x Data que possui apenas a altura 2 quando x = “07\/11\/2016”$/){
+Then(~/^Eu posso ver um gráfico Coletas x Data que possui apenas a altura 2 quando x = “07\/11\/2016”$/){ ->
     to YearPage
     at YearPage
 
@@ -130,7 +130,7 @@ Given(~/^Existe uma lista de coletas realizadas$/) { ->
     collectControl.response.reset()
 }
 
-When(~/^Eu seleciono a opção “Último mês”$/) { ->
+When(~/^Eu seleciono a opção “Último mes”$/) { ->
     def cControl = new CollectorDashboardController()
     cControl.viewLastMonth()
     cControl.response.reset()
