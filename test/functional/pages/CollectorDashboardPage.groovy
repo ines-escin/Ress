@@ -27,10 +27,6 @@ class CollectorDashboardPage extends Page {
     }
 
     def hasNoPickUp() {
-        if ($("td", text: "Nenhum pedido de coleta está aberto no momento")) {
-            return true;
-        } else {
-            return false;
-        }
+        return ($("td", text: "Nenhum pedido de coleta está aberto no momento"))
     }
 }
