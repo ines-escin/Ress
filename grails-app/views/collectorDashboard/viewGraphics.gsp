@@ -1,6 +1,7 @@
 <html>
 <head>
-    <meta name="layout" content="collectorLayout">
+
+    <meta name="layout" content="graphicsCollectorLayout">
     <title>ResS - Graficos</title>
     <link rel="stylesheet" type="text/css" href="../css/table-data.css">
     <link rel="stylesheet" type="text/css" href="../css/generatorDashboard/button.css"/>
@@ -9,7 +10,6 @@
     {
         width: 16% !important;
     }
-
     button{
         margin-top: 15px;
         margin-left: 10px;
