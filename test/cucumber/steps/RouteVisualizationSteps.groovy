@@ -94,7 +94,6 @@ When(~/^eu solicito a rota entre os locais com coletas pendentes$/) { ->
 
 Then(~/^o sistema retorna a rota que passa por "([^"]*)"$/) { String arg ->
     assert address.collect{at -> at.user.username}.contains(arg)
-    PickupRequest.executeUpdate('delete from PickupRequest')
 }
 
 Then(~/^o sistema não retorna a rota$/) { ->
