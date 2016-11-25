@@ -104,30 +104,32 @@ class CollectorDashboardController {
         SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
         def coletas = PickupRequest.findAllByStatus(true).sort{it.date}
         def datas = coletas.collect{it -> it.date}
-        if(tempo == 'month'){
+        verifyTemporality(tempo, datas)
+        def stringDates = datas.collect{it -> formatter.format(it)}
+        return stringDates
+    }
+
+    private void verifyTemporality(String tempo, List<Date> datas) {
+        if (tempo == 'month') {
             Calendar c = Calendar.getInstance()
             Calendar current = Calendar.getInstance()
-            for(int j = 0; j<datas.size(); j++){
+            for (int j = 0; j < datas.size(); j++) {
                 c.setTime(datas[j])
-                if((c.get(c.MONTH) < current.get(current.MONTH)) ||
+                if ((c.get(c.MONTH) < current.get(current.MONTH)) ||
                         ((c.get(c.MONTH) == current.get(current.MONTH)) && (c.get(c.YEAR) < current.get(current.YEAR)))) {
                     datas.remove(datas[j])
-                    println "eita"
                 }
             }
-        } else if(tempo == 'year') {
+        } else if (tempo == 'year') {
             Calendar c = Calendar.getInstance()
             Calendar current = Calendar.getInstance()
-            for(int j = 0; j<datas.size(); j++){
+            for (int j = 0; j < datas.size(); j++) {
                 c.setTime(datas[j])
-                if((c.get(c.YEAR) < current.get(current.YEAR))){
+                if ((c.get(c.YEAR) < current.get(current.YEAR))) {
                     datas.remove(datas[j])
                 }
             }
         }
-
-        def strings = datas.collect{it -> formatter.format(it)}
-        return strings
     }
 
     List<String> uniqueStringPickUps(String tempo){
