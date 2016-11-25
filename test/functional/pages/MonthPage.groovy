@@ -7,7 +7,7 @@
 import geb.Page
 
  class MonthPage extends Page{
-        def titulo = "Ress - Charts"
+        def titulo = "ResS - Charts"
         def url = "ResS/collectorDashboard/viewLastMonth"
 
         static at = {
@@ -15,9 +15,8 @@ import geb.Page
         }
 
         def hasChartMonth(){
-            def div =  $("div", class: "chart_div")
-            return div!=null
-
+            def div =  $("div", id: "chart_div")
+            return div != null
         }
     }
 

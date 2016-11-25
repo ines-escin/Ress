@@ -41,15 +41,15 @@ When(~/^Eu seleciono a opção “Último mês”$/) { ->
 Then(~/^Eu posso ver uma tela com um gráfico vazio$/){->
     at MonthPage
 
-    assert page.HasChartMonth()
+    assert page.hasChartMonth()
 }
 
-And(~/^Foram realizadas apenas 2 coletas no dia “07\/11\/2016”$/){ ->
+And(~/^Foram realizadas apenas 2 coletas no dia atual$/){ ->
     to SignUpPage
     at SignUpPage
 
     page.createDefaultUser("cnpj", "Gerador de Resíduo", "login")
-
+s
     to GeneratorDashboardPage
     at GeneratorDashboardPage
     page.pickUpRequest()
@@ -71,9 +71,8 @@ And(~/^Foram realizadas apenas 2 coletas no dia “07\/11\/2016”$/){ ->
     at GeneratorDashboardPage
     page.clickConfirmCollect()
 
-    to LoginAuthenticationPage
     at LoginAuthenticationPage
-    page.fillUserName("login")
+    page.fillUsername("login")
     page.fillPassword("pass")
 
     to GeneratorDashboardPage
@@ -89,7 +88,7 @@ And(~/^Foram realizadas apenas 2 coletas no dia “07\/11\/2016”$/){ ->
     page.logOff()
 
     at LoginAuthenticationPage
-    page.fillUserName("caio")
+    page.fillUsername("caio")
     page.fillPassword("pass")
 
     to GeneratorDashboardPage
