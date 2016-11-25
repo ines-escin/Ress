@@ -1,7 +1,6 @@
 <html>
 <head>
-    <meta name="layout" content="chartsCollectorLayout">
-    <title>ResS - Charts</title>
+    <meta name="layout" content="collectorLayout">
     <link rel="stylesheet" type="text/css" href="../css/table-data.css">
     <link rel="stylesheet" type="text/css" href="../css/generatorDashboard/button.css"/>
     <style type="text/css">

@@ -8,9 +8,10 @@
 <%@ page contentType="text/html;charset=UTF-8" %>
 <html>
 <head>
+
     <meta name="layout" content="collectorLayout">
-    <title></title>
     <link rel="stylesheet" type="text/css" href="../css/table-data.css">
+    <title>ResS - Dashboard</title>
 </head>
 
 <body>

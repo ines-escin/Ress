@@ -1,8 +1,7 @@
 <html>
 <head>
 
-    <meta name="layout" content="graphicsCollectorLayout">
-    <title>ResS - Graficos</title>
+    <meta name="layout" content="collectorLayout">
     <link rel="stylesheet" type="text/css" href="../css/table-data.css">
     <link rel="stylesheet" type="text/css" href="../css/generatorDashboard/button.css"/>
     <style type="text/css">
