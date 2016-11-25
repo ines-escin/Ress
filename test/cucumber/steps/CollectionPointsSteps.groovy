@@ -1,8 +1,9 @@
 package cucumber.steps
 
-
+import br.ufpe.cin.ines.ress.Address
 import br.ufpe.cin.ines.ress.PickupRequest
 import br.ufpe.cin.ines.ress.SignUpController
+import br.ufpe.cin.ines.ress.User
 import br.ufpe.cin.ines.ress.residuecollector.CollectorDashboardController
 import br.ufpe.cin.ines.ress.residuegenerator.GeneratorDashboardController
 import pages.CollectionPointsPage
@@ -25,7 +26,7 @@ Given(~/^o restaurante de login "([^"]*)" possui uma coleta pendente$/) { String
     to SignUpPage
     at SignUpPage
 
-    page.createDefaultUser("cnpj", "Gerador de Resíduo", login)
+    page.createDefaultUserCnpjTypeUserUsername("cnpj", "Gerador de Resíduo", login, "default@Mail.com")
 
     to GeneratorDashboardPage
     at GeneratorDashboardPage
@@ -64,8 +65,14 @@ Then(~/^eu vejo uma mensagem sinalizando que não há restaurantes com coletas p
 }
 
 Given(~/^o local de login "([^"]*)" e endereço "([^"]*)" "([^"]*)" "([^"]*)" "([^"]*)" "([^"]*)" "([^"]*)" "([^"]*)" possui uma coleta pendente$/) { String login, String rua, String numero, String infoAdicional, String bairro, String cidade, String estado, String cep ->
+
     def signUpController = new SignUpController()
-    signUpController.createDefaultGeneratorUser(login,rua, numero, infoAdicional, bairro, cidade, estado, cep)
+
+    def local =  new User(username: login, password: "pass",  name: login, email: login+'@gmail.com',
+            address: new Address(street :rua, cep: cep, city: cidade, state: estado, streetNumber: numero, neighborhood: bairro, additionalInfo: infoAdicional), enabled: true)
+
+    //Quando integrar definir valores de cnpj e tipo de usuario
+    signUpController.save(local)
 
     def generatorController  = new GeneratorDashboardController()
     generatorController.saveDefaultPickUp(login)

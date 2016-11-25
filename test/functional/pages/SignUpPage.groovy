@@ -12,7 +12,6 @@ import geb.Page
 class SignUpPage  extends Page {
 
     //STUB
-
     def titulo = "Coopere UFPE"
     static url = "/ResS/"
 
@@ -20,8 +19,8 @@ class SignUpPage  extends Page {
         title ==~ titulo
     }
 
-
-    def createDefaultUser(cnpj, tipoUsuario, usuario){
+    //STUB
+    def createDefaultUserCnpjTypeUserUsername(cnpj, tipoUsuario, usuario, email){
         def generatorRole = Role.findByAuthority('ROLE_GENERATOR') ?: new Role(authority: 'ROLE_GENERATOR').save(failOnError: true)
         def generator = User.findByUsername('ru') ?: new User(username: usuario,
                 password: 'pass',
@@ -33,9 +32,6 @@ class SignUpPage  extends Page {
             UserRole.create(generator, generatorRole, true)
         }
     }
-
-
-
 
 
 }
