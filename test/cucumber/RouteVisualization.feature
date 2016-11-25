@@ -11,8 +11,8 @@ Feature: Route visualization
       Then eu vejo a rota passando por "ru" no mapa
 
    Scenario: ver rotas sem coletas pendentes
-       Given eu estou na tela de visualização de mapas do ResS
-       And não existem coletas pendentes
+       Given não existem coletas pendentes
+       And eu estou na pagina de visualização de mapas do ResS
        When eu seleciono a opção de visualização de rotas
        Then o sistema exibe uma mensagem de erro
 

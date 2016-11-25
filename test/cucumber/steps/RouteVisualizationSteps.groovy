@@ -5,6 +5,7 @@ import br.ufpe.cin.ines.ress.PickupRequest
 import br.ufpe.cin.ines.ress.SignUpController
 import br.ufpe.cin.ines.ress.residuecollector.CollectorDashboardController
 import br.ufpe.cin.ines.ress.residuegenerator.GeneratorDashboardController
+import cucumber.api.PendingException
 import pages.CollectorDashboardPage
 import pages.GeneratorDashboardPage
 import pages.MapsPage
@@ -29,20 +30,15 @@ Given(~/^existem coletas pendentes no local "([^"]*)"$/) { String login ->
     page.submitButtonClick()
 }
 
-And(~/^eu estou na pagina de visualização de mapas do ResS$/) { ->
-    to MapsPage
-    at MapsPage
-}
-
-Given(~/^eu estou na tela de visualização de mapas do ResS$/) { ->
-    to MapsPage
-    at MapsPage
-}
-
-And(~/^não existem coletas pendentes$/) { ->
+Given(~/^não existem coletas pendentes$/) { ->
     to CollectorDashboardPage
     at CollectorDashboardPage
     assert page.hasNoPickUp()
+}
+
+And(~/^eu estou na pagina de visualização de mapas do ResS$/) { ->
+    to MapsPage
+    at MapsPage
 }
 
 When(~/^eu seleciono a opção de visualização de rotas$/) { ->
@@ -98,4 +94,8 @@ Then(~/^o sistema retorna a rota que passa por "([^"]*)"$/) { String arg ->
 
 Then(~/^o sistema não retorna a rota$/) { ->
     assert address.empty
+}
+And(~/^eu estou na tela de visualização de mapas do ResS$/) { ->
+    // Write code here that turns the phrase above into concrete actions
+    throw new PendingException()
 }
