@@ -7,8 +7,8 @@ Feature: Gerenciar usuários
 
   Scenario: Realizar cadastro no sistema.
     Given Estou na pagina de cadastro do ResS
-    And o usuário com o cnpj "36.682.672/0001-71" ou com o usuário "ruteste" não estão cadastrados
-    When eu informo o nome "Restaurante Universitário" com o seu cnpj "36.682.672/0001-71", o seu endereço "Rua dois" "22" "Dentro do campus" "Cidade Universitária" "Recife" "Pernambuco" "52232-123", o tipo de usuário como "Gerador de Resíduo", e-mail "ruteste@gmail.com", usuário "ruteste" e senha "pass" e eu tento cadastrar esse usuário
+    And o usuário com o cnpj "36.682.672/0001-71" ou com o usuário "geradorteste" não estão cadastrados
+    When eu informo o nome "Restaurante Universitário" com o seu cnpj "36.682.672/0001-71", o seu endereço "Rua dois" "22" "Dentro do campus" "Cidade Universitária" "Recife" "Pernambuco" "52232-123", o tipo de usuário como "Gerador de Resíduo", e-mail "ruteste@gmail.com", usuário "geradorteste" e senha "pass" e eu tento cadastrar esse usuário
     Then eu posso ver a tela de login e uma mensagem de confirmação
 
   Scenario: Cadastro de mesmo cnpj para diferentes tipos de usuário

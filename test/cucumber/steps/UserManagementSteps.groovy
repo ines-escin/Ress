@@ -161,22 +161,7 @@ private void selectPickupRequestCollector(String cnpj1, String cnpj2) {
     control.save(collector)
     control.response.reset()
 
-    User generator = new User
-            (
-                    username: "ruuser",
-                    password: "testcolpass",
-                    address: new Address(
-                            street: "Elm street",
-                            streetNumber: "13",
-                            neighborhood: "Devil's pit",
-                            city: "Charming",
-                            state: "Arkansas",
-                            cep: '65520020'
-                    ), name: "Asdf",
-                    email: "asdf@gmail.com",
-                    cnpj: "46.381.441/0001-81",
-                    typeUser: "Gerador de Resíduo"
-            );
+    User generator = aux.findGenerator("ruteste")
     generator.setCnpj(cnpj2)
     control.save(generator)
     control.response.reset()
@@ -194,7 +179,6 @@ When(~/^o cadastro da empresa coletora com o cnpj "([^"]*)" é deletado do siste
 
     User collector = User.findByCnpj(cnpj)
     assert collector != null
-    assert PickupRequest.findByCollector(collector)
 
     control.deleteCollectorAndPickups(collector)
     control.response.reset()
