@@ -16,8 +16,8 @@ class PickupRequestPage extends Page {
         title ==~ indexTitle
     }
 
-    def DefaultFillResidueAmount(){
-        $("input", id: "residueAmount").value(20)
+    def FillResidueAmount(quantidade){
+        $("input", id: "residueAmount").value(quantidade)
     }
 
     def submitButtonClick(){

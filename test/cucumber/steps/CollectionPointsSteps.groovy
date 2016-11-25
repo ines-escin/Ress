@@ -21,7 +21,7 @@ import static cucumber.api.groovy.EN.*;
  */
 
 
-Given(~/^o restaurante de login "([^"]*)" possui uma coleta pendente$/) { String login ->
+Given(~/^o restaurante de login "([^"]*)" possui uma coleta pendente de "([^"]*)" litros$/) { String login, String quantidade ->
 
     to SignUpPage
     at SignUpPage
@@ -33,7 +33,7 @@ Given(~/^o restaurante de login "([^"]*)" possui uma coleta pendente$/) { String
     page.pickupRequest()
 
     at PickupRequestPage
-    page.DefaultFillResidueAmount()
+    page.FillResidueAmount(quantidade)
     page.submitButtonClick()
 }
 

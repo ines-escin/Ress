@@ -6,7 +6,7 @@ Feature: Map Visualization
  # GUI
 
   Scenario: Visualizar locais
-    Given o restaurante de login "r1" possui uma coleta pendente
+    Given o restaurante de login "r1" possui uma coleta pendente de "50" litros
     And Estou na página de visualização de mapa do ResS
     When eu solicito a visualização das coletas
     Then eu vejo a localização do restaurante de login "r1" em um mapa
