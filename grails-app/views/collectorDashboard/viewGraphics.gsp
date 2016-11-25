@@ -19,7 +19,7 @@
 </head>
 </html>
 <body>
-<g:link controller="collectorDashboard" action="viewLastMonth"> <button class="btn btn-first"> Último mês </button> </g:link>
-<g:link controller="collectorDashboard" action="viewLastYear"> <button class="btn btn-first"> Último ano </button> </g:link>
+<g:link controller="collectorDashboard" action="viewLastMonth"> <button id = "viewLastMonth" class="btn btn-first"> Último mês </button> </g:link>
+<g:link controller="collectorDashboard" action="viewLastYear"> <button id = "viewLastYear" class="btn btn-first"> Último ano </button> </g:link>
 </body>
 

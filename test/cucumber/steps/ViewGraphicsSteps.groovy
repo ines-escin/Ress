@@ -34,13 +34,11 @@ And(~/^Eu estou na tela de opções de gráficos$/) { ->
 
 When(~/^Eu seleciono a opção “Último mês”$/) { ->
     at GraphicsPage
-    to GraphicsPage
 
-    page.ClickLastMonth()
+    page.clickViewLastMonth()
 }
 
 Then(~/^Eu posso ver uma tela com um gráfico vazio$/){->
-    to MonthPage
     at MonthPage
 
     assert page.HasChartMonth()
@@ -90,7 +88,6 @@ And(~/^Foram realizadas apenas 2 coletas no dia “07\/11\/2016”$/){ ->
     at GeneratorDashboardPage
     page.logOff()
 
-    to LoginAuthenticationPage
     at LoginAuthenticationPage
     page.fillUserName("caio")
     page.fillPassword("pass")
