@@ -42,7 +42,6 @@ And(~/^eu estou na pagina de visualização de mapas do ResS$/) { ->
 }
 
 When(~/^eu seleciono a opção de visualização de rotas$/) { ->
-    to MapsPage
     at MapsPage
     page.clickRouteVisualization()
 }
@@ -57,7 +56,6 @@ Then(~/^eu vejo a rota com origem e destino no endereço do coletor passando por
 }
 
 Then(~/^o sistema exibe uma mensagem de erro$/) { ->
-    to MapsPage
     at MapsPage
     assert page.hasNoCollectionPoints()
 }
@@ -97,8 +95,4 @@ Then(~/^o sistema retorna a rota que passa por "([^"]*)"$/) { String arg ->
 
 Then(~/^o sistema não retorna a rota$/) { ->
     assert address.empty
-}
-And(~/^eu estou na tela de visualização de mapas do ResS$/) { ->
-    // Write code here that turns the phrase above into concrete actions
-    throw new PendingException()
 }
