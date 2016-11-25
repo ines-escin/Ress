@@ -1,7 +1,8 @@
 <html>
 <head>
     <meta name='layout' content='main'/>
-    <title>ResS - Cadastro</title>
+    <g:set var="entityName" value="${message(code: 'singup.label', default: 'Sign Up')}"/>
+    <title><g:message code="default.page.signup.title" args="[entityName]"/></title>
     <link rel="stylesheet" type="text/css" href="../css/signup.css"/>
     <g:javascript plugin="jquery"/>
     <g:javascript plugin="jquery-ui"/>

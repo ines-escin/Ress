@@ -5,8 +5,6 @@ import br.ufpe.cin.ines.ress.PickupRequest
 import br.ufpe.cin.ines.ress.Role
 import br.ufpe.cin.ines.ress.User
 import br.ufpe.cin.ines.ress.UserRole
-import grails.plugins.springsecurity.Secured
-import grails.validation.ValidationException
 
 //@Secured(['ROLE_COLLECTOR'])
 class CollectorDashboardController {
@@ -116,41 +114,9 @@ class CollectorDashboardController {
             redirect(action: 'editAccountConfig')
         } else {
             try {
-                User newUserInfo = new User()
-                newUserInfo.name = params.name
-                newUserInfo.username = params.username
-                newUserInfo.cnpj = params.cnpj
-                newUserInfo.typeUser = params.typeUser
-                newUserInfo.email = params.email
-                newUserInfo.password = params.password
-                newUserInfo.enabled = true;
+                Address address = instanceAddress(params)
 
-                Address e = new Address()
-                e.street = params.street
-                e.streetNumber = params.streetNumber
-                e.cep = params.cep
-                e.city = params.city
-                e.state = params.state
-                e.neighborhood = params.neighborhood
-                e.additionalInfo = params.additionalInfo
-
-                newUserInfo.address = e
-
-                //def newUserInfo = new User(params);
-                userToChange.username = newUserInfo.username
-                userToChange.email = newUserInfo.email
-                userToChange.password = newUserInfo.password
-                userToChange.name = newUserInfo.name
-                userToChange.cnpj = newUserInfo.cnpj
-                userToChange.typeUser = newUserInfo.typeUser
-                userToChange.address.street = newUserInfo.address.street
-                userToChange.address.streetNumber = newUserInfo.address.streetNumber
-                userToChange.address.neighborhood = newUserInfo.address.neighborhood
-                userToChange.address.city = newUserInfo.address.city
-                userToChange.address.cep = newUserInfo.address.cep
-                userToChange.address.state = newUserInfo.address.state
-                userToChange.address.additionalInfo = newUserInfo.address.additionalInfo
-                userToChange.save()
+                updateChangesUser(userToChange, address, params)
 
                 def msg = message(code: 'default.updated.message', args: [message(code: 'default.user.label'), userToChange.cnpj])
                 flash.message = msg
@@ -163,6 +129,36 @@ class CollectorDashboardController {
         }
     }
 
+    private void updateChangesUser(User userToChange, Address address, params) {
+        userToChange.username = params.username
+        userToChange.email = params.email
+        userToChange.password = params.password
+        userToChange.name = params.name
+        userToChange.cnpj = params.cnpj
+        userToChange.typeUser = params.typeUser
+        userToChange.enabled = true
+        userToChange.address.street = address.street
+        userToChange.address.streetNumber = address.streetNumber
+        userToChange.address.neighborhood = address.neighborhood
+        userToChange.address.city = address.city
+        userToChange.address.cep = address.cep
+        userToChange.address.state = address.state
+        userToChange.address.additionalInfo = address.additionalInfo
+        userToChange.save()
+    }
+
+    private Address instanceAddress(params) {
+        Address address = new Address()
+        address.street = params.street
+        address.streetNumber = params.streetNumber
+        address.cep = params.cep
+        address.city = params.city
+        address.state = params.state
+        address.neighborhood = params.neighborhood
+        address.additionalInfo = params.additionalInfo
+        address
+    }
+
     def deleteCollectorAndPickups(User collector){
         def lista = PickupRequest.findAllByCollectorAndStatus(collector, true)
 
@@ -172,5 +168,11 @@ class CollectorDashboardController {
 
         role.delete(flush: true)
         collector.delete(flush: true)
+    }
+
+    def deleteAllData() {
+        PickupRequest.list().each {it.delete(flush: true)}
+        UserRole.list().each {it.delete(flush: true)}
+        User.list().each {it.delete(flush: true)}
     }
 }

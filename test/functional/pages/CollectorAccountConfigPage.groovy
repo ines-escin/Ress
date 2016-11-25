@@ -30,7 +30,7 @@ class CollectorAccountConfigPage extends Page {
         $("input", id: "username").value(username)
     }
 
-    def editUser(){
+    def confirmEditUser(){
         $("input", id: "btnConfirm").click()
     }
 

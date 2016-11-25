@@ -24,4 +24,9 @@ class LoginAuthenticationPage extends Page {
     def logInButtonClick(){
         $("input", id: "submit").click()
     }
+
+    def confirmSignUpUser(){
+        def msg = $(".login_message")
+        return msg != null
+    }
 }

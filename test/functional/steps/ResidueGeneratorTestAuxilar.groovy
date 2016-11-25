@@ -75,7 +75,8 @@ class ResidueGeneratorTestAuxilar {
                             ), name : "Roger",
                             email   : "roger@gmail.com",
                             cnpj: "56.896.678/0001-59",
-                            typeUser: "Gerador de Resíduo"
+                            typeUser: "Gerador de Resíduo",
+                            enabled: true
                     ]
 
             ]
@@ -99,19 +100,20 @@ class ResidueGeneratorTestAuxilar {
 
     static User collector2 = new User
             (
-                    username: "username",
+                    username: "logintesteusername",
                     password: "testcolpass",
                     address: new Address(
-                            street: "Elm street",
+                            street: "rua",
                             streetNumber: "13",
-                            neighborhood: "Devil's pit",
-                            city: "Charming",
-                            state: "Arkansas",
-                            cep: '65520020'
-                    ), name: "Dimmy",
-                    email: "dimmy2@gmail.com",
-                    cnpj: "24.831.494/0001-14",
-                    typeUser: "Empresa Coletora"
+                            neighborhood: "varzea",
+                            city: "toronto",
+                            state: "londres",
+                            cep: '44900000'
+                    ), name: "Fausto",
+                    email: "fsilva@gmail.com",
+                    cnpj: "46.687.864/0001-24",
+                    typeUser: "Empresa Coletora",
+                    enabled: true
             );
 
     public static def injectGenerator(String username) {
@@ -169,7 +171,7 @@ class ResidueGeneratorTestAuxilar {
                     collector: User.findByUsername("testcoldummy"),
                     status: false
                 )
-        pickup.save()
+        pickup.save(flush: true)
     }
 
     public static def confirmPickups(){
@@ -177,7 +179,7 @@ class ResidueGeneratorTestAuxilar {
         int i = 0
         pickups.each {
             pickups[i].status = true
-            pickups[i].save()
+            pickups[i].save(flush: true)
             i++
         }
 
@@ -199,20 +201,20 @@ class ResidueGeneratorTestAuxilar {
         if (User.findByUsername(username) == null) {
             User user = User.findByUsername(oldUsername)
             user.username = username
-            user.save()
+            user.save(flush: true)
         }
     }
 
     public static def updatePassword(String password, String newUsername) {
         User user = User.findByUsername(newUsername)
         user.password = password
-        user.save()
+        user.save(flush: true)
     }
 
     public static def updateEmail(String email, String newUsername) {
         User user = User.findByUsername(newUsername)
         user.email = email
-        user.save()
+        user.save(flush: true)
     }
 
     public static def sendEmail(String name, double residueAmount) {

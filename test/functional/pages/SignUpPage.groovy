@@ -1,15 +1,19 @@
 package pages
 
 import geb.Page
+import steps.InternationalizationHelper
 
 /**
  * Created by msb5 on 03/10/2016.
  */
 class SignUpPage extends Page{
-    def titulo = "ResS - Cadastro"
     static url = "/ResS/signUp/index"
+
     static at = {
-        title ==~ titulo
+        InternationalizationHelper helper = InternationalizationHelper.instance
+        String signUp = "Sign Up"
+        String signUpTitle = helper.getMessage("default.page.signup.title", signUp)
+        title ==~ signUpTitle
     }
 
     def fillUserDetails(nome, cnpj, rua, numero, infoAdicional, bairro, cidade, estado, cep, tipoUsuario, email, usuario, senha) {
@@ -33,30 +37,11 @@ class SignUpPage extends Page{
     }
 
     def createDefaultUserCnpjTypeUserUsername(cnpj, tipoUsuario, usuario, email){
-        $("input", id: "name").value("Teste")
-        $("input", id: "cnpj").value(cnpj)
-        $("input", id: "street").value("Teste")
-        $("input", id: "streetNumber").value("123")
-        $("input", id: "additionalInfo").value("Teste")
-        $("input", id: "neighborhood").value("Teste")
-        $("input", id: "city").value("Teste")
-        $("input", id: "state").value("Teste")
-        $("input", id: "cep").value("Teste")
-        $("input", id: "typeUser").value(tipoUsuario)
-        $("input", id: "email").value(email)
-        $("input", id: "username").value(usuario)
-        $("input", id: "password").value("teste123")
+        fillUserDetails("Teste", cnpj, "Teste", "123", "Teste", "Teste", "Teste", "Teste", "Teste", tipoUsuario, email, usuario, "teste123")
     }
 
     boolean messageError(){
         def msg = $(".login_message")
-        if(msg != null)
-        {
-            return true
-        }
-        else
-        {
-            return false
-        }
+        return msg != null
     }
 }
