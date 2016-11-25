@@ -37,7 +37,6 @@ class CollectorDashboardController {
         render (view:'maps')
     }
 
-    boolean route;
     def routeVisualization() {
         def enderecoColetor = User.findByUsername("admin").address;
         def coletas = PickupRequest.findAllByStatus(false);
@@ -47,15 +46,11 @@ class CollectorDashboardController {
             flash.error = message(code: 'default.pickup.requests.not.found.message')
             redirect(action: "maps")
         }else{
-            route = true;
             render (view:'routeVisualization', model: [enderecos: enderecos, enderecoColetor: enderecoColetor])
         }
 
     }
 
-    boolean routeFound() {
-        return route
-    }
 
     List<Address> pickUpsAddress(){
 
