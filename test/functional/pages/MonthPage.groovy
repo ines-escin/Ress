@@ -14,7 +14,7 @@ import geb.Page
             title ==~ titulo
         }
 
-        def hasChartMonth(){
+        def hasChart(){
             def div =  $("div", id: "chart_div")
             return div != null
         }

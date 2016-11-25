@@ -14,7 +14,7 @@ class YearPage extends Page{
         title ==~ titulo
     }
 
-    def hasChartYear(){
+    def hasChart(){
         def div =  $("div", id: "chart_div")
         return div!=null
     }
