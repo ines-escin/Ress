@@ -11,7 +11,7 @@ class RouteVisualizationPage extends Page{
         title ==~ titulo
     }
 
-    def hasRoute(){
+    def systemGetsRoute(){
         def div = $("div", class: "map_canvas")
         return div!=null
     }
