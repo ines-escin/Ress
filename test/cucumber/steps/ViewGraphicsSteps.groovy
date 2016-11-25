@@ -33,14 +33,11 @@ And(~/^Eu estou na tela de opções de gráficos$/) { ->
 
 
 When(~/^Eu seleciono a opção “Último mês”$/) { ->
-    at GraphicsPage
-
     page.clickViewLastMonth()
 }
 
 Then(~/^Eu posso ver uma tela com um gráfico vazio$/){->
     at MonthPage
-
     assert page.hasChartMonth()
 }
 
@@ -108,10 +105,10 @@ Given(~/^Existe uma lista de coletas realizadas$/) { ->
     def genControl = new GeneratorDashboardController()
     genControl.saveDefaultPickUp('ru')
     CollectorDashboardController collectControl = new CollectorDashboardController()
-    def col = User.findByUsername('admin')
-    def coleta = PickupRequest.findAllByStatusAndCollector(false, col)
+    def coletor = User.findByUsername('admin')
+    def coleta = PickupRequest.findAllByStatusAndCollector(false, coletor)
        coleta.each{it -> collectControl.collect(it.id)}
-    lista2 = PickupRequest.findAllByStatusAndCollector(true, col)
+    lista2 = PickupRequest.findAllByStatusAndCollector(true, coletor)
     assert lista2 != null
     genControl.response.reset()
     collectControl.response.reset()
@@ -125,8 +122,8 @@ When(~/^Eu seleciono a opção “Último mes”$/) { ->
 
 Then(~/^A lista de coletas realizadas não muda$/) { ->
     def us = User.findByUsername('admin')
-    def lista3 =  PickupRequest.findByStatusAndCollector(true, us)
-    lista3.each {it ->
-        assert lista2.contains(it) != null
+    def lista3 =  PickupRequest.findAllByStatusAndCollector(true, us)
+    lista2.each {it ->
+        assert lista3.contains(it) != null
     }
 }
