@@ -34,11 +34,11 @@ And(~/^Eu estou na tela de opções de gráficos$/) { ->
 
 When(~/^Eu seleciono a opção “Último mês”$/) { ->
     page.clickViewLastMonth()
+    at MonthPage
 }
 
 Then(~/^Eu posso ver uma tela com um gráfico vazio$/){->
-    at MonthPage
-    assert page.hasChartMonth()
+    assert page.hasChart()
 }
 
 And(~/^Foram realizadas apenas 2 coletas no dia atual$/){ ->
@@ -86,17 +86,13 @@ And(~/^Foram realizadas apenas 2 coletas no dia atual$/){ ->
 }
 
 When(~/^Eu seleciono a opção “Último ano”$/) { ->
-    to GraphicsPage
-    at GraphicsPage
-
     page.clickViewLastYear()
+    at YearPage
 }
 
 
 Then(~/^Eu posso ver um gráfico Coletas x Data que possui apenas a altura 2 quando x é a data atual$/){ ->
-    at YearPage
-
-    assert page.hasChartYear()
+    assert page.hasChart()
 }
 
 //controller
@@ -115,9 +111,9 @@ Given(~/^Existe uma lista de coletas realizadas$/) { ->
 }
 
 When(~/^Eu seleciono a opção “Último mes”$/) { ->
-    def cControl = new CollectorDashboardController()
-    cControl.viewLastMonth()
-    cControl.response.reset()
+    def dashControl = new CollectorDashboardController()
+    dashControl.viewLastMonth()
+    dashControl.response.reset()
 }
 
 Then(~/^A lista de coletas realizadas não muda$/) { ->
