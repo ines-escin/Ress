@@ -8,7 +8,7 @@ Feature: Route visualization
       Given existem coletas pendentes no local "ru"
       And eu estou na pagina de visualização de mapas do ResS
       When eu seleciono a opção de visualização de rotas
-      Then eu vejo a rota passando por "ru" no mapa
+      Then eu vejo a rota com origem e destino no endereço do coletor passando por "ru" no mapa
 
    Scenario: ver rotas sem coletas pendentes
        Given não existem coletas pendentes
