@@ -23,7 +23,7 @@ Feature: Map Visualization
   Scenario: Buscar endereços de coleta pendentes
     Given o local de login "ru1" e endereço "Rua dois" "22" "Dentro do campus" "Cidade Universitária" "Recife" "Pernambuco" "52232-123" possui uma coleta pendente
     When eu solicito os enderecos dos locais com coletas pendentes
-    Then o sistema retorna os enderecos  "Rua dois" "22" "Dentro do campus" "Cidade Universitária" "Recife" "Pernambuco" "52232-123" do local de login "ru1"
+    Then o sistema retorna o endereco  "Rua dois" "22" "Dentro do campus" "Cidade Universitária" "Recife" "Pernambuco" "52232-123" do local de login "ru1"
 
 
   Scenario: busca de enderecos nao havendo coletas pendentes

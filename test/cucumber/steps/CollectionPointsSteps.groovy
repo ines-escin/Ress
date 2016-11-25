@@ -92,7 +92,7 @@ When(~/^eu solicito os enderecos dos locais com coletas pendentes$/) { ->
 }
 
 
-Then(~/^o sistema retorna os enderecos  "([^"]*)" "([^"]*)" "([^"]*)" "([^"]*)" "([^"]*)" "([^"]*)" "([^"]*)" do local de login "([^"]*)"$/) {  String rua, String numero, String infoAdicional, String bairro, String cidade, String estado, String cep, String login ->
+Then(~/^o sistema retorna o endereco  "([^"]*)" "([^"]*)" "([^"]*)" "([^"]*)" "([^"]*)" "([^"]*)" "([^"]*)" do local de login "([^"]*)"$/) {  String rua, String numero, String infoAdicional, String bairro, String cidade, String estado, String cep, String login ->
 
     address =  address.findAll{it -> it.user.username == login}
     assert address[0].street == rua
