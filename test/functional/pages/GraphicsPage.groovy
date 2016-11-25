@@ -6,7 +6,7 @@ import geb.Page
  */
 class GraphicsPage extends Page {
 
-        def titulo = "ResS - Graficos"
+        def titulo = "ResS - Dashboard"
         static url = "ResS/collectorDashboard/viewGraphics"
 
         static at = {

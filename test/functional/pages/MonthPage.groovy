@@ -7,7 +7,7 @@
 import geb.Page
 
  class MonthPage extends Page{
-        def titulo = "ResS - Charts"
+        def titulo = "ResS - Dashboard"
         def url = "ResS/collectorDashboard/viewLastMonth"
 
         static at = {

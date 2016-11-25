@@ -7,7 +7,7 @@ package pages
 import geb.Page
 
 class YearPage extends Page{
-    def titulo = "Ress - Charts"
+    def titulo = "ResS - Dashboard"
     def url = "ResS/collectorDashboard/viewLastYear"
 
     static at = {
@@ -15,9 +15,8 @@ class YearPage extends Page{
     }
 
     def hasChartYear(){
-        def div =  $("div", class: "chart_div")
+        def div =  $("div", id: "chart_div")
         return div!=null
-
     }
 }
 
