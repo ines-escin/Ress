@@ -49,7 +49,7 @@ And(~/^Foram realizadas apenas 2 coletas no dia atual$/){ ->
     at SignUpPage
 
     page.createDefaultUser("cnpj", "Gerador de Resíduo", "login")
-s
+
     to GeneratorDashboardPage
     at GeneratorDashboardPage
     page.pickUpRequest()
@@ -62,15 +62,11 @@ s
     at GeneratorDashboardPage
     page.logOff()
 
-    to SignUpPage
-    at SignUpPage
-
-    page.createDefaultUser("cnpj", "Coletor de Resíduo", "caio")
-
-    to GeneratorDashboardPage
-    at GeneratorDashboardPage
+    to CollectorDashboardPage
+    at CollectorDashboardPage
     page.clickConfirmCollect()
 
+    to LoginAuthenticationPage
     at LoginAuthenticationPage
     page.fillUsername("login")
     page.fillPassword("pass")
@@ -87,12 +83,8 @@ s
     at GeneratorDashboardPage
     page.logOff()
 
-    at LoginAuthenticationPage
-    page.fillUsername("caio")
-    page.fillPassword("pass")
-
-    to GeneratorDashboardPage
-    at GeneratorDashboardPage
+    to CollectorDashboardPage
+    at CollectorDashboardPage
     page.clickConfirmCollect()
 }
 
@@ -104,11 +96,10 @@ When(~/^Eu seleciono a opção “Último ano”$/) { ->
 }
 
 
-Then(~/^Eu posso ver um gráfico Coletas x Data que possui apenas a altura 2 quando x = “07\/11\/2016”$/){ ->
-    to YearPage
+Then(~/^Eu posso ver um gráfico Coletas x Data que possui apenas a altura 2 quando x é a data atual$/){ ->
     at YearPage
 
-    assert page.HasChartYear()
+    assert page.hasChartYear()
 }
 
 //controller
