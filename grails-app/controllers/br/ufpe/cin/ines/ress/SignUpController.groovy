@@ -19,23 +19,9 @@ class SignUpController {
 
     def saveUser() {
         try {
-            User user = new User()
-            user.name = params.j_name
-            user.username = params.j_username
-            //user.cnpj = params.j_cnpj
-            //user.typeUser = params.j_typeUser
-            user.email = params.j_email
-            user.password = params.j_password
-            user.enabled = true;
+            User user = fillUserInfo()
 
-            Address e = new Address()
-            e.street = params.j_street
-            e.streetNumber = params.j_streetNumber
-            e.cep = params.j_cep
-            e.city = params.j_city
-            e.state = params.j_state
-            e.neighborhood = params.j_neighborhood
-            e.additionalInfo = params.j_additionalInfo
+            Address e = fillAddressInfo()
 
             user.address = e
 
@@ -49,6 +35,30 @@ class SignUpController {
             flash.message = "Certifique os campos informados!"
             redirect(action: "index")
         }
+    }
+
+    private Address fillAddressInfo() {
+        Address e = new Address()
+        e.street = params.j_street
+        e.streetNumber = params.j_streetNumber
+        e.cep = params.j_cep
+        e.city = params.j_city
+        e.state = params.j_state
+        e.neighborhood = params.j_neighborhood
+        e.additionalInfo = params.j_additionalInfo
+        e
+    }
+
+    private User fillUserInfo() {
+        User user = new User()
+        user.name = params.j_name
+        user.username = params.j_username
+        //user.cnpj = params.j_cnpj
+        //user.typeUser = params.j_typeUser
+        user.email = params.j_email
+        user.password = params.j_password
+        user.enabled = true;
+        user
     }
 
 
