@@ -53,7 +53,7 @@ Then(~/^eu vejo a localização do restaurante de login "([^"]*)" em um mapa$/) 
     assert page.hasmap()
 }
 
-And(~/^não existem locais com coletas pendentes$/) { ->
+Given(~/^não existem locais com coletas pendentes$/) { ->
     to CollectorDashboardPage
     at CollectorDashboardPage
     assert page.hasNoPickUp()
@@ -80,6 +80,9 @@ Given(~/^o local de login "([^"]*)" e endereço "([^"]*)" "([^"]*)" "([^"]*)" "(
     def pickups = PickupRequest.findAllByStatus(false).findAll {it -> it.generator.username == login}
 
     assert !pickups.isEmpty()
+
+    signUpController.response.reset()
+    generatorController.response.reset()
 }
 
 def address
@@ -88,7 +91,6 @@ When(~/^eu solicito os enderecos dos locais com coletas pendentes$/) { ->
     address = controlador.collectionPointsAddress()
 
     controlador.response.reset()
-
 }
 
 
