@@ -14,7 +14,9 @@ class GeneratorDashboardPage extends Page {
         InternationalizationHelper helper = InternationalizationHelper.instance
 
         String indexTitle = helper.getMessage("default.page.title.dashboard", "Index")
+        print($("h1").text())
         title ==~ indexTitle
+
     }
 
     def logOff(){
