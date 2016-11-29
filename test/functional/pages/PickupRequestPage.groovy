@@ -19,8 +19,8 @@ class PickupRequestPage extends Page{
     }
 
 
-    def fillResidueAmountDef() {
-        $("input", id: "residueAmount").value(2)
+    def fillResidueAmountDef(quantidade) {
+        $("input", id: "residueAmount").value(quantidade)
     }
 
     def submitButtonClick() {

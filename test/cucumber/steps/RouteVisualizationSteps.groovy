@@ -15,7 +15,7 @@ import pages.SignUpPage
 
 import static cucumber.api.groovy.EN.*;
 
-Given(~/^existem coletas pendentes no local "([^"]*)"$/) { String login ->
+Given(~/^existe uma coleta pendente de "([^"]*)" litros no local "([^"]*)"$/) { String qtd, String login ->
     to SignUpPage
     at SignUpPage
 
@@ -26,7 +26,7 @@ Given(~/^existem coletas pendentes no local "([^"]*)"$/) { String login ->
     page.pickupRequest()
 
     at PickupRequestPage
-    page.fillResidueAmountDef()
+    page.fillResidueAmountDef(qtd)
     page.submitButtonClick()
 }
 
