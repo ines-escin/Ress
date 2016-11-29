@@ -2,6 +2,7 @@ package pages
 
 import geb.Page
 import gherkin.lexer.Pa
+import steps.InternationalizationHelper
 
 /**
  * Created by Pedro on 05/11/2016.
@@ -11,8 +12,12 @@ class PickupRequestPage extends Page{
     static url = "ResS/generatorDashboard/pickupRequest"
 
     static at = {
-        title ==~ titulo
+        InternationalizationHelper helper = InternationalizationHelper.instance
+
+        String indexTitle = helper.getMessage("default.page.title.dashboard", "Index")
+        title ==~ indexTitle
     }
+
 
     def fillResidueAmountDef() {
         $("input", id: "residueAmount").value(2)

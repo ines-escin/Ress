@@ -1,6 +1,7 @@
 package pages
 
 import geb.Page
+import steps.InternationalizationHelper
 
 class MapsPage extends Page {
 
@@ -8,8 +9,11 @@ class MapsPage extends Page {
     static url = "ResS/collectorDashboard/maps"
 
     static at = {
-        title ==~ titulo
+        InternationalizationHelper helper = InternationalizationHelper.instance
+        String MapsTitle = helper.getMessage("default.page.title.map", "Maps")
+        title ==~ MapsTitle
     }
+
 
     def clickRouteVisualization(){
         $("li", id: "routeVisualization").click()
