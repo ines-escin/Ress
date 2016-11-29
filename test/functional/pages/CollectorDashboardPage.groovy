@@ -13,7 +13,7 @@ class CollectorDashboardPage extends Page {
     static at = {
         InternationalizationHelper helper = InternationalizationHelper.instance
 
-        String indexTitle = helper.getMessage("default.page.title.dashboard", "Index")
+        String indexTitle = helper.getMessage("default.page.title.dashboard", "Dashboard")
         title ==~ indexTitle
     }
 
