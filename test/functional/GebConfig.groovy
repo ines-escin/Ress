@@ -1,17 +1,17 @@
+//import org.openqa.selenium.chrome.ChromeDriver
+//
+//driver = {
+//    File file = new File("chromedrivers/chromedriver.exe");
+//
+//
+//    System.setProperty("webdriver.chrome.driver", file.getAbsolutePath());
+//    new ChromeDriver();
+//}
+//
+//baseUrl = "http://localhost:8070/"
+
+
 import org.openqa.selenium.chrome.ChromeDriver
-
-driver = {
-    File file = new File("chromedrivers/chromedriver.exe");
-
-
-    System.setProperty("webdriver.chrome.driver", file.getAbsolutePath());
-    new ChromeDriver();
-}
-
-baseUrl = "http://localhost:8070/"
-
-
-/*import org.openqa.selenium.chrome.ChromeDriver
 import org.openqa.selenium.firefox.FirefoxDriver
 
 environments {
@@ -30,4 +30,4 @@ environments {
     firefox {
         driver = { new FirefoxDriver() }
     }
-}*/
+}
