@@ -47,42 +47,14 @@ And(~/^Foram realizadas apenas 2 coletas no dia atual$/){ ->
 
     page.createDefaultUser("cnpj", "Gerador de Resíduo", "login")
 
-    to GeneratorDashboardPage
-    at GeneratorDashboardPage
-    page.pickUpRequest()
-
-    at PickupRequestPage
-    page.fillResidueAmountDef()
-    page.submitButtonClick()
-
-    to GeneratorDashboardPage
-    at GeneratorDashboardPage
-    page.logOff()
-
-    to CollectorDashboardPage
-    at CollectorDashboardPage
-    page.clickConfirmCollect()
+   createAndConfirmPickUp()
 
     to LoginAuthenticationPage
     at LoginAuthenticationPage
     page.fillUsername("login")
     page.fillPassword("pass")
 
-    to GeneratorDashboardPage
-    at GeneratorDashboardPage
-    page.pickUpRequest()
-
-    at PickupRequestPage
-    page.fillResidueAmountDef()
-    page.submitButtonClick()
-
-    to GeneratorDashboardPage
-    at GeneratorDashboardPage
-    page.logOff()
-
-    to CollectorDashboardPage
-    at CollectorDashboardPage
-    page.clickConfirmCollect()
+    createAndConfirmPickUp()
 }
 
 When(~/^Eu seleciono a opção “Último ano”$/) { ->
@@ -122,4 +94,22 @@ Then(~/^A lista de coletas realizadas não muda$/) { ->
     lista2.each {it ->
         assert lista3.contains(it) != null
     }
+}
+
+def createAndConfirmPickUp(){
+    to GeneratorDashboardPage
+    at GeneratorDashboardPage
+    page.pickUpRequest()
+
+    at PickupRequestPage
+    page.fillResidueAmountDef()
+    page.submitButtonClick()
+
+    to GeneratorDashboardPage
+    at GeneratorDashboardPage
+    page.logOff()
+
+    to CollectorDashboardPage
+    at CollectorDashboardPage
+    page.clickConfirmCollect()
 }
