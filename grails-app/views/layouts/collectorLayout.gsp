@@ -17,7 +17,8 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>ResS - Dashboard</title>
+    <g:set var="entityName" value="${message(code: 'collector.label', default: 'Dashboard')}"/>
+    <title><g:message code="default.page.title.dashboard" args="[entityName]"/></title>
 
     <!-- Bootstrap Core CSS -->
     <link href="../css/generatorDashboard/bootstrap.min.css" rel="stylesheet">

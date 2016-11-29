@@ -5,13 +5,17 @@
  */
 
 import geb.Page
+ import steps.InternationalizationHelper
 
  class MonthPage extends Page{
-        def titulo = "ResS - Dashboard"
         def url = "ResS/collectorDashboard/viewLastMonth"
 
         static at = {
-            title ==~ titulo
+            InternationalizationHelper helper = InternationalizationHelper.instance
+            String Month = "Dashboard"
+            String MonthTitle = helper.getMessage("default.page.title.dashboard", Month)
+
+            title ==~ MonthTitle
         }
 
         def hasChart(){

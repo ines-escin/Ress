@@ -1,16 +1,21 @@
 package pages
 
 import geb.Page
+import steps.InternationalizationHelper
+
 /**
  * Created by Caio on 07/11/2016.
  */
 class GraphicsPage extends Page {
 
-        def titulo = "ResS - Dashboard"
         static url = "ResS/collectorDashboard/viewGraphics"
 
         static at = {
-            title ==~ titulo
+            InternationalizationHelper helper = InternationalizationHelper.instance
+            String Graphics = "Dashboard"
+            String GraphicsTitle = helper.getMessage("default.page.title.dashboard", Graphics)
+
+            title ==~ GraphicsTitle
         }
 
     def clickViewLastMonth(){

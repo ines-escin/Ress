@@ -5,13 +5,17 @@ package pages
  */
 
 import geb.Page
+import steps.InternationalizationHelper
 
 class YearPage extends Page{
-    def titulo = "ResS - Dashboard"
     def url = "ResS/collectorDashboard/viewLastYear"
 
     static at = {
-        title ==~ titulo
+        InternationalizationHelper helper = InternationalizationHelper.instance
+        String Year = "Dashboard"
+        String YearTitle = helper.getMessage("default.page.title.dashboard", Year)
+
+        title ==~ YearTitle
     }
 
     def hasChart(){
