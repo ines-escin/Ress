@@ -100,19 +100,24 @@ class CollectorDashboardController {
         redirect (action: 'accountConfig')
     }
     
-    List<String> stringPickUps(String tempo){
+    List<String> pickUpDatesToString(String tempo){
         SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
-        def coletas = PickupRequest.findAllByStatus(true).sort{it.date}
-        def datas = coletas.collect{it -> it.date}
-        verifyTemporality(tempo, datas)
+        List<Date> datas = pickUpDates()
+        removeUndesiredTemporality(tempo, datas)
         def stringDates = datas.collect{it -> formatter.format(it)}
         return stringDates
     }
 
-    private void verifyTemporality(String tempo, List<Date> datas) {
+    private List<Date> pickUpDates() {
+        def coletas = PickupRequest.findAllByStatus(true).sort { it.date }
+        def datas = coletas.collect { it -> it.date }
+        return datas
+    }
+
+    private void removeUndesiredTemporality(String tempo, List<Date> datas) {
+        Calendar c = Calendar.getInstance()
+        Calendar current = Calendar.getInstance()
         if (tempo == 'month') {
-            Calendar c = Calendar.getInstance()
-            Calendar current = Calendar.getInstance()
             for (int j = 0; j < datas.size(); j++) {
                 c.setTime(datas[j])
                 if ((c.get(c.MONTH) < current.get(current.MONTH)) ||
@@ -121,8 +126,6 @@ class CollectorDashboardController {
                 }
             }
         } else if (tempo == 'year') {
-            Calendar c = Calendar.getInstance()
-            Calendar current = Calendar.getInstance()
             for (int j = 0; j < datas.size(); j++) {
                 c.setTime(datas[j])
                 if ((c.get(c.YEAR) < current.get(current.YEAR))) {
@@ -133,13 +136,13 @@ class CollectorDashboardController {
     }
 
     List<String> uniqueStringPickUps(String tempo){
-        def strings = stringPickUps(tempo)
+        def strings = pickUpDatesToString(tempo)
         def ustrings = strings.unique()
         return ustrings
     }
 
     List<Number> freqPickUps(String tempo){
-        def strings = stringPickUps(tempo)
+        def strings = pickUpDatesToString(tempo)
         def ustrings = uniqueStringPickUps(tempo)
         def frequencies = ustrings.collect{it -> strings.count(it)}
         return frequencies
