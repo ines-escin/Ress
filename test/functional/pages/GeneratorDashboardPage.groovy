@@ -8,7 +8,7 @@ import steps.InternationalizationHelper
  */
 class GeneratorDashboardPage extends Page {
 
-    static url = "ResS/generatorDashboard/"
+    static url = "ResS/generatorDashboard/index"
 
     static at = {
         InternationalizationHelper helper = InternationalizationHelper.instance
