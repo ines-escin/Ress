@@ -60,14 +60,14 @@ Then(~/^o sistema exibe uma mensagem de erro$/) { ->
     assert page.hasNoCollectionPoints()
 }
 
-Given(~/^o local "([^"]*)" possui coletas pendentes$/) { String arg ->
+Given(~/^o local "([^"]*)" possui uma coleta pendente$/) { String user ->
     def signUpController = new SignUpController()
-    signUpController.createDefaultGeneratorUser(arg)
+    signUpController.createDefaultGeneratorUser(user)
 
     def generatorController  = new GeneratorDashboardController()
-    generatorController.saveDefaultPickUp(arg)
+    generatorController.saveDefaultPickUp(user)
 
-    def pickups = PickupRequest.findAllByStatus(false).findAll {it -> it.generator.username == arg}
+    def pickups = PickupRequest.findAllByStatus(false).findAll {it -> it.generator.username == user}
     generatorController.response.reset()
     signUpController.response.reset()
     assert !pickups.isEmpty()
@@ -89,8 +89,8 @@ When(~/^eu solicito a rota entre os locais com coletas pendentes$/) { ->
     address = controlador.pickUpsAddress()
 }
 
-Then(~/^o sistema retorna a rota que passa por "([^"]*)"$/) { String arg ->
-    assert address.collect{at -> at.user.username}.contains(arg)
+Then(~/^o sistema retorna o endereço de "([^"]*)" pelo qual a rota passa$/) { String end ->
+    assert address.collect{at -> at.user.username}.contains(end)
 }
 
 Then(~/^o sistema não retorna a rota$/) { ->
