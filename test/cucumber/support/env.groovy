@@ -19,5 +19,4 @@ After () {
     scenarioInterceptor.destroy ()
     bindingUpdater.remove ()
     PickupRequest.executeUpdate('delete from PickupRequest')
-    User.executeUpdate('delete from User')
 }
