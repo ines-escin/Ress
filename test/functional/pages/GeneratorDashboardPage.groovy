@@ -8,15 +8,13 @@ import steps.InternationalizationHelper
  */
 class GeneratorDashboardPage extends Page {
 
-    static url = "ResS/generatorDashboard/index"
+    static url = "generatorDashboard/index"
 
     static at = {
         InternationalizationHelper helper = InternationalizationHelper.instance
 
         String indexTitle = helper.getMessage("default.page.title.dashboard", "Index")
 
-        def oi = $("h1").text();
-        assert oi ==~ "qualquer coisa"
         title ==~ indexTitle
 
     }

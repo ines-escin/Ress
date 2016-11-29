@@ -8,7 +8,7 @@ import steps.InternationalizationHelper
  */
 class CollectorDashboardPage extends Page {
 
-    static url = "ResS/collectorDashboard/index"
+    static url = "collectorDashboard/index"
 
     static at = {
         InternationalizationHelper helper = InternationalizationHelper.instance
