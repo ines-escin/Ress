@@ -16,6 +16,6 @@ before_install:
 
 branches:
   only:
-    - master
+    - devUserManagement
 
 script: grails -Dgeb.env=firefox test-app functional:cucumber --non-interactive --stacktrace
