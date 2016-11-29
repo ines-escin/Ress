@@ -8,13 +8,10 @@ before_script:
 - "sh -e /etc/init.d/xvfb start"
 
 before_install:
-- rm -rf ~/.gvm
-- curl -s get.gvmtool.net > ~/install_gvm.sh
-- chmod 775 ~/install_gvm.sh
-- ~/install_gvm.sh
-- echo sdkman_auto_answer=true > ~/.sdkman/etc/config
-- source "/home/travis/.sdkman/bin/sdkman-init.sh"
-- sdk install grails 2.1.5 
+ - curl -s get.sdkman.io | bash
+  - source "$HOME/.sdkman/bin/sdkman-init.sh"
+  - echo sdkman_auto_answer=true > ~/.sdkman/etc/config
+  - source "/home/travis/.sdkman/bin/sdkman-init.sh"- sdk install grails 2.1.5
 
 branches:
   only:
