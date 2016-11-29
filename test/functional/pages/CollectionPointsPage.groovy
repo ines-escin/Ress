@@ -9,7 +9,7 @@ import steps.InternationalizationHelper
 class CollectionPointsPage extends Page{
 
 
-    static url = "ResS/collectorDashboard/collectionPoints"
+    static url = "collectorDashboard/collectionPoints"
 
     static at = {
 
