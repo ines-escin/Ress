@@ -9,4 +9,14 @@ class SignUpController {
         user.save(failOnError: true)
         UserRole.create(user, generatorRole, true)
     }
+
+
+    Address getAddressByLogin(login){
+
+       def  address =   Address.findAll();
+
+       address =  address.findAll{it -> it.user.username == login}
+
+       return address[0]
+    }
 }
