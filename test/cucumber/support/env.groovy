@@ -19,5 +19,4 @@ After () {
     scenarioInterceptor.destroy ()
     bindingUpdater.remove ()
     PickupRequest.findAll().each { it.delete(flush:true, failOnError:true) }
-    User.executeUpdate('delete from User')
 }
