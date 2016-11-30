@@ -8,7 +8,6 @@ class RouteVisualizationPage extends Page{
     static url = "collectorDashboard/maps/route"
 
     static at = {
-
         InternationalizationHelper helper = InternationalizationHelper.instance
         String Maps = "Maps"
         String MapsTitle = helper.getMessage("default.page.title.map", Maps)
