@@ -7,7 +7,7 @@ import steps.InternationalizationHelper
  * Created by msb5 on 03/10/2016.
  */
 class SignUpPage extends Page{
-    static url = "WEB-INF/grails-app/views/signUp/index.gsp"
+    static url = "ResS/signUp/index"
 
     static at = {
         InternationalizationHelper helper = InternationalizationHelper.instance

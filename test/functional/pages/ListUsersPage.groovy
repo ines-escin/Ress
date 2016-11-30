@@ -7,7 +7,7 @@ import geb.Page
  */
 class ListUsersPage extends Page {
     def titulo = "ResS - Usuários"
-    static url = "list/index"
+    static url = "ResS/list/index"
     static at = {
         title ==~ titulo
     }
