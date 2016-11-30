@@ -7,6 +7,7 @@ import br.ufpe.cin.ines.ress.User
 import br.ufpe.cin.ines.ress.UserRole
 import br.ufpe.cin.ines.ress.residuecollector.CollectorDashboardController
 import br.ufpe.cin.ines.ress.residuegenerator.GeneratorDashboardController
+import cucumber.api.PendingException
 import pages.CollectorAccountConfigPage
 import pages.CollectorDashboardPage
 import pages.EditCollectorPage
@@ -132,9 +133,9 @@ When(~'^eu altero o cnpj "([^"]*)" para "([^"]*)"$') { String cnpj1, String cnpj
     page.fillCollectorPassword("teste")
     page.confirmEditUser()
 }
-Then(~'^eu posso ver uma mensagem de confirmação da alteração$') {
-    at CollectorAccountConfigPage
 
+Then(~/^eu posso ver uma mensagem de confirmação da atualização$/) { ->
+    at CollectorAccountConfigPage
     assert page.verifyUpdate()
 }
 
@@ -190,3 +191,4 @@ Then(~/^a solicitação de coleta do gerador de resíduo de cnpj "([^"]*)" que f
     def test = PickupRequest.findAllByGeneratorAndStatus(generator, true)
     assert test.size() == 0
 }
+
