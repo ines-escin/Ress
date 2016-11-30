@@ -13,6 +13,10 @@ class SignUpPage extends Page{
         InternationalizationHelper helper = InternationalizationHelper.instance
         String signUp = "Sign Up"
         String signUpTitle = helper.getMessage("default.page.signup.title", signUp)
+
+        def x = $("h1").text()
+        assert x ==~ "teste"
+
         title ==~ signUpTitle
     }
 
