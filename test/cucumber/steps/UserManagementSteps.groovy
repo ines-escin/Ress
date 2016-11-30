@@ -133,6 +133,7 @@ When(~'^eu altero o cnpj "([^"]*)" para "([^"]*)"$') { String cnpj1, String cnpj
     page.confirmEditUser()
 }
 Then(~'^eu posso ver os mesmos dados que eu via antes da alteração do usuário com cnpj "([^"]*)"$') { String cnpj ->
+    assert User.findByCnpj(cnpj)
     at CollectorAccountConfigPage
 
     assert page.cnpjVerify(cnpj)
