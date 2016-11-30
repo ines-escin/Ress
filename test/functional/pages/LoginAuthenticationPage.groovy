@@ -4,13 +4,17 @@ package pages
  * Created by user on 27/10/2015.
  */
 import geb.Page
+import steps.InternationalizationHelper
 
 class LoginAuthenticationPage extends Page {
-    def titulo = "ResS - Login"
-    static url = "/ResS/login/auth"
+    static url = "login/auth"
 
     static at = {
-        title ==~ titulo
+        InternationalizationHelper helper = InternationalizationHelper.instance
+        String CollectorDashboard = "Dashboard"
+        String CollectorTitle = helper.getMessage("default.page.title.dashboard", CollectorDashboard)
+
+        title ==~ CollectorTitle
     }
 
     def fillUsername(String username){

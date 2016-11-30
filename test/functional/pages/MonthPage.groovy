@@ -8,7 +8,7 @@ import geb.Page
  import steps.InternationalizationHelper
 
  class MonthPage extends Page{
-        def url = "ResS/collectorDashboard/viewLastMonth"
+        def url = "collectorDashboard/viewLastMonth"
 
         static at = {
             InternationalizationHelper helper = InternationalizationHelper.instance

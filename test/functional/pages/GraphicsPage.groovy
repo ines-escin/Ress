@@ -8,7 +8,7 @@ import steps.InternationalizationHelper
  */
 class GraphicsPage extends Page {
 
-        static url = "ResS/collectorDashboard/viewGraphics"
+        static url = "collectorDashboard/viewGraphics"
 
         static at = {
             InternationalizationHelper helper = InternationalizationHelper.instance
