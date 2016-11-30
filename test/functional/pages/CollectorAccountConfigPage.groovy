@@ -34,7 +34,7 @@ class CollectorAccountConfigPage extends Page {
         $("input", id: "btnConfirm").click()
     }
 
-    def cnpjVerify(String cnpj){
-        $("input", id: "cnpj").value() == cnpj
+    def cnpjVerify(){
+        $("input", id: "cnpj").value()
     }
 }
