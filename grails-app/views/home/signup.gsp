@@ -55,7 +55,7 @@
         <div class='login_message'>${message}</div>
     </g:if>
 
-    <g:form controller="signUp" action="saveUser" method="POST">
+    <g:form controller="home" action="saveUser" method="POST">
     %{--<form action='${postUrl}' method='POST' id='loginForm' class='cssform' autocomplete='off'>--}%
         <input placeholder="Nome" type='text' class='text_' name='j_name' id='name'/>
         <input placeholder="E-mail" type='email' class='text_' name='j_email' id='email'/>

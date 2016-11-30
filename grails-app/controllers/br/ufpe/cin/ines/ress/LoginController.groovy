@@ -136,6 +136,6 @@ class LoginController {
 	}
 
 	def createUser() {
-		redirect(controller: "signUp", action: "index")
+		redirect(controller: "home", action: "signup")
 	}
 }
