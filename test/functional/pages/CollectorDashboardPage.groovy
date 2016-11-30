@@ -1,6 +1,7 @@
 package pages
 
 import geb.Page
+import steps.InternationalizationHelper
 
 /**
  * Created by user on 27/10/2015.
@@ -10,7 +11,11 @@ class CollectorDashboardPage extends Page {
     static url = "ResS/collectorDashboard/index"
 
     static at = {
-        title ==~ titulo
+        InternationalizationHelper helper = InternationalizationHelper.instance
+        String CollectorDashboard = "Dashboard"
+        String CollectorTitle = helper.getMessage("default.page.title.dashboard", CollectorDashboard)
+
+        title ==~ CollectorTitle
     }
 
     def logOff(){
