@@ -8,7 +8,7 @@ import geb.Page
  */
 class CollectorAccountConfigPage extends Page {
     def titulo = "ResS - Dashboard"
-    static url = "ResS/collectorDashboard/editAccountConfig"
+    static url = "collectorDashboard/editAccountConfig"
 
     static at = {
         title ==~ titulo

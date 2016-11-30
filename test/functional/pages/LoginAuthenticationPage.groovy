@@ -7,7 +7,7 @@ import geb.Page
 
 class LoginAuthenticationPage extends Page {
     def titulo = "ResS - Login"
-    static url = "/ResS/login/auth"
+    static url = "/login/auth"
 
     static at = {
         title ==~ titulo
