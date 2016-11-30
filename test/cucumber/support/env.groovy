@@ -19,9 +19,9 @@ Before () {
 
 After () {
     PickupRequest.executeUpdate("DELETE FROM PickupRequest")
-    UserRole.executeUpdate("DELETE FROM UserRole")
+    /*UserRole.executeUpdate("DELETE FROM UserRole")
     Role.executeQuery("DELETE FROM Role")
-    User.executeUpdate("DELETE FROM User")
+    User.executeUpdate("DELETE FROM User")*/
 
     scenarioInterceptor.destroy ()
     bindingUpdater.remove ()
