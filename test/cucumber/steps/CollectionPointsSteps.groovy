@@ -66,13 +66,7 @@ Then(~/^eu vejo uma mensagem sinalizando que não há restaurantes com coletas p
 
 Given(~/^o local de login "([^"]*)" e endereço "([^"]*)" "([^"]*)" "([^"]*)" "([^"]*)" "([^"]*)" "([^"]*)" "([^"]*)" possui uma coleta pendente$/) { String login, String rua, String numero, String infoAdicional, String bairro, String cidade, String estado, String cep ->
 
-    def signUpController = new SignUpController()
-
-    def local =  new User(username: login, password: "pass",  name: login, email: login+'@gmail.com',
-            address: new Address(street :rua, cep: cep, city: cidade, state: estado, streetNumber: numero, neighborhood: bairro, additionalInfo: infoAdicional), enabled: true)
-
-    //Quando integrar definir valores de cnpj e tipo de usuario
-    signUpController.save(local)
+    createDefaultUser(login, rua, cep, cidade, estado, numero, bairro,infoAdicional);
 
     def generatorController  = new GeneratorDashboardController()
     generatorController.saveDefaultPickUp(login)
@@ -81,7 +75,6 @@ Given(~/^o local de login "([^"]*)" e endereço "([^"]*)" "([^"]*)" "([^"]*)" "(
 
     assert !pickups.isEmpty()
 
-    signUpController.response.reset()
     generatorController.response.reset()
 }
 
@@ -116,4 +109,15 @@ Then(~/^nada muda na lista de coletas pendentes$/) { ->
 
 def hasNoPickupRequests(){
     PickupRequest.findAllByStatus(false).empty
+}
+
+def createDefaultUser(login, rua, cep, cidade, estado, numero, bairro,infoAdicional){
+    def signUpController = new SignUpController()
+
+    def local =  new User(username: login, password: "pass",  name: login, email: login+'@gmail.com',
+            address: new Address(street :rua, cep: cep, city: cidade, state: estado, streetNumber: numero, neighborhood: bairro, additionalInfo: infoAdicional), enabled: true)
+
+
+    signUpController.save(local)
+    signUpController.response.reset()
 }
