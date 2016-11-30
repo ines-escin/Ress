@@ -7,15 +7,15 @@ import steps.InternationalizationHelper
  * Created by msb5 on 03/10/2016.
  */
 class SignUpPage extends Page{
-    static url = "login/createUser"
+    static url = "ResS/login/createUser"
 
     static at = {
         InternationalizationHelper helper = InternationalizationHelper.instance
         String signUp = "Sign Up"
         String signUpTitle = helper.getMessage("default.page.signup.title", signUp)
 
-      def x = $("h1").text()
-       assert x ==~ "teste"
+        def x = $("h1").text()
+        assert x ==~ "teste"
 
         title ==~ signUpTitle
     }
