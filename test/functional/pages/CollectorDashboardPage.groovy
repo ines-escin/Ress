@@ -7,7 +7,7 @@ import geb.Page
  */
 class CollectorDashboardPage extends Page {
     def titulo = "ResS - Dashboard"
-    static url = "ResS/collectorDashboard/index"
+    static url = "collectorDashboard/index"
 
     static at = {
         title ==~ titulo
