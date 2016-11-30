@@ -8,7 +8,6 @@ import steps.InternationalizationHelper
  * Created by Pedro on 05/11/2016.
  */
 class PickupRequestPage extends Page{
-    def titulo = "ResS - Dashboard"
     static url = "ResS/generatorDashboard/pickupRequest"
 
     static at = {

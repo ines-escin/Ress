@@ -5,8 +5,7 @@ import steps.InternationalizationHelper
 
 class RouteVisualizationPage extends Page{
 
-    def titulo = "ResS - Mapas"
-    static url = "ResS/collectorDashboard/maps/route"
+    static url = "collectorDashboard/maps/route"
 
     static at = {
 

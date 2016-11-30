@@ -5,7 +5,6 @@ import steps.InternationalizationHelper
 
 class MapsPage extends Page {
 
-    def titulo = "ResS - Mapas"
     static url = "ResS/collectorDashboard/maps"
 
     static at = {
