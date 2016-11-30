@@ -23,7 +23,7 @@ Feature: Gerenciar usuários
     And o usuário com cnpj "11.022.440/0001-66" já está cadastrado
     And estou na tela de alterar informações
     When eu altero o cnpj "25.296.876/0001-58" para "11.022.440/0001-66"
-    Then eu posso ver os mesmos dados que eu via antes da alteração do usuário com cnpj "25.296.876/0001-58"
+    Then eu posso ver uma mensagem de confirmação da alteração
 
 #Controle
   Scenario: Remover um usuário empresa coletora com solicitações de coleta confirmadas

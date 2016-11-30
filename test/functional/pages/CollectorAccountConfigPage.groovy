@@ -34,7 +34,7 @@ class CollectorAccountConfigPage extends Page {
         $("input", id: "btnConfirm").click()
     }
 
-    def cnpjVerify(){
+    def verifyUpdate(){
         def msg = $(".login_message")
         return msg != null
     }
