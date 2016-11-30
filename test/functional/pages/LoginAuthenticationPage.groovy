@@ -11,10 +11,10 @@ class LoginAuthenticationPage extends Page {
 
     static at = {
         InternationalizationHelper helper = InternationalizationHelper.instance
-        String CollectorDashboard = "Dashboard"
-        String CollectorTitle = helper.getMessage("default.page.title.dashboard", CollectorDashboard)
+        String LoginAuthentication = "Login"
+        String LoginTitle = helper.getMessage("default.page.title.dashboard", LoginAuthentication)
 
-        title ==~ CollectorTitle
+        title ==~ LoginTitle
     }
 
     def fillUsername(String username){
