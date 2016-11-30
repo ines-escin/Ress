@@ -7,7 +7,7 @@ import geb.Page
 import steps.InternationalizationHelper
 
 class LoginAuthenticationPage extends Page {
-    static url = "login/auth"
+    static url = "/ResS/login/auth"
 
     static at = {
         InternationalizationHelper helper = InternationalizationHelper.instance
