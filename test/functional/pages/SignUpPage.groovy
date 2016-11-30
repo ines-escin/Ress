@@ -7,7 +7,7 @@ import steps.InternationalizationHelper
  * Created by msb5 on 03/10/2016.
  */
 class SignUpPage extends Page{
-    static url = "signUp/index"
+    static url = "signup/index"
 
     static at = {
         InternationalizationHelper helper = InternationalizationHelper.instance

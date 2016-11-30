@@ -9,7 +9,7 @@ class SignUpController {
 		// TODO put any pre-logout code here
 		//redirect uri: SpringSecurityUtils.securityConfig.logout.filterProcessesUrl // '/j_spring_security_logout'
 
-		render(view: "createUser");
+		render(view: "index");
 	}
 
 	def saveUser() {
@@ -19,11 +19,11 @@ class SignUpController {
 		if (userCnpj) {
 			def msg = message(code: 'default.cnpj.existing.message', args: [userCnpj.cnpj])
 			flash.message = msg
-			render(view: "createUser", model: [message: msg])
+			render(view: "index", model: [message: msg])
 		} else if (userUsername) {
 			def msg = message(code: 'default.username.existing.message', args: [userUsername.username])
 			flash.message = msg
-			render(view: "createUser", model: [message: msg])
+			render(view: "index", model: [message: msg])
 		} else {
 			try {
 				User user = instanceUser(params)
