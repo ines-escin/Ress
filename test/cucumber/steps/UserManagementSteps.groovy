@@ -136,7 +136,7 @@ Then(~'^eu posso ver os mesmos dados que eu via antes da alteração do usuário
     assert User.findByCnpj(cnpj)
     at CollectorAccountConfigPage
 
-    assert page.cnpjVerify() == cnpj
+    assert page.cnpjVerify()
 }
 
 

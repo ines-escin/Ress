@@ -35,6 +35,7 @@ class CollectorAccountConfigPage extends Page {
     }
 
     def cnpjVerify(){
-        $("input", id: "cnpj").value()
+        def msg = $(".login_message")
+        return msg != null
     }
 }
