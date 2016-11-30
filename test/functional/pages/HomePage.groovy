@@ -5,7 +5,7 @@ package pages
  */
 import geb.Page
 class HomePage extends Page{
-   def titulo = "ResS - Gerenciamento de residuos"
+   def titulo = "Coopere UFPE"
    static url = "/ResS/"
 
     static at = {

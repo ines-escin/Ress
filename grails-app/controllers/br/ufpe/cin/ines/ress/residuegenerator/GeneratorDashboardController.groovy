@@ -6,7 +6,7 @@ import br.ufpe.cin.ines.ress.User
 import grails.plugins.springsecurity.Secured
 import mail.MailService
 
-@Secured(['ROLE_GENERATOR'])
+//@Secured(['ROLE_GENERATOR'])
 class GeneratorDashboardController{
 
     def springSecurityService
@@ -34,8 +34,19 @@ class GeneratorDashboardController{
         pickupRequest.status = false
         pickupRequest.collector = User.findByUsername('admin')
         pickupRequest.save()
-        MailService.sendEmail("dfm2@cin.ufpe.br", pickupRequest.generator.name, pickupRequest.date, pickupRequest.residueAmount)
+        MailService.sendEmail("las3@cin.ufpe.br", pickupRequest.generator.name, pickupRequest.date, pickupRequest.residueAmount)
         redirect(action:'pickupRequest')
+    }
+
+    def saveDefaultPickUp(String generator){
+        def pickupRequest = new PickupRequest()
+
+        pickupRequest.generator = User.findByUsername(generator)
+        pickupRequest.date = new Date()
+        pickupRequest.status = false
+        pickupRequest.residueAmount = 40
+        pickupRequest.collector = User.findByUsername('admin')
+        pickupRequest.save()
     }
 
     def accountConfig(){
