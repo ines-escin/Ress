@@ -16,7 +16,8 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>ResS - Dashboard</title>
+    <g:set var="entityName" value="${message(code: 'dashboard.label', default: 'Index')}"/>
+    <title><g:message code="default.page.title.dashboard" args="[entityName]"/></title>
 
     <!-- Bootstrap Core CSS -->
     <link href="../css/generatorDashboard/bootstrap.min.css" rel="stylesheet">
@@ -45,7 +46,7 @@
             <li>
                 <g:link controller="generatorDashboard" action="index">Histórico de coletas</g:link>
             </li>
-            <li>
+            <li id="pickupRequest">
                 <g:link controller="generatorDashboard" action="pickupRequest">Solicitar coleta</g:link>
             </li>
             <li>

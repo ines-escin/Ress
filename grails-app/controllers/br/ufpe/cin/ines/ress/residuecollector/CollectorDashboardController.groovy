@@ -1,8 +1,10 @@
 package br.ufpe.cin.ines.ress.residuecollector
 
+import br.ufpe.cin.ines.ress.Address
 import br.ufpe.cin.ines.ress.PickupRequest
 import br.ufpe.cin.ines.ress.Role
 import br.ufpe.cin.ines.ress.User
+import grails.converters.JSON
 import grails.plugins.springsecurity.Secured
 import org.grails.plugins.csv.CSVWriter
 
@@ -10,7 +12,7 @@ import org.grails.plugins.csv.CSVWriter
 
 import static br.ufpe.cin.ines.ress.User.*
 
-@Secured(['ROLE_COLLECTOR'])
+//@Secured(['ROLE_COLLECTOR'])
 class CollectorDashboardController {
 
     def springSecurityService
@@ -27,6 +29,35 @@ class CollectorDashboardController {
         def closedPickups = PickupRequest.findAllByStatus(true).sort{it.generator.name}
 
         render (view:'collectionHistory', model:[closedPickups : closedPickups])
+    }
+
+
+    def maps()
+    {
+        render (view:'maps')
+    }
+
+    def routeVisualization() {
+        def enderecoColetor = User.findByUsername("admin").address;
+        def coletas = PickupRequest.findAllByStatus(false);
+        def enderecos = coletas.collect {it -> it.generator.address}
+
+        if(coletas.empty) {
+            flash.error = message(code: 'default.pickup.requests.not.found.message')
+            redirect(action: "maps")
+        }else{
+            render (view:'routeVisualization', model: [enderecos: enderecos, enderecoColetor: enderecoColetor])
+        }
+
+    }
+
+
+    List<Address> pickUpsAddress(){
+
+        def coletas = PickupRequest.findAllByStatus(false);
+        def enderecos = coletas.collect {it -> it.generator.address}
+
+        return enderecos
     }
 
     def downloadExcelHistory(){

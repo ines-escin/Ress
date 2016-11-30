@@ -17,7 +17,8 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>ResS - Dashboard</title>
+    <g:set var="entityName" value="${message(code: 'dashboard.label', default: 'Index')}"/>
+    <title><g:message code="default.page.title.dashboard" args="[entityName]"/></title>
 
     <!-- Bootstrap Core CSS -->
     <link href="../css/generatorDashboard/bootstrap.min.css" rel="stylesheet">
@@ -28,7 +29,6 @@
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
-
     <![endif]-->
     <g:layoutHead/>
 </head>
@@ -54,6 +54,9 @@
             </li>
             <li>
                 <g:link controller="collectorDashboard" action="accountConfig">Configurações de conta</g:link>
+            </li>
+            <li id="maps">
+                <g:link controller="collectorDashboard" action="maps">Mapas</g:link>
             </li>
             <li id= "logout">
                 <g:link controller="logout" action="index">Sair</g:link>

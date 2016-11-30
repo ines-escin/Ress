@@ -2,7 +2,7 @@ Feature: Edit Profile
   As a user of the ResS system
   I want to edit my profile
   So that i can alter my username, email or password
-  
+
 @ignore
   Scenario: Edit generator profile
     Given I am at the the edit profile page as a generator
