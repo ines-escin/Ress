@@ -1,7 +1,8 @@
 <html>
 <head>
 	<meta name='layout' content='main'/>
-	<title>ResS - Login</title>
+	<g:set var="entityName" value="${message(code: 'login.label', default: 'Login')}"/>
+	<title><g:message code="default.page.title.login" args="[entityName]"/></title>
 	<link rel="stylesheet" type="text/css" href="../css/login.css"/>
 	<g:javascript plugin="jquery"/>
 	<g:javascript plugin="jquery-ui"/>

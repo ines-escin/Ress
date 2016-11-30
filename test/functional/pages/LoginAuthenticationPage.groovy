@@ -12,7 +12,7 @@ class LoginAuthenticationPage extends Page {
     static at = {
         InternationalizationHelper helper = InternationalizationHelper.instance
         String LoginAuthentication = "Login"
-        String LoginTitle = helper.getMessage("default.page.title.dashboard", LoginAuthentication)
+        String LoginTitle = helper.getMessage("default.page.title.login", LoginAuthentication)
 
         title ==~ LoginTitle
     }
