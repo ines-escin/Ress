@@ -18,7 +18,6 @@ import static cucumber.api.groovy.EN.*;
  * Created by Caio on 07/11/2016.
  */
 
-//Por causa do Spring Security, não consegui realizar meus testes de GUI, porém, implementei todos.
 Given(~/^Nenhuma coleta foi realizada no último mes$/) { ->
     to CollectorDashboardPage
     at CollectorDashboardPage
