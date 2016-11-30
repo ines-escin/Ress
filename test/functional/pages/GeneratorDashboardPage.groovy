@@ -7,7 +7,7 @@ import steps.InternationalizationHelper
  * Created by user on 27/10/2015.
  */
 class GeneratorDashboardPage extends Page {
-    static url = "generatorDashboard/"
+    static url = "generatorDashboard/index"
 
     static at = {
         InternationalizationHelper helper = InternationalizationHelper.instance
