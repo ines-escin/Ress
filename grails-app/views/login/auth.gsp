@@ -27,6 +27,9 @@
 				<li>
 					<g:link controller="home" action="login">Login</g:link>
 				</li>
+				<li id="lista">
+					<g:link controller="home" action="list">Usuários Cadastrados</g:link>
+				</li>
 				<li>
 					<a href="#services">Sobre</a>
 				</li>
@@ -51,6 +54,7 @@
 			<input placeholder="password" type='password' class='text_' name='j_password' id='password'/>
 			<input type='submit' id="submit" value='Login'/>
 		</form>
+		<g:link controller="login" action="createUser">Cadastre-se</g:link>
 	</div>
 <script type='text/javascript'>
 	<!--

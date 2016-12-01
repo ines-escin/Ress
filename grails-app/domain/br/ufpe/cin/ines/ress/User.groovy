@@ -14,12 +14,21 @@ class User {
 	boolean accountLocked
 	boolean passwordExpired
 
+	//USER MANAGEMENT
+	String cnpj
+	String typeUser
+
 	static constraints = {
 		username blank: false, nullable: false, unique: true
 		password blank: false
 		address blank: false, unique: true
 		name blank: false
 		email blank: false, unique: true
+
+		//USER MANAGEMENT
+		cnpj blank: false, unique: true, nullable: false
+		typeUser blank: false, nullable: false
+		typeUser(inList: ["Empresa Coletora", "Gerador de Resíduo"])
 	}
 
 	static mapping = {

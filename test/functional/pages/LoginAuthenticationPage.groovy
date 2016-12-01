@@ -7,7 +7,7 @@ import geb.Page
 
 class LoginAuthenticationPage extends Page {
     def titulo = "ResS - Login"
-    static url = "/ResS/login/auth"
+    static url = "login/auth"
 
     static at = {
         title ==~ titulo
@@ -23,5 +23,10 @@ class LoginAuthenticationPage extends Page {
 
     def logInButtonClick(){
         $("input", id: "submit").click()
+    }
+
+    def confirmSignUpUser(){
+        def msg = $(".login_message")
+        return msg != null
     }
 }

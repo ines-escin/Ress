@@ -11,4 +11,9 @@ class HomeController {
     {
         redirect(controller: "login", action: "index")
     }
+
+    def list()
+    {
+        redirect(controller: "list", action: "index")
+    }
 }

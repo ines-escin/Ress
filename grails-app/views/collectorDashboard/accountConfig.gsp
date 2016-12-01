@@ -9,7 +9,7 @@
 <html>
 <head>
     <meta name="layout" content="collectorLayout">
-    <title></title>
+    <title>ResS - Dashboard</title>
     <link rel="stylesheet" type="text/css" href="../css/table-data.css">
     <link rel="stylesheet" type="text/css" href="../css/generatorDashboard/button.css"/>
     <style type="text/css">
@@ -28,6 +28,9 @@
 
 <body>
 <div id="page-content-wrapper">
+    <g:if test='${flash.message}'>
+        <div class='login_message'>${flash.message}</div>
+    </g:if>
        <table>
        <thead>
        <tr>
@@ -58,7 +61,7 @@
         </tr>
        </tbody>
    </table>
-        <g:link controller="collectorDashboard" action="editAccountConfig"> <button class="btn btn-first"> Editar </button> </g:link>
+        <g:link controller="collectorDashboard" action="editAccountConfig"> <button id="edit" class="btn btn-first"> Editar </button> </g:link>
 </div>
 </body>
 </html>

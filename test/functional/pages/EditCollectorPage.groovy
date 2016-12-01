@@ -7,7 +7,7 @@ import geb.Page
  */
 class EditCollectorPage extends Page {
     def titulo = "ResS - Dashboard"
-    static url = "ResS/collectorDashboard/accountConfig"
+    static url = "collectorDashboard/accountConfig"
 
     static at = {
         title ==~ titulo
@@ -23,5 +23,9 @@ class EditCollectorPage extends Page {
 
     def confirmCollectorEdition(){
         $("input", value: "Confirmar").click()
+    }
+
+    def viewEditUser(){
+        $("button", id: "edit").click()
     }
 }

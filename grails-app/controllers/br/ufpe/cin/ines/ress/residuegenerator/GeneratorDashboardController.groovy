@@ -1,12 +1,14 @@
 package br.ufpe.cin.ines.ress.residuegenerator
 
-import br.ufpe.cin.ines.ress.DashboardController
+import br.ufpe.cin.ines.ress.Address
 import br.ufpe.cin.ines.ress.PickupRequest
 import br.ufpe.cin.ines.ress.User
+import br.ufpe.cin.ines.ress.residuecollector.CollectorDashboardController
 import grails.plugins.springsecurity.Secured
+import grails.validation.ValidationException
 import mail.MailService
 
-@Secured(['ROLE_GENERATOR'])
+//@Secured(['ROLE_GENERATOR'])
 class GeneratorDashboardController{
 
     def springSecurityService
@@ -33,9 +35,19 @@ class GeneratorDashboardController{
         pickupRequest.date = new Date()
         pickupRequest.status = false
         pickupRequest.collector = User.findByUsername('admin')
-        pickupRequest.save()
+        pickupRequest.save(flush: true)
         MailService.sendEmail("dfm2@cin.ufpe.br", pickupRequest.generator.name, pickupRequest.date, pickupRequest.residueAmount)
         redirect(action:'pickupRequest')
+    }
+
+    def createPickupRequestConfirmedKl(User collector, User generator){
+        def pickupRequest = new PickupRequest()
+        pickupRequest.generator = generator
+        pickupRequest.date = new Date()
+        pickupRequest.status = true
+        pickupRequest.collector = collector
+        pickupRequest.residueAmount = 1000
+        pickupRequest.save(flush: true)
     }
 
     def accountConfig(){
@@ -45,21 +57,15 @@ class GeneratorDashboardController{
 
     def saveAccountChanges(){
         def user = new User(params)
-        user.save();
+        user.save(flush: true);
     }
 
     def editAccountConfig(){
-        def user = new User()
-        render(view:'editAccount', model: [user: user])
+        User user = (User) springSecurityService.currentUser
+        render(view:'editAccount', model: [user: user, address: user.address])
     }
 
     def saveUserChanges(){
-        def newUserInfo = new User(params);
-        User userToChange = (User) springSecurityService.currentUser
-        userToChange.username = newUserInfo.username
-        userToChange.email = newUserInfo.email
-        userToChange.password = newUserInfo.password
-        userToChange.save()
-        redirect (action: 'accountConfig')
+        redirect(controller: "collectorDashboard", action: "saveUserChanges", params: params)
     }
 }

@@ -1,16 +1,12 @@
 package br.ufpe.cin.ines.ress.residuecollector
 
+import br.ufpe.cin.ines.ress.Address
 import br.ufpe.cin.ines.ress.PickupRequest
 import br.ufpe.cin.ines.ress.Role
 import br.ufpe.cin.ines.ress.User
-import grails.plugins.springsecurity.Secured
-import org.grails.plugins.csv.CSVWriter
+import br.ufpe.cin.ines.ress.UserRole
 
-//import pl.touk.excel.export.WebXlsxExporter
-
-import static br.ufpe.cin.ines.ress.User.*
-
-@Secured(['ROLE_COLLECTOR'])
+//@Secured(['ROLE_COLLECTOR'])
 class CollectorDashboardController {
 
     def springSecurityService
@@ -74,6 +70,11 @@ class CollectorDashboardController {
 
     def accountConfig(){
         User user = (User) springSecurityService.currentUser
+
+        if(!user){
+            user = User.findByCnpj("25.296.876/0001-58")
+        }
+
         render(view: "accountConfig", model:[user:user])
     }
 
@@ -83,18 +84,95 @@ class CollectorDashboardController {
     }
 
     def editAccountConfig(){
-        def user = new User()
-        render(view:'editAccount', model: [user: user])
+        User user = (User) springSecurityService.currentUser
+
+        if(!user){
+            user = User.findByCnpj("25.296.876/0001-58")
+        }
+
+        render(view: "editAccount", model: [user: user, address: user.address])
+
+//        render(view: "editAccount")
     }
 
     def saveUserChanges(){
-        def newUserInfo = new User(params);
+        def userCnpj = User.findByCnpj(params.cnpj)
+        def userUsername = User.findByUsername(params.username)
         User userToChange = (User) springSecurityService.currentUser
-        userToChange.username = newUserInfo.username
-        userToChange.email = newUserInfo.email
-        userToChange.password = newUserInfo.password
-        userToChange.save()
-        redirect (action: 'accountConfig')
+
+        if (!userToChange) {
+            userToChange = User.findByCnpj("25.296.876/0001-58")
+        }
+
+        if (userCnpj && userCnpj.cnpj != userToChange.cnpj) {
+            def msg = message(code: 'default.cnpj.existing.message', args: [userCnpj.cnpj])
+            flash.error = msg
+            redirect(action: 'editAccountConfig')
+        } else if (userUsername && userUsername.username != userToChange.username) {
+            def msg = message(code: 'default.username.existing.message', args: [userUsername.username])
+            flash.error = msg
+            redirect(action: 'editAccountConfig')
+        } else {
+            try {
+                Address address = instanceAddress(params)
+
+                updateChangesUser(userToChange, address, params)
+
+                def msg = message(code: 'default.updated.message', args: [message(code: 'default.user.label'), userToChange.cnpj])
+                flash.message = msg
+                redirect(action: 'accountConfig')
+            } catch (ValidationException) {
+                def msg = message(code: 'default.empty.fields.message')
+                flash.error = msg
+                redirect(action: 'editAccountConfig')
+            }
+        }
     }
 
+    private void updateChangesUser(User userToChange, Address address, params) {
+        userToChange.username = params.username
+        userToChange.email = params.email
+        userToChange.password = params.password
+        userToChange.name = params.name
+        userToChange.cnpj = params.cnpj
+        userToChange.typeUser = params.typeUser
+        userToChange.enabled = true
+        userToChange.address.street = address.street
+        userToChange.address.streetNumber = address.streetNumber
+        userToChange.address.neighborhood = address.neighborhood
+        userToChange.address.city = address.city
+        userToChange.address.cep = address.cep
+        userToChange.address.state = address.state
+        userToChange.address.additionalInfo = address.additionalInfo
+        userToChange.save()
+    }
+
+    private Address instanceAddress(params) {
+        Address address = new Address()
+        address.street = params.street
+        address.streetNumber = params.streetNumber
+        address.cep = params.cep
+        address.city = params.city
+        address.state = params.state
+        address.neighborhood = params.neighborhood
+        address.additionalInfo = params.additionalInfo
+        address
+    }
+
+    def deleteCollectorAndPickups(User collector){
+        def lista = PickupRequest.findAllByCollectorAndStatus(collector, true)
+
+        lista.each {it -> it.delete(flush: true)}
+
+        UserRole role = UserRole.findByUser(collector)
+
+        role.delete(flush: true)
+        collector.delete(flush: true)
+    }
+
+    def deleteAllData() {
+        PickupRequest.list().each {it.delete(flush: true)}
+        UserRole.list().each {it.delete(flush: true)}
+        User.list().each {it.delete(flush: true)}
+    }
 }
