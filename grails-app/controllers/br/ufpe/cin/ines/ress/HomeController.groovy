@@ -16,8 +16,4 @@ class HomeController {
     {
         redirect(controller: "list", action: "index")
     }
-
-    def signup() {
-        render(view: "signup")
-    }
 }
